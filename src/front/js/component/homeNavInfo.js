@@ -1,22 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Nav } from "react-bootstrap";
 
 const HomeNavInfo = () => {
 	return (
-		<div>
-			<Link to="/">
-				<p>Home</p>
-			</Link>
-			<Link to="/">
-				<p>Servicios</p>
-			</Link>
-			<Link to="/">
-				<p>Quienes somos</p>
-			</Link>
-			<Link to="/">
-				<p>Contactanos</p>
-			</Link>
-		</div>
+		<Nav className="justify-content-end">
+			<Nav.Link href="#">Home</Nav.Link>
+			<Nav.Link href="#">Quienes Somos</Nav.Link>
+			<Nav.Link href="#">Nuestros Servicios</Nav.Link>
+			<Nav.Link href="#">Contactanos</Nav.Link>
+		</Nav>
 	);
 };
 

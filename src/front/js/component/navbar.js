@@ -1,30 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Navbar } from "react-bootstrap";
 
 import HomeNavInfo from "./homeNavInfo";
 
-export const Navbar = () => {
+export const MyNavbar = () => {
 	return (
-		<div>
-			<div className="collapse" id="toggleMenu">
+		<Navbar collapseOnSelect expand="lg" className="petCloudBar" variant="light">
+			<Navbar.Brand href="#home">
+				<Link to="/">
+					<img
+						className="logo"
+						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/navbar/src/front/img/petcloudlogo.png"
+					/>
+				</Link>
+			</Navbar.Brand>
+			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
+			<Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">
 				<HomeNavInfo />
-			</div>
-			<nav className="navbar navbar-light petCloudBar mb-3">
-				<div className="container-fluid">
-					<Link to="/">
-						<span className="navbar-brand mb-0 h1">PetCloud</span>
-					</Link>
-					<button
-						className="navbar-toggler"
-						type="button"
-						data-bs-toggle="collapse"
-						data-bs-target="#toggleMenu"
-						aria-expanded="false"
-						aria-controls="toggleMenu">
-						<span className="navbar-toggler-icon" />
-					</button>
-				</div>
-			</nav>
-		</div>
+			</Navbar.Collapse>
+		</Navbar>
 	);
 };

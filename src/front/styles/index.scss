@@ -2,10 +2,19 @@
     background-color: #e37222 !important;
 }
 
-.navbar-brand {
+.menu {
     color: black;
 }
 
-.navbar-toggler {
-    border: 3px solid;
+.navbar-brand {
+    padding: 0;
 }
+
+.navbar-toggler {
+    border: 3px black;
+}
+
+.logo {
+    width: 80px;
+};
+
