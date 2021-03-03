@@ -3,7 +3,7 @@ import { Col, Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 
 const CardUser = () => {
 	return (
-		<Col xs="6">
+		<Col xs="12" md="6">
 			<Card border="0" style={{ width: "18rem", backgroundColor: "" }}>
 				<Card.Header className="bg-danger" style={{ color: "white" }}>
 					¿No tienes el historial clínico de tus mascotas en línea?

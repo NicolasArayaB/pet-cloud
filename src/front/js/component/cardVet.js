@@ -3,7 +3,7 @@ import { Col, Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 
 const CardVet = () => {
 	return (
-		<Col xs="6">
+		<Col xs="12" md="6">
 			<Card border="0" style={{ width: "18rem", backgroundColor: "" }}>
 				<Card.Header className="bg-danger" style={{ color: "white" }}>
 					¿No tienes el historial de las mascotas que atiendes?
@@ -23,7 +23,7 @@ const CardVet = () => {
 				<Card.Body>
 					<Button variant="primary" href="#">
 						Me interesa!!
-					</Button>
+					</Button>.
 				</Card.Body>
 			</Card>
 		</Col>
