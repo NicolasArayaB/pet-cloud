@@ -10,7 +10,7 @@ const CardVet = () => {
 				</Card.Header>
 				<Card.Img
 					variant="top"
-					src="https://lh3.googleusercontent.com/proxy/bSl4Qt8Fay1SR9jtW5B6BqgurigWHWfFfwhE_ltGJaaRYJ8ArdzDmo_G0_eiI1s9kC8DTzGZ3gV47z-4KPGCRZNvHiMerbtkujevhPjoPoVJ79nhvxWbH5cIGjoRgnidRZlifODbwtpTY96hshVpEnjFVw"
+					src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/01-view-home-change-images/src/front/img/veterinary_card.png"
 				/>
 				<Card.Body>
 					<Card.Title style={{ color: "#07889B" }}> Veterinari@</Card.Title>
