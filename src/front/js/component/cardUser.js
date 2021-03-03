@@ -11,7 +11,7 @@ const CardUser = () => {
 				<Card.Img
 					variant="top"
 					src="https://image.flaticon.com/icons/png/512/53/53086.png"
-					style={{ height: "320px" }}
+					style={{ height: "200px" }}
 				/>
 				<Card.Body>
 					<Card.Title style={{ color: "#07889B" }}> Dueñ@ de mascota</Card.Title>
