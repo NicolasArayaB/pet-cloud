@@ -2,23 +2,25 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.scss";
+import CarouselVet from "../../js/component/carouselVet";
+import CardVet from "../../js/component/cardVet";
+import { Container, Row } from "react-bootstrap";
+import CardUser from "../component/cardUser";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">{store.message || "Loading message from the backend..."}</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://github.com/4GeeksAcademy/react-flask-hello/tree/95e0540bd1422249c3004f149825285118594325/docs">
-					Read documentation
-				</a>
-			</p>
+			<h1>Pet Cloud</h1>
+			<CarouselVet />
+			<br />
+			<Container>
+				<Row>
+					<CardVet />
+					<CardUser />
+				</Row>
+			</Container>
 		</div>
 	);
 };
