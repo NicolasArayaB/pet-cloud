@@ -5,7 +5,12 @@ export const Admin = () => {
 	console.log("Imansd");
 	return (
 		<Container>
-			<br /><br /><br /><br /><br /><br />  {/* cambiar a una solucion más "elegante" de centrar el container */}
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br /> {/* cambiar a una solucion más "elegante" de centrar el container */}
 			<Row className="text-center my-5">
 				<Col>
 					<h3>Buscar por el id de la mascota</h3>

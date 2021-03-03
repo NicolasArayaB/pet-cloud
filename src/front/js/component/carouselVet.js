@@ -8,7 +8,7 @@ const CarouselVet = () => {
 				<Carousel.Item>
 					<img
 						className="d-block w-100"
-						src="/veterinary_1.jpg"
+						src="/front/img/veterinary_1.png"
 						alt="Veterynarian performing controls"
 						style={{ height: "500px" }}
 					/>
