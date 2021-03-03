@@ -8,7 +8,7 @@ const CarouselVet = () => {
 				<Carousel.Item>
 					<img
 						className="d-block w-100"
-						src="/front/img/veterinary_1.png"
+						src="https://github.com/NicolasArayaB/pet-cloud/blob/01-view-home-change-images/src/front/img/veterinary_1.png"
 						alt="Veterynarian performing controls"
 						style={{ height: "500px" }}
 					/>
@@ -20,7 +20,7 @@ const CarouselVet = () => {
 				<Carousel.Item>
 					<img
 						className="d-block w-100"
-						src="/pet_user_1.jpg"
+						src="https://github.com/NicolasArayaB/pet-cloud/blob/01-view-home-change-images/src/front/img/pet_user_1.jpg"
 						alt="Happy Pet Owner"
 						style={{ height: "500px" }}
 					/>
@@ -33,7 +33,7 @@ const CarouselVet = () => {
 				<Carousel.Item>
 					<img
 						className="d-block w-100"
-						src="/veterinary_2.jpg"
+						src="https://github.com/NicolasArayaB/pet-cloud/blob/01-view-home-change-images/src/front/img//veterinary_2.jpg"
 						alt="Veterynarian caring for a dog"
 						style={{ height: "500px" }}
 					/>
