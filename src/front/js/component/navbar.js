@@ -1,17 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Navbar } from "react-bootstrap";
 
-export const Navbar = () => {
+import HomeNavInfo from "./homeNavInfo";
+
+export const MyNavbar = () => {
 	return (
-		<nav className="navbar navbar-light bg-light mb-3">
-			<Link to="/">
-				<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-			</Link>
-			<div className="ml-auto">
-				<Link to="/demo">
-					<button className="btn btn-primary">Check the Context in action</button>
+		<Navbar collapseOnSelect expand="lg" className="petCloudBar" variant="light">
+			<Navbar.Brand href="#home">
+				<Link to="/">
+					<img
+						className="logo"
+						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/navbar/src/front/img/petcloudlogo.png"
+					/>
 				</Link>
-			</div>
-		</nav>
+			</Navbar.Brand>
+			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
+			<Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">
+				<HomeNavInfo />
+			</Navbar.Collapse>
+		</Navbar>
 	);
 };
