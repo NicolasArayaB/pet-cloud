@@ -11,11 +11,6 @@ const HomeNavInfo = () => {
 			</Nav.Item>
 			<Nav.Item>
 				<Nav.Link href="#" className="mx-4">
-					Quienes Somos
-				</Nav.Link>
-			</Nav.Item>
-			<Nav.Item>
-				<Nav.Link href="#" className="mx-4">
 					Nuestros Servicios
 				</Nav.Link>
 			</Nav.Item>
