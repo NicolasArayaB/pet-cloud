@@ -1,5 +1,6 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
+// import { Link } from "react-router-dom";
 
 const HomeNavInfo = () => {
 	return (
@@ -7,7 +8,10 @@ const HomeNavInfo = () => {
 			<Nav.Link href="#">Home</Nav.Link>
 			<Nav.Link href="#">Quienes Somos</Nav.Link>
 			<Nav.Link href="#">Nuestros Servicios</Nav.Link>
-			<Nav.Link href="#">Contactanos</Nav.Link>
+			<Nav.Link href="/contactanos">Contactanos</Nav.Link>
+			{/* <Link to="/contactanos">
+					<span>Contactanos</span>
+				</Link> */}
 		</Nav>
 	);
 };
