@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Navbar } from "react-bootstrap";
+import { Navbar, Container, Row, Col } from "react-bootstrap";
 
 import HomeNavInfo from "./homeNavInfo";
 import HomeNavLogin from "./homeNavLogin";
@@ -17,9 +17,17 @@ export const MyNavbar = () => {
 				</Link>
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
-			<Navbar.Collapse className="justify-content-center" id="responsive-navbar-nav">
-				<HomeNavInfo />
-				<HomeNavLogin />
+			<Navbar.Collapse id="responsive-navbar-nav">
+				<Container fluid className="navContainer">
+					<Row>
+						<Col sm={10} className="d-flex justify-content-center">
+							<HomeNavInfo />
+						</Col>
+						<Col sm={2}>
+							<HomeNavLogin />
+						</Col>
+					</Row>
+				</Container>
 			</Navbar.Collapse>
 		</Navbar>
 	);

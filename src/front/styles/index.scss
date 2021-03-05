@@ -18,11 +18,15 @@
     border: 3px black;
 }
 
+.navContainer {
+    display: inline !important;
+    justify-content: center;
+}
+
 .logo {
     width: 80px;
 };
 
-.nav-link.active {
+.login.active {
     background-color: #66b9bf !important;
-    margin: 5px;
 }

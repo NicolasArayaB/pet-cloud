@@ -5,7 +5,7 @@ const HomeNavInfo = () => {
 	return (
 		<Nav>
 			<Nav.Item>
-				<Nav.Link href="#" className="mx-4">
+				<Nav.Link href="/" className="mx-4">
 					Home
 				</Nav.Link>
 			</Nav.Item>
@@ -15,9 +15,7 @@ const HomeNavInfo = () => {
 				</Nav.Link>
 			</Nav.Item>
 			<Nav.Item>
-				<Nav.Link href="/contactanos">
-					Contactanos
-				</Nav.Link>
+				<Nav.Link href="/contactanos">Contactanos</Nav.Link>
 			</Nav.Item>
 		</Nav>
 	);
