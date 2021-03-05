@@ -3,8 +3,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
+import { LoginView } from "./pages/login";
 import { Admin } from "./pages/admin";
-import { Single } from "./pages/single";
+
 import injectContext from "./store/appContext";
 
 import { MyNavbar } from "./component/navbar";
@@ -26,6 +27,9 @@ const Layout = () => {
 					<Switch>
 						<Route exact path="/">
 							<Home />
+						</Route>
+						<Route exact path="/login">
+							<LoginView />
 						</Route>
 						<Route exact path="/admin">
 							<Admin />
