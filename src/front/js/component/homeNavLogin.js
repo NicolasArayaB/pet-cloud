@@ -1,17 +1,23 @@
 import React from "react";
-import { Nav } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
+import Login from "./loginform";
 
-const HomeNavLogin = () => {
+const LoginModal = params => {
 	return (
-		<Nav className="nav-pills">
-			<Nav.Link href="#" className="mx-4 btn active">
-				Login
-			</Nav.Link>
-			<Nav.Link href="#" className="mx-4 btn active">
-				Registrate
-			</Nav.Link>
-		</Nav>
+		<Modal show={params.show} onHide={params.close}>
+			<Modal.Header closeButton>
+				<Modal.Title>Login</Modal.Title>
+			</Modal.Header>
+			<Modal.Body>
+				<Login />
+			</Modal.Body>
+			<Modal.Footer>
+				<Button variant="secondary" type="submit">
+					Login
+				</Button>
+			</Modal.Footer>
+		</Modal>
 	);
 };
 
-export default HomeNavLogin;
+export default LoginModal;

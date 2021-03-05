@@ -10,7 +10,7 @@ const Login = () => {
 				<Form.Control type="password" placeholder="Ingresa tu contraseña" />
 				<Form.Text>La contraseña debe tener entre 6 a 12 characteres</Form.Text>
 			</Form.Group>
-			<Link to="/pwrd">¿Olvidaste tu contraseña?</Link>
+			<Link>¿Olvidaste tu contraseña?</Link>
 		</Form>
 	);
 };
