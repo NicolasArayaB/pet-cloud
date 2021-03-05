@@ -10,6 +10,8 @@ import injectContext from "./store/appContext";
 
 import { MyNavbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Contact } from "./pages/contact";
+import { Link } from "react-router-dom";
 
 //create your first component
 const Layout = () => {
@@ -32,8 +34,22 @@ const Layout = () => {
 						<Route exact path="/admin">
 							<Admin />
 						</Route>
+						<Route exact path="/single/:theid">
+							<Single />
+						</Route>
+						<Route exact path="/contactanos">
+							<Contact />
+						</Route>
 						<Route>
-							<h1>Not found!</h1>
+							<h1>
+								Lo siento, pero Pet Cloud no encuentra esta página
+								<br />
+								<Link to="/">
+									<span className="btn btn-primary btn-lg" href="#" role="button">
+										Volver al Home de Pet cloud
+									</span>
+								</Link>
+							</h1>
 						</Route>
 					</Switch>
 					<Footer />
