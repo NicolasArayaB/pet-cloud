@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 
 import HomeNavInfo from "./homeNavInfo";
+import HomeNavLogin from "./homeNavLogin";
 
 export const MyNavbar = () => {
 	return (
@@ -16,8 +17,9 @@ export const MyNavbar = () => {
 				</Link>
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
-			<Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">
+			<Navbar.Collapse className="justify-content-center" id="responsive-navbar-nav">
 				<HomeNavInfo />
+				<HomeNavLogin />
 			</Navbar.Collapse>
 		</Navbar>
 	);
