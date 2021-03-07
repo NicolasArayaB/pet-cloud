@@ -34,9 +34,6 @@ const Layout = () => {
 						<Route exact path="/admin">
 							<Admin />
 						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
-						</Route>
 						<Route exact path="/contactanos">
 							<Contact />
 						</Route>
