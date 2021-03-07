@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
-import { LoginView } from "./pages/login";
+import { RegisterView } from "./pages/register";
 import { Admin } from "./pages/admin";
 
 import injectContext from "./store/appContext";
@@ -28,8 +28,8 @@ const Layout = () => {
 						<Route exact path="/">
 							<Home />
 						</Route>
-						<Route exact path="/login">
-							<LoginView />
+						<Route exact path="/register">
+							<RegisterView />
 						</Route>
 						<Route exact path="/admin">
 							<Admin />

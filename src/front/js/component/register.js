@@ -15,7 +15,7 @@ const Register = () => {
 					<Form.Text className="passText">La contraseña debe tener entre 6 a 12 caracteres</Form.Text>
 				</Form.Group>
 				<Form.Text className="info mt-5">
-					Al hacer clic en Registrarte, aceptas nuestras Condiciones, la Política de datos y la Política de
+					Al hacer clic en Registrate, aceptas nuestras Condiciones, la Política de datos y la Política de
 					cookies.
 				</Form.Text>
 				<Button type="submit" className="my-1 submitBtn">
