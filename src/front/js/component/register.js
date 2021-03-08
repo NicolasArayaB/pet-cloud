@@ -3,7 +3,7 @@ import { Container, Form, Button } from "react-bootstrap";
 
 const Register = () => {
 	return (
-		<Container className="loginForms">
+		<Container className="registerForms">
 			<Form autocomplete="off" className="p-5 text-center">
 				<h2>Registrate</h2>
 				<Form.Control type="text" placeholder="Nombre" className="m-3" />
@@ -18,7 +18,7 @@ const Register = () => {
 					Al hacer clic en Registrate, aceptas nuestras Condiciones, la Política de datos y la Política de
 					cookies.
 				</Form.Text>
-				<Button type="submit" className="my-1 submitBtn">
+				<Button type="submit" className="my-1 petBtn">
 					Registrate
 				</Button>
 			</Form>

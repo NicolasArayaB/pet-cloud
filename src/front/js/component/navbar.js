@@ -31,7 +31,7 @@ export const MyNavbar = () => {
 								<HomeNavInfo />
 							</Col>
 							<Col sm={2}>
-								<Button onClick={handleShow} className="mx-4 btn login">
+								<Button onClick={handleShow} className="mx-4 btn petBtn">
 									Login
 								</Button>
 							</Col>
