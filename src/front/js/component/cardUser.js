@@ -22,7 +22,7 @@ const CardUser = () => {
 					<ListGroupItem>Revisa sus próximos controles </ListGroupItem>
 				</ListGroup>
 				<Card.Body>
-					<Button variant="primary" href="#">
+					<Button variant="primary" href="/user">
 						Me interesa!!
 					</Button>
 				</Card.Body>

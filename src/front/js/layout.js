@@ -12,6 +12,7 @@ import { MyNavbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Contact } from "./pages/contact";
 import { Link } from "react-router-dom";
+import User from "./pages/user";
 
 //create your first component
 const Layout = () => {
@@ -36,6 +37,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/contactanos">
 							<Contact />
+						</Route>
+						<Route exact path="/user">
+							<User />
 						</Route>
 						<Route>
 							<h1>
