@@ -28,6 +28,9 @@
     width: 80px;
 };
 
-.login {
+.login, .login:hover, .login:focus {
     background-color: #66b9bf !important;
+    border: #66b9bf;
+    color: black;
+    box-shadow: none;
 }

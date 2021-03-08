@@ -18,7 +18,7 @@ const Register = () => {
 					Al hacer clic en Registrate, aceptas nuestras Condiciones, la Política de datos y la Política de
 					cookies.
 				</Form.Text>
-				<Button type="submit" className="my-1 submitBtn">
+				<Button type="submit" className="my-1 submitBtn login">
 					Registrate
 				</Button>
 			</Form>
