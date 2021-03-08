@@ -11,8 +11,8 @@ const LoginModal = params => {
 			<Modal.Body>
 				<Login />
 			</Modal.Body>
-			<Modal.Footer>
-				<Button variant="secondary" type="submit">
+			<Modal.Footer className="justify-content-center">
+				<Button type="submit" className="login">
 					Login
 				</Button>
 			</Modal.Footer>

@@ -3,7 +3,7 @@ import { Container, Form, Button } from "react-bootstrap";
 
 const Register = () => {
 	return (
-		<Container className="registerForm">
+		<Container className="loginForms">
 			<Form autocomplete="off" className="p-5 text-center">
 				<h2>Registrate</h2>
 				<Form.Control type="text" placeholder="Nombre" className="m-3" />
@@ -15,7 +15,7 @@ const Register = () => {
 					<Form.Text className="passText">La contraseña debe tener entre 6 a 12 caracteres</Form.Text>
 				</Form.Group>
 				<Form.Text className="info mt-5">
-					Al hacer clic en Registrarte, aceptas nuestras Condiciones, la Política de datos y la Política de
+					Al hacer clic en Registrate, aceptas nuestras Condiciones, la Política de datos y la Política de
 					cookies.
 				</Form.Text>
 				<Button type="submit" className="my-1 submitBtn">

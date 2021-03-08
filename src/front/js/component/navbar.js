@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Navbar, Container, Row, Col, Button } from "react-bootstrap";
 
 import HomeNavInfo from "./homeNavInfo";
-import LoginModal from "./homeNavLogin";
+import LoginModal from "./loginModal";
 
 export const MyNavbar = () => {
 	const [show, setShow] = useState(false);
