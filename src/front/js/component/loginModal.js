@@ -12,7 +12,7 @@ const LoginModal = params => {
 				<Login />
 			</Modal.Body>
 			<Modal.Footer className="justify-content-center">
-				<Button type="submit" className="login">
+				<Button type="submit" className="petBtn">
 					Login
 				</Button>
 			</Modal.Footer>
