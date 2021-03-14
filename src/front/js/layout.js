@@ -13,6 +13,8 @@ import { Footer } from "./component/footer";
 import { Contact } from "./pages/contact";
 import { Link } from "react-router-dom";
 import User from "./pages/user";
+import { petDataInfo } from "./pages/petDataInfo";
+import { PetInformation } from "./component/petInformation";
 
 //create your first component
 const Layout = () => {
@@ -40,6 +42,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/user">
 							<User />
+						</Route>
+						<Route exact path="/user/information">
+							<PetInformation />
 						</Route>
 						<Route>
 							<h1>
