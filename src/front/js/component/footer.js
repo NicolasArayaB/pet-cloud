@@ -11,8 +11,8 @@ export const Footer = () => (
 			Servicios
 		</Link>
 		<span className="footerLink">|</span>
-		<Link to="/" className="footerLink">
-			Contacto
+		<Link to="/contactanos" className="footerLink">
+			Contactanos
 		</Link>
 	</footer>
 );
