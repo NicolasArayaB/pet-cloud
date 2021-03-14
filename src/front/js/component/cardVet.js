@@ -22,7 +22,7 @@ const CardVet = () => {
 					<ListGroupItem>Control de tus registros</ListGroupItem>
 				</ListGroup>
 				<Card.Body>
-					<Button variant="primary" href="#">
+					<Button variant="primary" href="/vet">
 						Me interesa!!
 					</Button>
 					.

@@ -1,26 +1,19 @@
 import React from "react";
 import { Container, Row, Col, InputGroup, FormControl } from "react-bootstrap";
 
-export const Admin = () => {
-	console.log("Imansd");
+import "../../styles/vet.scss";
+
+export const Vet = () => {
 	return (
-		<Container>
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br /> {/* cambiar a una solucion más "elegante" de centrar el container */}
+		<Container className="search-form">
 			<Row className="text-center my-5">
-				<Col>
+				<Col xs={{ span: 12, order: 1 }} md={{ span: 6, order: 1 }} className="mb-3">
 					<h3>Buscar por el id de la mascota</h3>
 				</Col>
-				<Col>
-					<h3>Buscar por su dueño</h3>
+				<Col xs={{ span: 12, order: 3 }} md={{ span: 6, order: 2 }} className="mb-3">
+					<h3>Buscar por rut de su dueño</h3>
 				</Col>
-			</Row>
-			<Row className="my-5">
-				<Col>
+				<Col xs={{ span: 12, order: 2 }} md={{ span: 6, order: 3 }}>
 					<InputGroup className="mb-3">
 						<FormControl placeholder="Id mascota" aria-label="pet id" aria-describedby="search-addon1" />
 						<InputGroup.Append>
@@ -28,7 +21,7 @@ export const Admin = () => {
 						</InputGroup.Append>
 					</InputGroup>
 				</Col>
-				<Col>
+				<Col xs={{ span: 12, order: 4 }} md={{ span: 6, order: 4 }}>
 					<InputGroup className="mb-3">
 						<FormControl
 							placeholder="Nombre completo"
