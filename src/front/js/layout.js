@@ -4,7 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
 import { RegisterView } from "./pages/register";
-import { Admin } from "./pages/admin";
+import { Vet } from "./pages/vet";
 
 import injectContext from "./store/appContext";
 
@@ -34,8 +34,8 @@ const Layout = () => {
 						<Route exact path="/register">
 							<RegisterView />
 						</Route>
-						<Route exact path="/admin">
-							<Admin />
+						<Route exact path="/vet">
+							<Vet />
 						</Route>
 						<Route exact path="/contactanos">
 							<Contact />
