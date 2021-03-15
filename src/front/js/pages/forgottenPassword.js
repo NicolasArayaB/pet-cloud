@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Form, Button } from "react-bootstrap";
 
-const ForgottenPass = () => {
+export const ForgottenPass = () => {
 	return (
 		<Container className="registerForms">
 			<Form autocomplete="off" className="p-5 text-center">
@@ -12,5 +12,3 @@ const ForgottenPass = () => {
 		</Container>
 	);
 };
-
-export default ForgottenPass;
