@@ -9,7 +9,7 @@ const LoginModal = params => {
 				<Modal.Title>Login</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<Login />
+				<Login close={params.close} />
 			</Modal.Body>
 			<Modal.Footer className="justify-content-center">
 				<Button type="submit" className="petBtn">
