@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import User from "./pages/user";
 import { petDataInfo } from "./pages/petDataInfo";
 import { PetInformation } from "./component/petInformation";
+import VetInfo from "./pages/vetInformation";
 
 //create your first component
 const Layout = () => {
@@ -36,6 +37,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/admin">
 							<Admin />
+						</Route>
+						<Route exact path="/vet/id">
+							<VetInfo />
 						</Route>
 						<Route exact path="/contactanos">
 							<Contact />
