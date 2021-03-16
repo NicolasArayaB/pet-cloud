@@ -19,7 +19,7 @@ export const MyNavbar = () => {
 					<Link to="/">
 						<img
 							className="logo"
-							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/navbar/src/front/img/petcloudlogo.png"
+							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/navbar/src/front/img/petcloud-logo.png"
 						/>
 					</Link>
 				</Navbar.Brand>
