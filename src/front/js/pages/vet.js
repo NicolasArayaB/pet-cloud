@@ -36,7 +36,9 @@ export const Vet = () => {
 			</Row>
 			<Row className="text-center">
 				<Col>
-					<Button className="petBtn">Nueva Mascota</Button>
+					<Button className="petBtn" href="/newPet">
+						Nueva Mascota
+					</Button>
 				</Col>
 			</Row>
 		</Container>
