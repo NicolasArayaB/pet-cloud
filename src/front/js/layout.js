@@ -15,13 +15,9 @@ import { Link } from "react-router-dom";
 import User from "./pages/user";
 import { petDataInfo } from "./pages/petDataInfo";
 import { PetInformation } from "./component/petInformation";
-<<<<<<< HEAD
-import newPet from "./pages/newPet";
 import NewPet from "./pages/newPet";
-=======
 import { ForgottenPass } from "./pages/forgottenPassword";
 import { PrivateRoute } from "../js/privateRoute";
->>>>>>> 0a84b5a0ab7cdbdedabcc22534be35263e3b345e
 
 //create your first component
 const Layout = () => {
@@ -35,29 +31,6 @@ const Layout = () => {
 				<ScrollToTop>
 					<MyNavbar />
 					<Switch>
-<<<<<<< HEAD
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/register">
-							<RegisterView />
-						</Route>
-						<Route exact path="/admin">
-							<Admin />
-						</Route>
-						<Route exact path="/contactanos">
-							<Contact />
-						</Route>
-						<Route exact path="/user">
-							<User />
-						</Route>
-						<Route exact path="/user/information">
-							<PetInformation />
-						</Route>
-						<Route exact path="/newPet">
-							<NewPet />
-						</Route>
-=======
 						<Route exact path="/" component={Home} />
 						<Route exact path="/register" component={RegisterView} />
 						<Route exact path="/vet" component={Vet} />
@@ -65,7 +38,7 @@ const Layout = () => {
 						<Route exact path="/user" component={User} />
 						<Route exact path="/user/information" component={PetInformation} />
 						<Route exact path="/pass" component={ForgottenPass} />
->>>>>>> 0a84b5a0ab7cdbdedabcc22534be35263e3b345e
+                        <Route exact path="/newPet" component={NewPet} />
 						<Route>
 							<div className="text-center">
 								<h1>Lo siento, pero Pet Cloud no encuentra esta página</h1>
