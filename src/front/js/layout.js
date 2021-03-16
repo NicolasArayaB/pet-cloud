@@ -4,7 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
 import { RegisterView } from "./pages/register";
-import { Admin } from "./pages/admin";
+import { Vet } from "./pages/vet";
 
 import injectContext from "./store/appContext";
 
@@ -16,6 +16,8 @@ import User from "./pages/user";
 import { petDataInfo } from "./pages/petDataInfo";
 import { PetInformation } from "./component/petInformation";
 import VetInfo from "./pages/vetInformation";
+import { ForgottenPass } from "./pages/forgottenPassword";
+import { PrivateRoute } from "../js/privateRoute";
 
 //create your first component
 const Layout = () => {
@@ -29,37 +31,27 @@ const Layout = () => {
 				<ScrollToTop>
 					<MyNavbar />
 					<Switch>
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/register">
-							<RegisterView />
-						</Route>
-						<Route exact path="/admin">
-							<Admin />
-						</Route>
-						<Route exact path="/vet/id">
-							<VetInfo />
-						</Route>
-						<Route exact path="/contactanos">
-							<Contact />
-						</Route>
-						<Route exact path="/user">
-							<User />
-						</Route>
-						<Route exact path="/user/information">
-							<PetInformation />
-						</Route>
+						<Route exact path="/" component={Home} />
+						<Route exact path="/register" component={RegisterView} />
+						<Route exact path="/vet" component={Vet} />
+						<Route exact path="/contactanos" component={Contact} />
+						<Route exact path="/user" component={User} />
+						<Route exact path="/user/information" component={PetInformation} />
+						<Route exact path="/pass" component={ForgottenPass} />
+                        <Route exact path="/vet/id" component={VetInfo} />
 						<Route>
-							<h1>
-								Lo siento, pero Pet Cloud no encuentra esta página
-								<br />
+							<div className="text-center">
+								<h1>Lo siento, pero Pet Cloud no encuentra esta página</h1>
+								<h2>
+									Sigue navegando con nosotros{" "}
+									<i className="fas fa-paw" style={{ color: "#e37222" }} />
+								</h2>
 								<Link to="/">
-									<span className="btn btn-primary btn-lg" href="#" role="button">
+									<button className="btn btn-primary btn-lg" href="#" role="button">
 										Volver al Home de Pet cloud
-									</span>
+									</button>
 								</Link>
-							</h1>
+							</div>
 						</Route>
 					</Switch>
 					<Footer />
