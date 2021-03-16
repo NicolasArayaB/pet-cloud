@@ -40,7 +40,7 @@ const Layout = () => {
 						<Route exact path="/user/information" component={PetInformation} />
 						<Route exact path="/pass" component={ForgottenPass} />
 						<Route exact path="/vet/id" component={VetInfo} />
-                        <Route exact path="/newPet" component={NewPet} />
+						<Route exact path="/newPet" component={NewPet} />
 						<Route>
 							<div className="text-center">
 								<h1>Lo siento, pero Pet Cloud no encuentra esta página</h1>
