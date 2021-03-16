@@ -4,7 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
 import { RegisterView } from "./pages/register";
-import { Admin } from "./pages/admin";
+import { Vet } from "./pages/vet";
 
 import injectContext from "./store/appContext";
 
@@ -15,8 +15,13 @@ import { Link } from "react-router-dom";
 import User from "./pages/user";
 import { petDataInfo } from "./pages/petDataInfo";
 import { PetInformation } from "./component/petInformation";
+<<<<<<< HEAD
 import newPet from "./pages/newPet";
 import NewPet from "./pages/newPet";
+=======
+import { ForgottenPass } from "./pages/forgottenPassword";
+import { PrivateRoute } from "../js/privateRoute";
+>>>>>>> 0a84b5a0ab7cdbdedabcc22534be35263e3b345e
 
 //create your first component
 const Layout = () => {
@@ -30,6 +35,7 @@ const Layout = () => {
 				<ScrollToTop>
 					<MyNavbar />
 					<Switch>
+<<<<<<< HEAD
 						<Route exact path="/">
 							<Home />
 						</Route>
@@ -51,16 +57,28 @@ const Layout = () => {
 						<Route exact path="/newPet">
 							<NewPet />
 						</Route>
+=======
+						<Route exact path="/" component={Home} />
+						<Route exact path="/register" component={RegisterView} />
+						<Route exact path="/vet" component={Vet} />
+						<Route exact path="/contactanos" component={Contact} />
+						<Route exact path="/user" component={User} />
+						<Route exact path="/user/information" component={PetInformation} />
+						<Route exact path="/pass" component={ForgottenPass} />
+>>>>>>> 0a84b5a0ab7cdbdedabcc22534be35263e3b345e
 						<Route>
-							<h1>
-								Lo siento, pero Pet Cloud no encuentra esta página
-								<br />
+							<div className="text-center">
+								<h1>Lo siento, pero Pet Cloud no encuentra esta página</h1>
+								<h2>
+									Sigue navegando con nosotros{" "}
+									<i className="fas fa-paw" style={{ color: "#e37222" }} />
+								</h2>
 								<Link to="/">
-									<span className="btn btn-primary btn-lg" href="#" role="button">
+									<button className="btn btn-primary btn-lg" href="#" role="button">
 										Volver al Home de Pet cloud
-									</span>
+									</button>
 								</Link>
-							</h1>
+							</div>
 						</Route>
 					</Switch>
 					<Footer />
