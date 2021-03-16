@@ -124,7 +124,7 @@ const NewPetForm = () => {
 				<br />
 			</Form.Group>
 
-			<Button variant="primary" type="submit">
+			<Button className="petBtn" type="submit">
 				Crear
 			</Button>
 		</div>
