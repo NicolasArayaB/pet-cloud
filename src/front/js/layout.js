@@ -13,8 +13,7 @@ import { Footer } from "./component/footer";
 import { Contact } from "./pages/contact";
 import { Link } from "react-router-dom";
 import User from "./pages/user";
-import { petDataInfo } from "./pages/petDataInfo";
-import { PetInformation } from "./component/petInformation";
+import { PetInformation } from "./component/pet-owner/petInformation";
 import VetInfo from "./pages/vetInformation";
 import NewPet from "./pages/newPet";
 import { ForgottenPass } from "./pages/forgottenPassword";
@@ -40,7 +39,7 @@ const Layout = () => {
 						<Route exact path="/user/information" component={PetInformation} />
 						<Route exact path="/pass" component={ForgottenPass} />
 						<Route exact path="/vet/id" component={VetInfo} />
-                        <Route exact path="/newPet" component={NewPet} />
+						<Route exact path="/newPet" component={NewPet} />
 						<Route>
 							<div className="text-center">
 								<h1>Lo siento, pero Pet Cloud no encuentra esta página</h1>
