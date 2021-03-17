@@ -12,7 +12,7 @@ const CardVet = () => {
 				<Card.Img
 					variant="top"
 					src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/01-view-home-change-images/src/front/img/veterinary_card.png"
-                    style={{ height: "200px" }}
+					style={{ height: "200px" }}
 				/>
 				<Card.Body>
 					<Card.Title style={{ color: "#07889B" }}> Veterinari@</Card.Title>
