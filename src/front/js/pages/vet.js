@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, InputGroup, FormControl } from "react-bootstrap";
+import { Container, Row, Col, InputGroup, FormControl, Button } from "react-bootstrap";
 
 import "../../styles/vet.scss";
 
@@ -32,6 +32,13 @@ export const Vet = () => {
 							<InputGroup.Text id="search-addon2">&#128269;</InputGroup.Text>
 						</InputGroup.Append>
 					</InputGroup>
+				</Col>
+			</Row>
+			<Row className="text-center">
+				<Col>
+					<Button className="petBtn" href="/newPet">
+						Nueva Mascota
+					</Button>
 				</Col>
 			</Row>
 		</Container>
