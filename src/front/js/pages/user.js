@@ -1,8 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import UserFiles from "../../js/component/userFiles";
-import UserPhoto from "../../js/component/userPhoto";
-import UserData from "../../js/component/userData";
+import UserFiles from "../component/pet-owner/userFiles";
+import UserPhoto from "../component/pet-owner/userPhoto";
 
 function User() {
 	return (

@@ -1,5 +1,4 @@
 import React from "react";
-import "../../styles/home.scss";
 import { Container, Row, Col, ListGroup, ListGroupItem, Form, Image } from "react-bootstrap";
 
 export const PetInformation = () => {

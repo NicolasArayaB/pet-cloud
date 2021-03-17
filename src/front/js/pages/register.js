@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-import Register from "../component/register";
+import Register from "../component/login/register";
 
 import "../../styles/login.scss";
 

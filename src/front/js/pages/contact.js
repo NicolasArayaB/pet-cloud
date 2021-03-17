@@ -16,7 +16,7 @@ export const Contact = () => {
 	return (
 		<Container>
 			<Row className="justify-content-center">
-				<Col xs="12" md="6">
+				<Col xs={12} md={6}>
 					<Form noValidate validated={validated} onSubmit={handleSubmit}>
 						<Form.Group controlId="exampleForm.ControlSelect1">
 							<Form.Label style={{ marginTop: "40px" }}>Selecciona tu perfil</Form.Label>
@@ -37,7 +37,12 @@ export const Contact = () => {
 							<Form.Label>Cuentanos de Tu problema</Form.Label>
 							<Form.Control as="textarea" rows={3} required />
 						</Form.Group>
-						<Button variant="outline-primary" size="lg" block type="submit">
+						<Button
+							variant="outline-secondary"
+							style={{ backgroundColor: "#66b9bf", border: 0 }}
+							size="lg"
+							block
+							type="submit">
 							Enviar
 						</Button>
 					</Form>

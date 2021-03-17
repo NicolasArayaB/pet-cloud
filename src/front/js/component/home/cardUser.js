@@ -3,8 +3,8 @@ import { Col, Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 
 const CardUser = () => {
 	return (
-		<Col xs="12" md="6">
-			<Card border="0" style={{ width: "18rem", backgroundColor: "" }}>
+		<Col xs={12} md={6}>
+			<Card border="0" style={{ width: "18rem", backgroundColor: "", marginTop: "20px" }}>
 				<Card.Header className="bg-danger" style={{ color: "white" }}>
 					¿No tienes el historial clínico de tus mascotas en línea?
 				</Card.Header>
@@ -22,7 +22,11 @@ const CardUser = () => {
 					<ListGroupItem>Revisa sus próximos controles </ListGroupItem>
 				</ListGroup>
 				<Card.Body>
-					<Button variant="primary" href="/user">
+					<Button
+						variant="outline-secondary"
+						className="button-card"
+						style={{ backgroundColor: "#66b9bf", border: 0 }}
+						href="/user">
 						Me interesa!!
 					</Button>
 				</Card.Body>

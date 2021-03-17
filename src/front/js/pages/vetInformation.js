@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
-import Checkup from "../component/checkupTable";
-import Vaccines from "../component/vaccinesTable";
+import Checkup from "../component/vet/checkupTable";
+import Vaccines from "../component/vet/vaccinesTable";
 
 const VetInfo = () => {
 	return (
