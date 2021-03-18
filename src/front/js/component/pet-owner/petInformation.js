@@ -3,7 +3,7 @@ import { Container, Row, Col, ListGroup, ListGroupItem, Form, Image } from "reac
 
 export const PetInformation = () => {
 	return (
-		<Container-fluid>
+		<Container>
 			<Row className="text-center">
 				<Col xs={12} md={12}>
 					<h2 className="nombre mt-4">Hola @Name</h2>
@@ -107,6 +107,6 @@ export const PetInformation = () => {
 					</ListGroup>
 				</Col>
 			</Row>
-		</Container-fluid>
+		</Container>
 	);
 };
