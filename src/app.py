@@ -10,6 +10,7 @@ from api.utils import APIException, generate_sitemap
 from api.models import db
 from api.routes import api
 from api.admin import setup_admin
+from flask_jwt_extended import JWTManager
 #from models import Person
 
 ENV = os.getenv("FLASK_ENV")
@@ -56,6 +57,10 @@ def serve_any_other_file(path):
     response = send_from_directory(static_file_dir, path)
     response.cache_control.max_age = 0 # avoid cache memory
     return response
+
+# including JWT library
+app.config["JWT_SECRET_KEY"] = "nuestra-clave"
+jwt = JWTManager(app)
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
