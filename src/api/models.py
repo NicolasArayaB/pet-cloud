@@ -12,21 +12,24 @@ class User(db.Model):
     email = Column(String(120), unique=True, nullable=False)
     password = Column(String(80), unique=False, nullable=False)
     is_active = Column(Boolean(), unique=False, nullable=False)
+    first_name = Column(String(50))
+    last_name = Column(String(50))
+    gender = Column(String(50))
     vet_user_fk = Column(Integer, ForeignKey('vet_user.id'))
     vet_users = relationship("Vet_user", foreign_keys=[vet_user_fk])
     
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r>' % self.id
 
     def serialize(self):
         return {
             "id": self.id,
             "email": self.email,
-            # do not serialize the password, its a security breach
+            # do not serialize the password
         }
 
 
-class User_contact(db.Model):
+class User_contact(db.Model): 
     id = Column(Integer, primary_key=True)
     address = Column(String(100))
     city = Column(String(100))
@@ -35,7 +38,7 @@ class User_contact(db.Model):
     users_contact = relationship("User", foreign_keys=[user_contact_fk])
     
     def __repr__(self):
-        return '<User_contact %r>' % self.username
+        return '<User_contact %r>' % self.address
 
     def serialize(self):
         return {
@@ -58,7 +61,7 @@ class Vet_user(db.Model):
     users = relationship('User', foreign_keys=[user_fk])
 
     def __repr__(self):
-        return '<Vet_user %r>' % self.username
+        return '<Vet_user %r>' % self.id
 
     def serialize(self):
         return {
@@ -80,7 +83,7 @@ class Veterinary_organization(db.Model):
     vet_users = relationship("Vet_user", foreign_keys=[vet_user_fk])
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<Veterinary_organization %r>' % self.id
 
     def serialize(self):
         return {
@@ -101,7 +104,7 @@ class Pet(db.Model):
     pet_users = relationship("User", foreign_keys=[pet_user_fk])
 
     def __repr__(self):
-        return '<Pet %r>' % self.username
+        return '<Pet %r>' % self.id
 
     def serialize(self):
         return {
@@ -120,7 +123,7 @@ class Pet_controls(db.Model):
     pets = relationship("Pet", foreign_keys=[pet_controls_fk])
 
     def __repr__(self):
-        return '<Pet_controls %r>' % self.username
+        return '<Pet_controls %r>' % self.id
 
     def serialize(self):
         return {
