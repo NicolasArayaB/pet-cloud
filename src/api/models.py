@@ -25,11 +25,11 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            # do not serialize the password, its a security breach
+            # do not serialize the password
         }
 
 
-class User_contact(db.Model):
+class User_contact(db.Model): 
     id = Column(Integer, primary_key=True)
     address = Column(String(100))
     city = Column(String(100))
