@@ -91,7 +91,7 @@ class Veterinary_organization(db.Model):
 
 class Pet(db.Model):
     __tablename__ = 'pet'
-    id = db.Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     chip_identifier = Column(String(50))
     nickname = Column(String(100))
     species = Column(String(100))
