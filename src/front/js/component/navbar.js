@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import Context from "../store/appContext";
 import { Link } from "react-router-dom";
 import { Navbar, Container, Row, Col, Button } from "react-bootstrap";
 
@@ -7,9 +8,14 @@ import LoginModal from "./login/loginModal";
 
 export const MyNavbar = () => {
 	const [show, setShow] = useState(false);
+	const [store, actions] = useContext(Context);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+
+	useEffect(() => {
+		actions.getToken();
+	}, []);
 
 	return (
 		<>
@@ -31,9 +37,13 @@ export const MyNavbar = () => {
 								<HomeNavInfo />
 							</Col>
 							<Col sm={2}>
-								<Button onClick={handleShow} className="mx-4 btn petBtn">
-									Login
-								</Button>
+								{store.user.token !== null ? (
+									<Button onClick={handleShow} className="mx-4 btn petBtn">
+										Login
+									</Button>
+								) : (
+									<p>Hola {store.user.first_name}</p>
+								)}
 							</Col>
 						</Row>
 					</Container>
