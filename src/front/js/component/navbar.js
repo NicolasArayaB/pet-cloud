@@ -42,7 +42,7 @@ export const MyNavbar = () => {
 										Login
 									</Button>
 								) : (
-									<p>Hola {store.user.first_name}</p>
+									<p>Hola {store.user.username}</p>
 								)}
 							</Col>
 						</Row>

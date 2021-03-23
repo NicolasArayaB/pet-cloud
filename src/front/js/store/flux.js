@@ -2,15 +2,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			user: {
-                expires: "",
-                token: "",
-                email: "",
-                id: "",
-                first_name: ""
-            }
+				expires: "",
+				token: "",
+				email: "",
+				id: "",
+				username: ""
+			}
 		},
 		actions: {
-            getToken: () => {
+            addUser: newUser => {
+                const store = getStore();
+                setStore({ user: [...store.user, { newUser }] });
+            },
+
+            setRegister: newUser => {
+                fetch(process.env.BAKEND_URL + "/api/register", {
+                    method: "POST",
+                    body: JSON.stringify(newUser),
+                    headers: { "Content-type": "application/json; charset=UTF-8" }
+                })
+                    .then(resp => resp.json())
+                    .then(data => addUser(data))
+            },
+
+			getToken: () => {
 				const tokenLocal = localStorage.getItem("token");
 				const userLocal = JSON.parse(localStorage.getItem("user"));
 				setStore({
@@ -21,9 +36,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				console.log("-->", tokenLocal);
 				console.log("-->", JSON.stringify(userLocal));
-            },
-            
-            setLogin: user => {
+			},
+
+			setLogin: user => {
 				fetch(process.env.BACKEND_URL + "/api/login", {
 					method: "POST",
 					body: JSON.stringify(user),
@@ -38,8 +53,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 							localStorage.setItem("token", data.token);
 							localStorage.setItem("user", JSON.stringify(data.user));
 						} else {
-                            // LocalStorage no soportado en este navegador
-                            alert("Lo sentimos, tu navegador no es compatible.");
+							// LocalStorage no soportado en este navegador
+							alert("Lo sentimos, tu navegador no es compatible.");
 						}
 					})
 					.catch(error => console.log("Error loading message from backend", error));
@@ -51,7 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => setStore({ message: data.message }))
 					.catch(error => console.log("Error loading message from backend", error));
-			},
+			}
 		}
 	};
 };

@@ -6,7 +6,7 @@ from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 db = SQLAlchemy()
 
 # Data Model: 
-# user, user_contact, vet_user, veterinary_orgnization, pet, pet_controls
+# user, user_contact, vet_user, veterinary_organization, pet, pet_controls
 
 class User(db.Model):
     id = Column(Integer, primary_key=True)
