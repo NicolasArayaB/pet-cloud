@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const LoginForm = params => {
 	return (
-		<Form autocomplete="off">
+		<Form autoComplete="off">
 			<Form.Control
 				value={params.email}
 				onChange={e => params.setEmail(e.target.value)}
@@ -19,7 +19,7 @@ const LoginForm = params => {
 					type="password"
 					placeholder="Ingresa tu contraseña"
 				/>
-				<Form.Text>La contraseña debe tener entre 6 a 12 characteres</Form.Text>
+				<Form.Text>La contraseña debe tener entre 6 a 12 caracteres</Form.Text>
 			</Form.Group>
 			<Link to="/pass" onClick={params.close}>
 				¿Olvidaste tu contraseña?

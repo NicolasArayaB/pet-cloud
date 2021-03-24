@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
-import Context from "../store/appContext";
+// import Context from "../store/appContext";
+import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { Navbar, Container, Row, Col, Button } from "react-bootstrap";
 
@@ -8,18 +9,18 @@ import LoginModal from "./login/loginModal";
 
 export const MyNavbar = () => {
 	const [show, setShow] = useState(false);
-	const [store, actions] = useContext(Context);
+	const { store, actions } = useContext(Context);
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+	const handleShow = () => setShow(!show);
 
 	useEffect(() => {
 		actions.getToken();
 	}, []);
+	console.log(store.login, "<-- store.user");
 
 	return (
 		<>
-			<LoginModal show={show} close={handleClose} />
+			<LoginModal show={show} close={handleShow} />
 			<Navbar collapseOnSelect expand="lg" className="petCloudBar" variant="light">
 				<Navbar.Brand href="#home">
 					<Link to="/">
@@ -37,12 +38,12 @@ export const MyNavbar = () => {
 								<HomeNavInfo />
 							</Col>
 							<Col sm={2}>
-								{store.user.token !== null ? (
+								{store.login.token != null ? (
+									<p>Hola {JSON.stringify(store.login.user.email)}</p>
+								) : (
 									<Button onClick={handleShow} className="mx-4 btn petBtn">
 										Login
 									</Button>
-								) : (
-									<p>Hola {store.user.username}</p>
 								)}
 							</Col>
 						</Row>

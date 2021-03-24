@@ -1,55 +1,23 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			user: {
-				expires: "",
-				token: "",
-				email: "",
-				id: "",
-				username: ""
-			}
+			login: [],
+			users: [],
+			message: {}
 		},
 		actions: {
-            addUser: newUser => {
-                const store = getStore();
-                setStore({ user: [...store.user, { newUser }] });
-            },
-
-            setRegister: newUser => {
-                fetch(process.env.BAKEND_URL + "/api/register", {
-                    method: "POST",
-                    body: JSON.stringify(newUser),
-                    headers: { "Content-type": "application/json; charset=UTF-8" }
-                })
-                    .then(resp => resp.json())
-                    .then(data => addUser(data))
-            },
-
-			getToken: () => {
-				const tokenLocal = localStorage.getItem("token");
-				const userLocal = JSON.parse(localStorage.getItem("user"));
-				setStore({
-					user: {
-						token: tokenLocal,
-						user: userLocal
-					}
-				});
-				console.log("-->", tokenLocal);
-				console.log("-->", JSON.stringify(userLocal));
-			},
-
 			setLogin: user => {
-				fetch(process.env.BACKEND_URL + "/api/login", {
+				fetch("https://3001-coral-amphibian-ubxv67se.ws-us03.gitpod.io" + "/api/login", {
 					method: "POST",
 					body: JSON.stringify(user),
-					headers: { "Content-type": "application/json; charset=UTF-8" }
+					headers: { "Content-type": "application/json" }
 				})
 					.then(resp => resp.json())
 					.then(data => {
 						console.log("--data--", data);
-						setStore({ user: data });
-
+						setStore({ login: data });
 						if (typeof Storage !== "undefined") {
+							console.log(data.token);
 							localStorage.setItem("token", data.token);
 							localStorage.setItem("user", JSON.stringify(data.user));
 						} else {
@@ -60,12 +28,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("Error loading message from backend", error));
 			},
 
-			getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
-					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					.catch(error => console.log("Error loading message from backend", error));
+			getToken: () => {
+				const tokenLocal = localStorage.getItem("token");
+				const userLocal = JSON.parse(localStorage.getItem("user"));
+				setStore({
+					login: {
+						token: tokenLocal,
+						user: userLocal
+					}
+				});
+				console.log("-->", tokenLocal);
+				console.log("-->", JSON.stringify(userLocal));
 			}
 		}
 	};

@@ -86,6 +86,7 @@ def register():
     username = request.json.get("username", None)
     first_name = request.json.get("first_name", None)
     last_name = request.json.get("last_name", None)
+    gender = request.json.get("gender", None)
     # how we call it, mother and father-family?
 
     if not email:
@@ -112,12 +113,16 @@ def register():
         return "This email has been already taken", 401
 
     user = User()
+    hashed_password = generate_password_hash(password)
+
     user.email = email
+    user.password = hashed_password
     user.username = username
     user.first_name = first_name
     user.last_name = last_name
-    hashed_password = generate_password_hash(password)
-    user.password = hashed_password
+    user.gender = gender
+
+    
     print(user)
     db.session.add(user)
     db.session.commit()

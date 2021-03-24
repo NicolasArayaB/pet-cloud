@@ -19,18 +19,18 @@ const LoginModal = params => {
 	};
 
 	return (
-		<Modal
-			show={params.show}
-			onHide={params.close}
-			email={email}
-			password={password}
-			setEmail={setEmail}
-			setPassword={setPassword}>
+		<Modal show={params.show} onHide={params.close}>
 			<Modal.Header closeButton>
 				<Modal.Title>Login</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<LoginForm close={params.close} />
+				<LoginForm
+					close={params.close}
+					email={email}
+					password={password}
+					setEmail={setEmail}
+					setPassword={setPassword}
+				/>
 			</Modal.Body>
 			<Modal.Footer className="justify-content-center">
 				<Button onClick={e => clickHandler(e)} type="submit" className="petBtn">
