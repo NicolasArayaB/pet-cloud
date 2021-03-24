@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
-// import Context from "../store/appContext";
-import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { Navbar, Container, Row, Col, Button } from "react-bootstrap";
 
+import { Context } from "../store/appContext";
 import HomeNavInfo from "./homeNavInfo";
 import LoginModal from "./login/loginModal";
 
@@ -16,7 +15,7 @@ export const MyNavbar = () => {
 	useEffect(() => {
 		actions.getToken();
 	}, []);
-	console.log(store.login, "<-- store.user");
+	console.log(store.login, "<-- store.login");
 
 	return (
 		<>
@@ -39,7 +38,7 @@ export const MyNavbar = () => {
 							</Col>
 							<Col sm={2}>
 								{store.login.token != null ? (
-									<p>Hola {JSON.stringify(store.login.user.email)}</p>
+									<div className="text-center ">Hola {store.login.username}!</div>
 								) : (
 									<Button onClick={handleShow} className="mx-4 btn petBtn">
 										Login
