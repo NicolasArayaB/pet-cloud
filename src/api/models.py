@@ -6,12 +6,12 @@ from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 db = SQLAlchemy()
 
 # Data Model: 
-# user, user_contact, vet_user, veterinary_orgnization, pet, pet_controls
+# user, user_contact, vet_user, veterinary_organization, pet, pet_controls
 
 class User(db.Model):
     id = Column(Integer, primary_key=True)
     email = Column(String(120), unique=True, nullable=False)
-    password = Column(String(80), unique=False, nullable=False)
+    password = Column(String(200), unique=False, nullable=False)
     username = Column(String(50), unique=True)
     is_active = Column(Boolean(), unique=False, nullable=False)
     first_name = Column(String(50))

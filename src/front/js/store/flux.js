@@ -1,46 +1,44 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			login: [],
+			users: [],
+			message: {}
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-
-			getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
+			setLogin: user => {
+				fetch("https://3001-coral-amphibian-ubxv67se.ws-us03.gitpod.io" + "/api/login", {
+					method: "POST",
+					body: JSON.stringify(user),
+					headers: { "Content-type": "application/json" }
+				})
 					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
+					.then(data => {
+						console.log("--data--", data);
+						setStore({ login: data });
+						if (typeof Storage !== "undefined") {
+							console.log(data.token);
+							localStorage.setItem("token", data.token);
+							localStorage.setItem("user", JSON.stringify(data.user));
+						} else {
+							// LocalStorage no soportado en este navegador
+							alert("Lo sentimos, tu navegador no es compatible.");
+						}
+					})
 					.catch(error => console.log("Error loading message from backend", error));
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
+			getToken: () => {
+				const tokenLocal = localStorage.getItem("token");
+				const userLocal = JSON.parse(localStorage.getItem("user"));
+				setStore({
+					login: {
+						token: tokenLocal,
+						user: userLocal
+					}
 				});
-
-				//reset the global store
-				setStore({ demo: demo });
+				console.log("-->", tokenLocal);
+				console.log("-->", JSON.stringify(userLocal));
 			}
 		}
 	};
