@@ -3,9 +3,19 @@
     padding: 15px;
 }
 
-.petCloudBar{
-    background-color: #e37222 !important;
+#loggedButton, #loggedButton:focus, #loggedButton::after {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    color: rgba(0, 0, 0, 0.5)
 }
+#loggedButton:hover{
+    color: black;
+}
+
+.logo {
+    width: 130px;
+};
 
 .menu {
     color: black;
@@ -15,23 +25,22 @@
     padding: 0;
 }
 
-.navbar-toggler {
-    border: 3px black;
-}
-
 .navContainer {
     display: inline !important;
     justify-content: center;
 }
 
-.logo {
-    width: 130px;
-};
+.navbar-toggler {
+    border: 3px black;
+}
 
 .petBtn, .petBtn:hover, .petBtn:focus {
     background-color: #66b9bf !important;
     border-color: #66b9bf;
     color: black;
     box-shadow: none;
-    
+}
+
+.petCloudBar{
+    background-color: #e37222 !important;
 }
