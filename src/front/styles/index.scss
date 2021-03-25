@@ -3,6 +3,16 @@
     padding: 15px;
 }
 
+#loggedButton, #loggedButton:focus, #loggedButton::after {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    color: rgba(0, 0, 0, 0.5)
+}
+#loggedButton:hover{
+    color: black;
+}
+
 .logo {
     width: 130px;
 };
@@ -33,14 +43,4 @@
 
 .petCloudBar{
     background-color: #e37222 !important;
-}
-
-#loggedButton, #loggedButton:focus, #loggedButton::after {
-    background-color: transparent;
-    border-color: transparent;
-    box-shadow: none;
-    color: rgba(0, 0, 0, 0.5)
-}
-#loggedButton:hover{
-    color: black;
 }
