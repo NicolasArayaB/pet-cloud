@@ -71,8 +71,7 @@ def login():
         "user": user.serialize(),
         "token": access_token,
         "expires": expiration.total_seconds()*1000,
-        "userId": user.id,
-        "username": user.username
+        "userId": user.id
     }
 
     return jsonify(data), 200
@@ -83,18 +82,12 @@ def register():
  if request.method == 'POST':
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    username = request.json.get("username", None)
     first_name = request.json.get("first_name", None)
-    last_name = request.json.get("last_name", None)
-    gender = request.json.get("gender", None)
-    # how we call it, mother and father-family?
+    father_family_name = request.json.get("father_family_name", None)
+    mother_family_name = request.json.get("mother_family_name", None)
 
     if not email:
         return "Email required", 401
-
-    username = request.json.get("username", None)
-    if not username:
-        return "Username required", 401
 
     password = request.json.get("password", None)
     if not password:
@@ -103,10 +96,14 @@ def register():
     first_name = request.json.get("first_name", None)
     if not first_name:
         return "First Name required", 401
+
+    father_family_name = request.json.get("father_family_name", None)
+    if not father_family_name:
+        return "Father Family Name required", 401
     
-    last_name = request.json.get("last_name", None)
-    if not last_name:
-        return "Last Name required", 401
+    mother_family_name = request.json.get("mother_family_name", None)
+    if not mother_family_name:
+        return "Mother Family Name required", 401
 
     email_query = User.query.filter_by(email=email).first()
     if email_query:
@@ -114,24 +111,20 @@ def register():
 
     user = User()
     hashed_password = generate_password_hash(password)
-
     user.email = email
     user.password = hashed_password
-    user.username = username
     user.first_name = first_name
-    user.last_name = last_name
+    user.father_family_name = father_family_name
+    user.mother_family_name = mother_family_name
     user.gender = gender
 
-    
     print(user)
     db.session.add(user)
     db.session.commit()
 
     response = {
         "msg": "User added successfully",
-        "username": username
+        "email": email
     }
     return jsonify(response), 200
-
     return jsonify(response_body), 200
-
