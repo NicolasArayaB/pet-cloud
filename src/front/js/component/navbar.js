@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Container, Row, Col, Button } from "react-bootstrap";
+import { Navbar, Container, Row, Col, Button, DropdownButton, Dropdown } from "react-bootstrap";
 
 import { Context } from "../store/appContext";
 import HomeNavInfo from "./homeNavInfo";
@@ -38,7 +38,14 @@ export const MyNavbar = () => {
 							</Col>
 							<Col sm={2}>
 								{store.login.token != null ? (
-									<div className="text-center ">Hola {store.login.username}!</div>
+									<Dropdown>
+										<Dropdown.Toggle id="loggedButton">Hola {store.login.username}</Dropdown.Toggle>
+										<Dropdown.Menu>
+											<Dropdown.Item href="/" onClick={localStorage.clear()}>
+												Cerrar sesión
+											</Dropdown.Item>
+										</Dropdown.Menu>
+									</Dropdown>
 								) : (
 									<Button onClick={handleShow} className="mx-4 btn petBtn">
 										Login

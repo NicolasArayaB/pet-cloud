@@ -34,3 +34,13 @@
 .petCloudBar{
     background-color: #e37222 !important;
 }
+
+#loggedButton, #loggedButton:focus, #loggedButton::after {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    color: rgba(0, 0, 0, 0.5)
+}
+#loggedButton:hover{
+    color: black;
+}
