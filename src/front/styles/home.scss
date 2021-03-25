@@ -2,10 +2,6 @@ body, html {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-h1 {
-    color: #66B9BF
-}
-
 .button-card {
    color:rgb(19, 17, 17);
 }
@@ -18,4 +14,8 @@ h1 {
    border-radius: 5px; 
    resize: both; 
    overflow: scroll; 
+}
+
+h1 {
+    color: #66B9BF
 }
