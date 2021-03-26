@@ -45,7 +45,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			registerUser: user => {
-				fetch("https://3001-emerald-moth-d6fb1mhj.ws-us03.gitpod.io/" + "api/register", {
+				fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
 					body: JSON.stringify(user),
 					headers: { "Content-type": "application/json" }
@@ -58,6 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => {
 						console.log(error);
 					});
+				console.log(JSON.stringify(user), "<--user register data");
 			}
 		}
 	};

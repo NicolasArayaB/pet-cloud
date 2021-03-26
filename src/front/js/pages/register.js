@@ -34,11 +34,11 @@ export const RegisterView = () => {
 	const clickHandler = e => {
 		e.preventDefault();
 		actions.registerUser({
-			email: email,
-			password: password,
 			firstName: firstName,
 			fatherFamilyName: fatherFamilyName,
-			motherFamilyName: motherFamilyName
+			motherFamilyName: motherFamilyName,
+			email: email,
+			password: password
 		});
 	};
 	const onChangeFirstName = e => {
