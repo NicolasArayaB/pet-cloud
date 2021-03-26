@@ -9,32 +9,21 @@ const CardInfo = () => {
 				<Card border="light">
 					<Card.Img variant="top" src="holder.js/100px160" />
 					<Card.Body>
-						<Card.Title>Card title</Card.Title>
-						<Card.Text>
-							This is a wider card with supporting text below as a natural lead-in to additional content.
-							This content is a little bit longer.
-						</Card.Text>
+						<Card.Text>Identifica rapidamente a tu mascota</Card.Text>
 					</Card.Body>
 				</Card>
 
-				<Card>
+				<Card border="light">
 					<Card.Img variant="top" src="holder.js/100px160" />
 					<Card.Body>
-						<Card.Title>Card title</Card.Title>
-						<Card.Text>
-							This card has supporting text below as a natural lead-in to additional content.{" "}
-						</Card.Text>
+						<Card.Text>Obten el historial de tu mascota a un click</Card.Text>
 					</Card.Body>
 				</Card>
 
-				<Card>
+				<Card border="light">
 					<Card.Img variant="top" src="holder.js/100px160" />
 					<Card.Body>
-						<Card.Title>Card title</Card.Title>
-						<Card.Text>
-							This is a wider card with supporting text below as a natural lead-in to additional content.
-							This card has even longer content than the first to show that equal height action.
-						</Card.Text>
+						<Card.Text>Recibe notificaciones de los proximos controles</Card.Text>
 					</Card.Body>
 				</Card>
 			</CardGroup>

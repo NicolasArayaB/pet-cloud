@@ -8,12 +8,10 @@ function ServicesMain() {
 			<Container>
 				<br />
 				<br />
+				<h1>SERVICIOS</h1>
 				<br />
 				<br />
-				<br />
-				<br />
-				<br />
-				<br />
+				<h2>¿Eres dueño de mascota?</h2>
 				<br />
 				<br />
 				<br />
