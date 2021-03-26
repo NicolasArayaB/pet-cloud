@@ -56,7 +56,6 @@ def login():
         return jsonify({"msg":"Password is required"}), 400
     
     user = User.query.filter_by(email=email).first()
-    print(user)
 
     if not user:
         return jsonify({"msg": "The email is not correct",
@@ -72,7 +71,7 @@ def login():
         "token": access_token,
         "expires": expiration.total_seconds()*1000,
         "userId": user.id,
-        "username": user.username
+        "first_name": user.first_name
     }
 
     return jsonify(data), 200

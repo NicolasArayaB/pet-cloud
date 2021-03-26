@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			setLogin: user => {
-				fetch("https://3001-coral-amphibian-ubxv67se.ws-us03.gitpod.io" + "/api/login", {
+				fetch(process.env.BACKEND_URL + "/api/login", {
 					method: "POST",
 					body: JSON.stringify(user),
 					headers: { "Content-type": "application/json" }
@@ -20,7 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							console.log(data.token, "---> data.token");
 							localStorage.setItem("token", data.token);
 							localStorage.setItem("user", JSON.stringify(data.user));
-							localStorage.setItem("username", JSON.stringify(data.username));
+							localStorage.setItem("first_name", JSON.stringify(data.first_name));
 						} else {
 							// LocalStorage no soportado en este navegador
 							alert("Lo sentimos, tu navegador no es compatible.");
@@ -32,12 +32,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getToken: () => {
 				const tokenLocal = localStorage.getItem("token");
 				const userLocal = JSON.parse(localStorage.getItem("user"));
-				const usernameLocal = JSON.parse(localStorage.getItem("username"));
+				const firstNameLocal = JSON.parse(localStorage.getItem("first_name"));
 				setStore({
 					login: {
 						token: tokenLocal,
 						user: userLocal,
-						username: usernameLocal
+						firstName: firstNameLocal
 					}
 				});
 				console.log("-->", tokenLocal);
