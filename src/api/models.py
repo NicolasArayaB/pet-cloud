@@ -10,15 +10,15 @@ db = SQLAlchemy()
 class User(db.Model):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
-    email = Column(String(200), unique=True, nullable=False)
-    password = Column(String(200), unique=False, nullable=False)
-    is_active = Column(Boolean, unique=False, nullable=False)
-    first_name = Column(String(50))
+    email = Column(String(100), unique=True, nullable=False)
+    password = Column(String(200), nullable=False)
+    first_name = Column(String(100))
     father_family_name = Column(String(50))
     mother_family_name = Column(String(50))
-    gender = Column(String(50))
-# vet_user_fk = Column(Integer, ForeignKey('vet_user.id'))
-# vet_users = relationship("Vet_user", foreign_keys=[vet_user_fk])
+    # is_active = Column(Boolean, unique=False, nullable=True)
+    # gender = Column(String(50))
+    # vet_user_fk = Column(Integer, ForeignKey('vet_user.id'))
+    # vet_users = relationship("Vet_user", foreign_keys=[vet_user_fk])
     
     def __repr__(self):
         return '<User %r>' % self.email
@@ -80,7 +80,7 @@ class Veterinary_organization(db.Model):
     address = Column(String(100))
     city = Column(String(100))
     phone = Column(Integer)
-    email = Column(String(80), unique=True)
+    email = Column(String(100), unique=True)
     vet_user_fk = Column(Integer, ForeignKey('vet_user.id'))
     vet_users = relationship("Vet_user", foreign_keys=[vet_user_fk])
 

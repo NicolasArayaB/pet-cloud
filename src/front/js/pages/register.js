@@ -61,6 +61,7 @@ export const RegisterView = () => {
 		const password = e.target.value;
 		setPassword(password);
 	};
+
 	return (
 		<Container className="registerForms">
 			<Form autocomplete="off" className="p-5 text-center">
@@ -69,6 +70,7 @@ export const RegisterView = () => {
 					focus
 					type="text"
 					placeholder="Nombre"
+					name="firstName"
 					value={firstName}
 					onChange={onChangeFirstName}
 					className="m-3"
@@ -76,6 +78,7 @@ export const RegisterView = () => {
 				<Form.Control
 					type="text"
 					placeholder="Apellido Paterno"
+					name="fatherFamilyName"
 					value={fatherFamilyName}
 					onChange={onChangeFatherFamilyName}
 					className="m-3"
@@ -83,6 +86,7 @@ export const RegisterView = () => {
 				<Form.Control
 					type="text"
 					placeholder="Apellido Materno"
+					name="motherFamilyName"
 					value={motherFamilyName}
 					onChange={onChangeMotherFamilyName}
 					className="m-3"
@@ -90,6 +94,7 @@ export const RegisterView = () => {
 				<Form.Control
 					type="email"
 					placeholder="Ingresa tu e-mail"
+					name="email"
 					value={email}
 					onChange={onChangeEmail}
 					className="m-3"
@@ -98,6 +103,7 @@ export const RegisterView = () => {
 					<Form.Control
 						type="password"
 						placeholder="Ingresa una contraseña"
+						name="password"
 						value={password}
 						onChange={onChangePassword}
 						validations={[required, validPassword]}
