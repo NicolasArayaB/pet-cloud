@@ -7,8 +7,11 @@ export const Contact = () => {
 	const [validated, setValidated] = useState(false);
 
 	const handleSubmit = event => {
-		const form = event.currentTarget;
-		const { role, name, email, message } = form;
+		const form = event.target;
+		const role = form.roleFormControl.value;
+		const name = form.nameFormControl.value;
+		const email = form.emailFormControl.value;
+		const message = form.messageFormControl.value;
 
 		event.preventDefault();
 
@@ -17,26 +20,25 @@ export const Contact = () => {
 		}
 
 		setValidated(true);
-		actions.sendContactMsg(name.value, email.value, message.value);
-		console.log("enviado");
+		actions.sendContactMsg(name, email, message, role);
 	};
 	return (
 		<Container>
 			<Row className="justify-content-center">
 				<Col xs={12} md={6}>
 					<Form noValidate validated={validated} onSubmit={handleSubmit}>
-						<Form.Group controlId="exampleForm.ControlSelect1">
+						<Form.Group controlId="roleFormControl">
 							<Form.Label style={{ marginTop: "40px" }}>Selecciona tu perfil</Form.Label>
 							<Form.Control as="select" name="role">
 								<option>Soy Veterinario</option>
 								<option>Soy Dueño de mascota</option>
 							</Form.Control>
 						</Form.Group>
-						<Form.Group controlId="validationCustom02">
+						<Form.Group controlId="nameFormControl">
 							<Form.Control name="Name" required type="text" placeholder="Ingresa tu Nombre y Apellido" />
 							<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
 						</Form.Group>
-						<Form.Group controlId="exampleForm.ControlInput1">
+						<Form.Group controlId="emailFormControl">
 							<Form.Control
 								name="email"
 								type="email"

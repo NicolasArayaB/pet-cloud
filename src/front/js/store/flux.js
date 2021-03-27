@@ -45,13 +45,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("-->", JSON.stringify(userLocal));
 			},
 
-			sendContactMsg: (name, email, message) => {
+			sendContactMsg: (name, email, message, role) => {
 				fetch("https://kp0p375mk2.execute-api.sa-east-1.amazonaws.com/default/contactanos", {
 					method: "POST",
 					body: JSON.stringify({
 						senderName: name,
 						senderEmail: email,
-						senderMessage: message
+						senderMessage: role + message
 					}),
 					headers: { "Content-type": "application/json" }
 				})
