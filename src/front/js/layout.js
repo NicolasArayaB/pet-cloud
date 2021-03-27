@@ -18,6 +18,7 @@ import VetInfo from "./pages/vetInformation";
 import NewPet from "./pages/newPet";
 import { ForgottenPass } from "./pages/forgottenPassword";
 import { PrivateRoute } from "../js/privateRoute";
+import ServicesMain from "./pages/services";
 
 //create your first component
 const Layout = () => {
@@ -40,6 +41,7 @@ const Layout = () => {
 						<Route exact path="/pass" component={ForgottenPass} />
 						<Route exact path="/vet/id" component={VetInfo} />
 						<Route exact path="/newPet" component={NewPet} />
+						<Route exact path="/services" component={ServicesMain} />
 						<Route>
 							<div className="text-center">
 								<h1>Lo siento, pero Pet Cloud no encuentra esta página</h1>
