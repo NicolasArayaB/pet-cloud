@@ -42,7 +42,7 @@ def handle_hash():
 
     return jsonify(response_token), 200
 
-#path to generate login for user
+# #path to generate login for user
 @api.route('/login', methods=['POST'])
 def login():
     
@@ -76,61 +76,53 @@ def login():
 
     return jsonify(data), 200
 
-#generate register for user
-@api.route('/register', methods=['POST'])
+# #generate register for user
+@api.route('/register', methods=['POST, GET'])
 def register():
- if request.method == 'POST':
+
+    first_name = request.json.get("firstName", None)
+    father_family_name = request.json.get("fatherFamilyName", None)
+    mother_family_name = request.json.get("motherFamilyName", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    username = request.json.get("username", None)
-    first_name = request.json.get("first_name", None)
-    last_name = request.json.get("last_name", None)
-    gender = request.json.get("gender", None)
-    # how we call it, mother and father-family?
 
     if not email:
         return "Email required", 401
-
-    username = request.json.get("username", None)
-    if not username:
-        return "Username required", 401
 
     password = request.json.get("password", None)
     if not password:
         return "Password required", 401
     
-    first_name = request.json.get("first_name", None)
+    first_name = request.json.get("firstName", None)
     if not first_name:
         return "First Name required", 401
+
+    father_family_name = request.json.get("fatherFamilyName", None)
+    if not father_family_name:
+        return "Father Family Name required", 401
     
-    last_name = request.json.get("last_name", None)
-    if not last_name:
-        return "Last Name required", 401
+    mother_family_name = request.json.get("motherFamilyName", None)
+    if not mother_family_name:
+        return "Mother Family Name required", 401
 
     email_query = User.query.filter_by(email=email).first()
     if email_query:
         return "This email has been already taken", 401
 
     user = User()
-    hashed_password = generate_password_hash(password)
-
-    user.email = email
-    user.password = hashed_password
-    user.username = username
     user.first_name = first_name
-    user.last_name = last_name
-    user.gender = gender
-
-    
-    print(user)
+    user.father_family_name = father_family_name
+    user.mother_family_name = mother_family_name
+    user.email = email
+    hashed_password = generate_password_hash(password)
+    user.password = hashed_password
+  
+    # print(user)
     db.session.add(user)
     db.session.commit()
 
-    response = {
-        "msg": "User added successfully",
-        "username": username
+    response_token = {
+        "msg": "User added successfully"   
     }
-    return jsonify(response), 200
 
-    return jsonify(response_body), 200
-
+    return jsonify(response_token), 200
