@@ -13,7 +13,7 @@ class User(db.Model):
     email = Column(String(120), unique=True, nullable=False)
     password = Column(String(200), unique=False, nullable=False)
     username = Column(String(50), unique=True)
-    is_active = Column(Boolean(), unique=False, nullable=False)
+    is_active = Column(Boolean(), unique=False)
     first_name = Column(String(50))
     last_name = Column(String(50))
     gender = Column(String(50))
