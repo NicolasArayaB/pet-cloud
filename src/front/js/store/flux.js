@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			setLogin: user => {
-				fetch("https://3001-coral-amphibian-ubxv67se.ws-us03.gitpod.io" + "/api/login", {
+				fetch(process.env.BACKEND_URL + "/api/login", {
 					method: "POST",
 					body: JSON.stringify(user),
 					headers: { "Content-type": "application/json" }
@@ -42,6 +42,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				console.log("-->", tokenLocal);
 				console.log("-->", JSON.stringify(userLocal));
+			},
+
+			registerUser: user => {
+				fetch(process.env.BACKEND_URL + "/api/register", {
+					method: "POST",
+					body: JSON.stringify(user),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(response => response.json())
+					.then(data => {
+						console.log(data, "<--");
+						setStore({ user: data });
+					})
+					.catch(error => {
+						console.log(error);
+					});
+				console.log(JSON.stringify(user), "<--user register data");
 			}
 		}
 	};

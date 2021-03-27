@@ -2,34 +2,33 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 
-
 db = SQLAlchemy()
 
 # Data Model: 
 # user, user_contact, vet_user, veterinary_organization, pet, pet_controls
 
 class User(db.Model):
+    __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
-    email = Column(String(120), unique=True, nullable=False)
+    email = Column(String(200), unique=True, nullable=False)
     password = Column(String(200), unique=False, nullable=False)
-    username = Column(String(50), unique=True)
-    is_active = Column(Boolean(), unique=False, nullable=False)
+    is_active = Column(Boolean, unique=False, nullable=False)
     first_name = Column(String(50))
-    last_name = Column(String(50))
+    father_family_name = Column(String(50))
+    mother_family_name = Column(String(50))
     gender = Column(String(50))
-    vet_user_fk = Column(Integer, ForeignKey('vet_user.id'))
-    vet_users = relationship("Vet_user", foreign_keys=[vet_user_fk])
+# vet_user_fk = Column(Integer, ForeignKey('vet_user.id'))
+# vet_users = relationship("Vet_user", foreign_keys=[vet_user_fk])
     
     def __repr__(self):
-        return '<User %r>' % self.id
+        return '<User %r>' % self.email
 
     def serialize(self):
         return {
             "id": self.id,
             "email": self.email,
-            # do not serialize the password
+        
         }
-
 
 class User_contact(db.Model): 
     id = Column(Integer, primary_key=True)
@@ -55,7 +54,8 @@ class Vet_user(db.Model):
     email = Column(String(120), unique=True, nullable=False)
     RUN = Column(String(12))
     first_name = Column(String(50))
-    last_name = Column(String(50))
+    father_family_name = Column(String(50))
+    mother_family_name = Column(String(50))
     gender = Column(String(50))
     birth_date = Column(String(50))
     is_exotic = Column(Boolean)
