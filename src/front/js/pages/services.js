@@ -1,6 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import CardInfo from "../component/services/cardServices";
+import CardInfoVet from "../component/services/cardServicesVet";
 
 function ServicesMain() {
 	return (
@@ -17,6 +18,14 @@ function ServicesMain() {
 				<br />
 				<br />
 				<CardInfo />
+				<br />
+				<br />
+				<h2>¿Eres veterinaria?</h2>
+				<br />
+				<br />
+				<br />
+				<br />
+				<CardInfoVet />
 			</Container>
 		</div>
 	);
