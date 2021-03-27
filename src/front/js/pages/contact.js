@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Context } from "../store/appContext";
 
 export const Contact = () => {
-	const { store, actions } = useContext(Context);
+	const { actions } = useContext(Context);
 	const [validated, setValidated] = useState(false);
 
 	const handleSubmit = event => {
@@ -17,7 +17,8 @@ export const Contact = () => {
 		}
 
 		setValidated(true);
-		if (validated) actions.sendContactMsg(role.value, name.value, email.value, message.value);
+		actions.sendContactMsg(name.value, email.value, message.value);
+		console.log("enviado");
 	};
 	return (
 		<Container>

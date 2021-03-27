@@ -45,7 +45,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("-->", JSON.stringify(userLocal));
 			},
 
-			sendContactMsg: (role, name, email, message) => {
+			sendContactMsg: (name, email, message) => {
 				fetch("https://kp0p375mk2.execute-api.sa-east-1.amazonaws.com/default/contactanos", {
 					method: "POST",
 					body: JSON.stringify({
