@@ -1,9 +1,10 @@
 import React from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Toast } from "react-bootstrap";
 import "../../styles/login.scss";
 import { useContext, useState } from "react";
+import { Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
-// import { Form } from "react-validation/build/form";
+// import Form from "react-validation";
 
 export const RegisterView = () => {
 	const [firstName, setFirstName] = useState("");
@@ -11,7 +12,12 @@ export const RegisterView = () => {
 	const [motherFamilyName, setMotherFamilyName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [validated, setValidated] = useState(false);
+	const [showToast, setShowToast] = useState(false);
+	const [redirect, setRedirect] = useState(null);
 	const { actions } = useContext(Context);
+
+	const toggleShowToast = () => setShowToast(!showToast);
 
 	const required = value => {
 		if (!value) {
@@ -31,7 +37,8 @@ export const RegisterView = () => {
 			);
 		}
 	};
-	const clickHandler = e => {
+
+	const handleSubmit = e => {
 		e.preventDefault();
 		actions.registerUser({
 			firstName: firstName,
@@ -40,7 +47,12 @@ export const RegisterView = () => {
 			email: email,
 			password: password
 		});
+
+		setValidated(true);
+		actions.registerUser(firstName, fatherFamilyName, motherFamilyName, email, password);
+		toggleShowToast();
 	};
+
 	const onChangeFirstName = e => {
 		const firstName = e.target.value;
 		setFirstName(firstName);
@@ -62,17 +74,34 @@ export const RegisterView = () => {
 		setPassword(password);
 	};
 
+	const closeTost = () => {
+		toggleShowToast();
+		setRedirect(true);
+	};
+
 	return (
 		<Container className="registerForms">
-			<Form autocomplete="off" className="p-5 text-center">
+			{redirect ? <Redirect to="/" /> : ""}
+			<Toast show={showToast} onClose={closeTost} delay={3000} autohide className="mt-4 mx-auto">
+				<Toast.Header>
+					<strong className="mr-auto">Muchas gracias por ser parte de PetCloud</strong>
+				</Toast.Header>
+				<Toast.Body>Tu registro ha sido exitoso</Toast.Body>
+			</Toast>
+			<Form
+				noValidate
+				validated={validated}
+				onSubmit={handleSubmit}
+				autocomplete="off"
+				className="p-5 text-center">
 				<h2>Registrate</h2>
 				<Form.Control
-					focus
 					type="text"
 					placeholder="Nombre"
 					name="firstName"
 					value={firstName}
 					onChange={onChangeFirstName}
+					required
 					className="m-3"
 				/>
 				<Form.Control
@@ -81,6 +110,7 @@ export const RegisterView = () => {
 					name="fatherFamilyName"
 					value={fatherFamilyName}
 					onChange={onChangeFatherFamilyName}
+					required
 					className="m-3"
 				/>
 				<Form.Control
@@ -89,6 +119,7 @@ export const RegisterView = () => {
 					name="motherFamilyName"
 					value={motherFamilyName}
 					onChange={onChangeMotherFamilyName}
+					required
 					className="m-3"
 				/>
 				<Form.Control
@@ -97,6 +128,7 @@ export const RegisterView = () => {
 					name="email"
 					value={email}
 					onChange={onChangeEmail}
+					required
 					className="m-3"
 				/>
 				<Form.Group>
@@ -106,7 +138,7 @@ export const RegisterView = () => {
 						name="password"
 						value={password}
 						onChange={onChangePassword}
-						validations={[required, validPassword]}
+						required
 						className="pass"
 					/>
 					<Form.Text className="passText">La contraseña debe tener entre 6 a 12 caracteres</Form.Text>
@@ -116,7 +148,7 @@ export const RegisterView = () => {
 					cookies.
 				</Form.Text>
 				<Form.Check type="checkbox" label="Soy veterinario" />
-				<Button onClick={e => clickHandler(e)} type="submit" className="my-1 petBtn">
+				<Button type="submit" className="my-1 petBtn">
 					Registrate
 				</Button>
 			</Form>
