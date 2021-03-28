@@ -1,10 +1,10 @@
 import React from "react";
-import { Col, Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
+import { Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 import "../../../styles/home.scss";
 
 const CardVet = () => {
 	return (
-		<Card border="0" style={{ width: "20rem", backgroundColor: "", marginTop: "20px" }}>
+		<Card border="0" className="mx-auto" style={{ width: "20rem", backgroundColor: "", marginTop: "20px" }}>
 			<Card.Header className="bg-danger" style={{ color: "white" }}>
 				¿No tienes el historial de las mascotas que atiendes?
 			</Card.Header>
@@ -21,15 +21,6 @@ const CardVet = () => {
 				<ListGroupItem>Ficha estandarizada</ListGroupItem>
 				<ListGroupItem>Control de tus registros</ListGroupItem>
 			</ListGroup>
-			<Card.Body>
-				<Button
-					className="button-card"
-					variant="outline-secondary"
-					style={{ backgroundColor: "#66b9bf", border: 0 }}
-					href="/vet">
-					Me interesa!!
-				</Button>
-			</Card.Body>
 		</Card>
 	);
 };

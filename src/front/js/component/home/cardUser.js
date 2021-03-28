@@ -1,9 +1,9 @@
 import React from "react";
-import { Col, Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
+import { Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 
 const CardUser = () => {
 	return (
-		<Card border="0" style={{ width: "20rem", backgroundColor: "", marginTop: "20px" }}>
+		<Card border="0" className="mx-auto" style={{ width: "20rem", backgroundColor: "", marginTop: "20px" }}>
 			<Card.Header className="bg-danger" style={{ color: "white" }}>
 				¿No tienes el historial clínico de tus mascotas en línea?
 			</Card.Header>
@@ -20,15 +20,6 @@ const CardUser = () => {
 				<ListGroupItem>Conoce a tu mascota</ListGroupItem>
 				<ListGroupItem>Revisa sus próximos controles </ListGroupItem>
 			</ListGroup>
-			<Card.Body>
-				<Button
-					variant="outline-secondary"
-					className="button-card"
-					style={{ backgroundColor: "#66b9bf", border: 0 }}
-					href="/user">
-					Me interesa!!
-				</Button>
-			</Card.Body>
 		</Card>
 	);
 };
