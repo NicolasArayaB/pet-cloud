@@ -15,7 +15,6 @@ export const MyNavbar = () => {
 	useEffect(() => {
 		actions.getToken();
 	}, []);
-	console.log(store.login, "<-- store.login");
 
 	return (
 		<>
@@ -39,7 +38,9 @@ export const MyNavbar = () => {
 							<Col sm={2}>
 								{store.login.token != null ? (
 									<Dropdown>
-										<Dropdown.Toggle id="loggedButton">Hola {store.login.username}</Dropdown.Toggle>
+										<Dropdown.Toggle id="loggedButton">
+											Hola {store.login.first_name}
+										</Dropdown.Toggle>
 										<Dropdown.Menu>
 											<Dropdown.Item href="/" onClick={localStorage.clear()}>
 												Cerrar sesión
