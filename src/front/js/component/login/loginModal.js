@@ -10,7 +10,7 @@ const LoginModal = params => {
 
 	const submitHandler = e => {
 		e.preventDefault();
-		params.close;
+		params.close();
 
 		actions.setLogin({
 			email: email,

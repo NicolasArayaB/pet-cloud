@@ -77,7 +77,7 @@ def login():
     return jsonify(data), 200
 
 # #generate register for user
-@api.route('/register', methods=['POST, GET'])
+@api.route('/register', methods=['POST'])
 def register():
 
     first_name = request.json.get("firstName", None)
@@ -114,6 +114,7 @@ def register():
     user.father_family_name = father_family_name
     user.mother_family_name = mother_family_name
     user.email = email
+    # hashed_password = create_access_token(password)
     hashed_password = generate_password_hash(password)
     user.password = hashed_password
   
