@@ -51,9 +51,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify({
 						senderName: name,
 						senderEmail: email,
-						senderMessage: role + message
-					}),
-					headers: { "Content-type": "application/json" }
+						senderMessage: message,
+						senderRole: role
+					})
 				})
 					.then(resp => {
 						if (!resp.ok) throw new Error("Error in fetch");

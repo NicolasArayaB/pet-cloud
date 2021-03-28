@@ -1,31 +1,50 @@
 import React, { useState, useContext } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Toast } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Contact = () => {
 	const { actions } = useContext(Context);
 	const [validated, setValidated] = useState(false);
+	const [showToast, setShowToast] = useState(false);
+	const [redirect, setRedirect] = useState(null);
+
+	const toggleShowToast = () => setShowToast(!showToast);
 
 	const handleSubmit = event => {
+		event.preventDefault();
+
 		const form = event.target;
 		const role = form.roleFormControl.value;
 		const name = form.nameFormControl.value;
 		const email = form.emailFormControl.value;
 		const message = form.messageFormControl.value;
 
-		event.preventDefault();
-
 		if (form.checkValidity() === false) {
 			event.stopPropagation();
+		} else {
+			setValidated(true);
+			actions.sendContactMsg(name, email, message, role);
+			toggleShowToast();
 		}
-
-		setValidated(true);
-		actions.sendContactMsg(name, email, message, role);
 	};
+
+	const closeTost = () => {
+		toggleShowToast();
+		setRedirect(true);
+	};
+
 	return (
 		<Container>
+			{redirect ? <Redirect to="/" /> : ""}
 			<Row className="justify-content-center">
 				<Col xs={12} md={6}>
+					<Toast show={showToast} onClose={closeTost} className="mt-4 mx-auto">
+						<Toast.Header>
+							<strong className="mr-auto">Muchas gracias</strong>
+						</Toast.Header>
+						<Toast.Body>Responderemos a tu consulta a la brevedad</Toast.Body>
+					</Toast>
 					<Form noValidate validated={validated} onSubmit={handleSubmit}>
 						<Form.Group controlId="roleFormControl">
 							<Form.Label style={{ marginTop: "40px" }}>Selecciona tu perfil</Form.Label>
@@ -47,7 +66,7 @@ export const Contact = () => {
 							/>
 							<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
 						</Form.Group>
-						<Form.Group controlId="exampleForm.ControlTextarea1">
+						<Form.Group controlId="messageFormControl">
 							<Form.Label>Cuentanos de Tu problema</Form.Label>
 							<Form.Control name="message" as="textarea" rows={3} required />
 						</Form.Group>
