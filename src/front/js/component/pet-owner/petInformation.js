@@ -3,30 +3,32 @@ import { Container, Row, Col, ListGroup, ListGroupItem, Form, Image } from "reac
 import { useContext, useEffect } from "react";
 import { Context } from "../../store/appContext";
 
-export const PetInformation = (name, gender, identifier, birthDate) => {
+export const PetInformation = (name, identifier, gender, birthDate, petOwner, address, phone, email) => {
 	const { store, actions } = useContext(Context);
 
 	useEffect(() => {
 		actions.getPetInformation("PET-001");
 	}, []);
 
-	name = store.pets.name;
+	name = JSON.stringify(store.pets.name);
+	identifier = JSON.stringify(store.pets.identifier);
 	gender = store.pets.gender;
-	identifier = store.pets.identifier;
 	birthDate = store.pets.birthDate;
+	petOwner = JSON.stringify(store.pets.contact);
+	address = JSON.stringify(store.pets.contact);
+	phone = JSON.stringify(store.pets.contact);
+	email = JSON.stringify(store.pets.contact);
 	console.log(name, "---> name");
 	console.log(gender, "---> gender");
 	console.log(identifier, "---> identifier");
 	console.log(birthDate, "---> birthDate");
-	// address = JSON.stringify(store.pets.contact.address);
-	// phone = JSON.stringify(store.pets.contact.value);
-	// email = JSON.stringify(store.pets.contact.value);
+	console.log(petOwner, "---> petOwner");
 
 	return (
 		<Container>
 			<Row className="text-center">
 				<Col xs={12} md={12}>
-					<h2 className="nombre mt-4">Hola @Name</h2>
+					<h2 className="nombre mt-4">Hola {name} </h2>
 					<Image
 						src="https://images.all-free-download.com/images/graphiclarge/dog_icons_vector_281192.jpg"
 						style={{ height: "200px" }}
@@ -69,7 +71,7 @@ export const PetInformation = (name, gender, identifier, birthDate) => {
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextWeight">
 									<Form.Label column sm="2">
-										Gender:
+										Género:
 									</Form.Label>
 									<Col sm="10">
 										<Form.Control type="text" name="gender" value={gender} />
@@ -80,7 +82,7 @@ export const PetInformation = (name, gender, identifier, birthDate) => {
 										Fecha de Nacimiento:
 									</Form.Label>
 									<Col sm="10">
-										<Form.Control type="text" name="BirthDate" value={birthDate} />
+										<Form.Control type="text" name="birthDate" value={birthDate} />
 									</Col>
 								</Form.Group>
 							</Form>
@@ -95,7 +97,7 @@ export const PetInformation = (name, gender, identifier, birthDate) => {
 										Mi Dueño es:
 									</Form.Label>
 									<Col lg="10">
-										<Form.Control type="text" name="username" value={name} />
+										<Form.Control type="text" name="usepetOwner" value={petOwner} />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextAddress">
@@ -103,15 +105,15 @@ export const PetInformation = (name, gender, identifier, birthDate) => {
 										Vive en:
 									</Form.Label>
 									<Col lg="10">
-										<Form.Control type="text" name="address" value={name} />
+										<Form.Control type="text" name="address" value={address} />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextPhone">
 									<Form.Label column sm="2">
-										Su teléfono de contacto es:
+										Su teléfono es:
 									</Form.Label>
 									<Col lg="10">
-										<Form.Control type="text" name="phone" value={name} />
+										<Form.Control type="text" name="phone" value={phone} />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextEmail">
@@ -119,7 +121,7 @@ export const PetInformation = (name, gender, identifier, birthDate) => {
 										Su mail:
 									</Form.Label>
 									<Col lg="10">
-										<Form.Control type="text" name="email" value={name} />
+										<Form.Control type="text" name="email" value={email} />
 									</Col>
 								</Form.Group>
 							</Form>
