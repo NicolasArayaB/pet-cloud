@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Table } from "react-bootstrap";
+import Context from "../../store/appContext";
 
 const Checkup = () => {
+	//	const { store } = useContext(Context);
+	//
+	//	const pet = store.pet.entry;
+	//	console.log(pet, "<-- pet");
 	return (
 		<Table bordered hover>
 			<thead className="table-secondary">

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import Context from "../store/appContext";
 
 import Checkup from "../component/vet/checkupTable";
 import Vaccines from "../component/vet/vaccinesTable";
 
 const VetInfo = () => {
+	//const { store } = useContext(Context);
+	//
+	//const pet = store.pet.entry;
 	return (
 		<Container>
 			{/* Hay que sacar estos datos de la db */}

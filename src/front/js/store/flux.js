@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			login: [],
 			users: [],
-			message: {}
+			pet: []
 		},
 
 		actions: {
@@ -82,6 +82,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(error);
 					});
 				console.log(JSON.stringify(user), "<--user register data");
+			},
+
+			getPetById: id => {
+				fetch(`https://fhir.cens.cl/baseR4/Observation?subject:Patient.identifier=${id}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				})
+					.then(response => response.json())
+					.then(result => {
+						setStore({ pet: result });
+					})
+					.catch(error => console.log("error", error));
 			}
 		}
 	};
