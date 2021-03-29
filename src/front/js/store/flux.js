@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			login: [],
 			users: [],
+			pets: {},
 			message: {}
 		},
 
@@ -82,6 +83,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(error);
 					});
 				console.log(JSON.stringify(user), "<--user register data");
+			},
+
+			getPetInformation: pets => {
+				fetch(`https://fhir.cens.cl/baseR4/Patient/${pets}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				})
+					.then(response => response.json())
+					.then(data => {
+						console.log(data, "<-- getPet data");
+						setStore({ pets: data });
+					})
+					.catch(error => {
+						console.log(error);
+					});
+				//	console.log(JSON.stringify(pets), "<--pet data");
 			}
 		}
 	};
