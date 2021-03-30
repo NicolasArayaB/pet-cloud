@@ -93,12 +93,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(data => {
 						console.log(data, "<-- getPet data");
-						setStore({ pets: data });
+						const dataPets = {
+							name: data.name[0].given[0],
+							identifier: data.identifier[0].value,
+							gender: data.gender,
+							birthDate: data.birthDate,
+							petOwner: data.contact[0].name.given[0],
+							address: data.contact[0].address.line[0],
+							phone: data.contact[0].telecom[0].value,
+							email: data.contact[0].telecom[1].value
+						};
+						setStore({ pets: dataPets });
+
+						console.log("-->> data:", dataPets);
 					})
 					.catch(error => {
 						console.log(error);
 					});
-				//	console.log(JSON.stringify(pets), "<--pet data");
+				console.log(JSON.stringify(pets), "<--pet data");
 			}
 		}
 	};

@@ -1,31 +1,46 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Container, Row, Col, ListGroup, ListGroupItem, Form, Image } from "react-bootstrap";
-import { useContext, useEffect } from "react";
 import { Context } from "../../store/appContext";
 
-export const PetInformation = (name, identifier, gender, birthDate, petOwner, address, phone, email) => {
+// export const PetInformation = ({ name, identifier, gender, birthDate, petOwner, address, phone, email }) => {
+export const PetInformation = () => {
 	const { store, actions } = useContext(Context);
+	// const [pets, setPets] = useState({});
 
-	useEffect(() => {
-		actions.getPetInformation("PET-001");
+	useEffect(async () => {
+		await actions.getPetInformation("PET-001");
+
+		// setPets(store.pets);
 	}, []);
 
-	name = JSON.stringify(store.pets.name);
-	identifier = JSON.stringify(store.pets.identifier);
-	gender = store.pets.gender;
-	birthDate = store.pets.birthDate;
-	petOwner = JSON.stringify(store.pets.contact);
-	address = JSON.stringify(store.pets.contact);
-	phone = JSON.stringify(store.pets.contact);
-	email = JSON.stringify(store.pets.contact);
-	console.log(name, "---> name");
-	console.log(gender, "---> gender");
-	console.log(identifier, "---> identifier");
-	console.log(birthDate, "---> birthDate");
-	console.log(petOwner, "---> petOwner");
+	// const name = "";
+	// const identifier = "";
+	// const gender = "";
+	// const birthDate = "";
+	// const petOwner = "";
+	// const address = "";
+	// const phone = "";
+	// const email = "";
+
+	// name = JSON.stringify(store.pets.name);
+	// identifier = JSON.stringify(store.pets.identifier);
+	// gender = store.pets.gender;
+	// birthDate = store.pets.birthDate;
+	// petOwner = JSON.stringify(store.pets.contact);
+	// address = JSON.stringify(store.pets.contact);
+	// phone = JSON.stringify(store.pets.contact);
+	// email = JSON.stringify(store.pets.contact);
+	// // console.log(name, "---> name");
+	// console.log(gender, "---> gender");
+	// console.log(identifier, "---> identifier");
+	// console.log(birthDate, "---> birthDate");
+	// console.log(petOwner, "---> petOwner");
+
+	// {"name":"Cachupin","identifier":"12345678","gender":"female","birthDate":"2010-03-23","petOwner":"Francisco","address":"Buenas Peras 123, Calama, Chile","phone":"998765432","email":"francisco@gmail.com"}
 
 	return (
 		<Container>
+			<span>{JSON.stringify(store.pets)}</span>
 			<Row className="text-center">
 				<Col xs={12} md={12}>
 					<h2 className="nombre mt-4">Hola {name} </h2>
@@ -58,7 +73,7 @@ export const PetInformation = (name, identifier, gender, birthDate, petOwner, ad
 										Mi nombre es:
 									</Form.Label>
 									<Col sm="10">
-										<Form.Control type="text" name="name" value={name} />
+										<Form.Control type="text" name="name" value={store.pets.name} />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextIdentifier">
@@ -66,7 +81,7 @@ export const PetInformation = (name, identifier, gender, birthDate, petOwner, ad
 										Mi número de CHIP:
 									</Form.Label>
 									<Col sm="10">
-										<Form.Control type="text" name="identifier" value={identifier} />
+										<Form.Control type="text" name="identifier" value={store.pets.identifier} />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextWeight">
@@ -74,7 +89,7 @@ export const PetInformation = (name, identifier, gender, birthDate, petOwner, ad
 										Género:
 									</Form.Label>
 									<Col sm="10">
-										<Form.Control type="text" name="gender" value={gender} />
+										<Form.Control type="text" name="gender" />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextWeight">
@@ -82,7 +97,7 @@ export const PetInformation = (name, identifier, gender, birthDate, petOwner, ad
 										Fecha de Nacimiento:
 									</Form.Label>
 									<Col sm="10">
-										<Form.Control type="text" name="birthDate" value={birthDate} />
+										<Form.Control type="text" name="birthDate" />
 									</Col>
 								</Form.Group>
 							</Form>
@@ -97,7 +112,7 @@ export const PetInformation = (name, identifier, gender, birthDate, petOwner, ad
 										Mi Dueño es:
 									</Form.Label>
 									<Col lg="10">
-										<Form.Control type="text" name="usepetOwner" value={petOwner} />
+										<Form.Control type="text" name="usepetOwner" />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextAddress">
@@ -105,7 +120,7 @@ export const PetInformation = (name, identifier, gender, birthDate, petOwner, ad
 										Vive en:
 									</Form.Label>
 									<Col lg="10">
-										<Form.Control type="text" name="address" value={address} />
+										<Form.Control type="text" name="address" />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextPhone">
@@ -113,7 +128,7 @@ export const PetInformation = (name, identifier, gender, birthDate, petOwner, ad
 										Su teléfono es:
 									</Form.Label>
 									<Col lg="10">
-										<Form.Control type="text" name="phone" value={phone} />
+										<Form.Control type="text" name="phone" />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextEmail">
@@ -121,7 +136,7 @@ export const PetInformation = (name, identifier, gender, birthDate, petOwner, ad
 										Su mail:
 									</Form.Label>
 									<Col lg="10">
-										<Form.Control type="text" name="email" value={email} />
+										<Form.Control type="text" name="email" />
 									</Col>
 								</Form.Group>
 							</Form>
