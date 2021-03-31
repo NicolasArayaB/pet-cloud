@@ -34,18 +34,19 @@ const Layout = () => {
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route exact path="/register" component={RegisterView} />
-						<Route exact path="/vet" component={Vet} />
+						<Route exact path="/pass" component={ForgottenPass} />
 						<Route exact path="/contactanos" component={Contact} />
+						<Route exact path="/services" component={ServicesMain} />
+						<Route exact path="/vet" component={Vet} />
+						<Route exact path="/vet/id" component={VetInfo} />
 						<Route exact path="/user" component={User} />
 						<Route exact path="/user/information" component={PetInformation} />
-						<Route exact path="/pass" component={ForgottenPass} />
-						<Route exact path="/vet/id" component={VetInfo} />
 						<Route exact path="/newPet" component={NewPet} />
-						<Route exact path="/services" component={ServicesMain} />
 						<Route>
 							<div className="text-center">
 								<h1>Lo siento, pero Pet Cloud no encuentra esta página</h1>
 								<h2>
+									<i className="fas fa-paw" style={{ color: "#e37222" }} />
 									Sigue navegando con nosotros{" "}
 									<i className="fas fa-paw" style={{ color: "#e37222" }} />
 								</h2>

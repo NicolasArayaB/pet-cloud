@@ -15,7 +15,11 @@ export const Vet = () => {
 				</Col>
 				<Col xs={{ span: 12, order: 2 }} md={{ span: 6, order: 3 }}>
 					<InputGroup className="mb-3">
-						<FormControl placeholder="Id mascota" aria-label="pet id" aria-describedby="search-addon1" />
+						<FormControl
+							placeholder="CHIP de la mascota"
+							aria-label="pet id"
+							aria-describedby="search-addon1"
+						/>
 						<InputGroup.Append>
 							<InputGroup.Text id="search-addon1">&#128269;</InputGroup.Text>
 						</InputGroup.Append>
@@ -24,7 +28,7 @@ export const Vet = () => {
 				<Col xs={{ span: 12, order: 4 }} md={{ span: 6, order: 4 }}>
 					<InputGroup className="mb-3">
 						<FormControl
-							placeholder="Nombre completo"
+							placeholder="RUT del dueño"
 							aria-label="pet owner"
 							aria-describedby="search-addon2"
 						/>
