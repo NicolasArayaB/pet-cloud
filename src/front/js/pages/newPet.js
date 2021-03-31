@@ -1,8 +1,8 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import NewPetForm from "../component/pet-owner/newPetForm";
 
-function NewPet() {
+export const NewPet = () => {
 	return (
 		<div>
 			<Container>
@@ -12,6 +12,4 @@ function NewPet() {
 			</Container>
 		</div>
 	);
-}
-
-export default NewPet;
+};

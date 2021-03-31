@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Row, Col, ListGroup, ListGroupItem, Form, Image } from "react-bootstrap";
 import { Context } from "../../store/appContext";
 

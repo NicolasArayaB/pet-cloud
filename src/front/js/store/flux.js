@@ -141,13 +141,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 							email: data.contact[0].telecom[1].value
 						};
 						setStore({ pets: dataPets });
-
 						console.log("-->> data:", dataPets);
 					})
 					.catch(error => {
 						console.log(error);
 					});
 				console.log(JSON.stringify(pets), "<--pet data");
+			},
+
+			createNewPet: () => {
+				fetch(`https://fhir.cens.cl/baseR4/Patient/${pets}`, {
+					method: "POST",
+					headers: { "Content-type": "application/json" },
+					body: JSON.stringify(pets)
+				})
+					.then(response => response.json())
+					.then(data => {
+						console.log(data, "<-- createNewPet data");
+						// const newDataPets = {
+						// 	name: data.name[0].given[0],
+						// 	identifier: data.identifier[0].value,
+						// 	gender: data.gender,
+						// 	birthDate: data.birthDate,
+						// 	species: data.extension[0].extension[0].valueCodeableConcept.coding[0].display,
+						// 	breed: data.extension[0].extension[1].valueCodeableConcept.coding[0].display,
+						// 	petOwner_name: data.contact[0].name.given[0],
+						// 	address: data.contact[0].address.line[0],
+						// 	phone: data.contact[0].telecom[0].value,
+						// 	email: data.contact[0].telecom[1].value
+						// };
+						setStore({ pets: newDataPets });
+						console.log("-->> data:", neWdataPets);
+					});
 			}
 		}
 	};
