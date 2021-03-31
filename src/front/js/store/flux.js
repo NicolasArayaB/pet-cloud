@@ -98,7 +98,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 							identifier: data.identifier[0].value,
 							gender: data.gender,
 							birthDate: data.birthDate,
-							petOwner: data.contact[0].name.given[0],
+							petOwner_name: data.contact[0].name.given[0],
+							petOwner_father: data.contact[0].name.extension[0].valueString,
+							petOwner_mother: data.contact[0].name.extension[1].valueString,
 							address: data.contact[0].address.line[0],
 							phone: data.contact[0].telecom[0].value,
 							email: data.contact[0].telecom[1].value
