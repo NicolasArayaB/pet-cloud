@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			login: [],
 			users: [],
 			pets: {},
-			message: {}
+			haveTheData: false
 		},
 
 		actions: {
@@ -86,10 +86,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getPetById: id => {
-				fetch(`https://fhir.cens.cl/baseR4/Patient?identifier=${id}`, {
+				fetch(`https://fhir.cens.cl/baseR4/Patient?identifier=${parseInt(id)}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				})
+					.then(response => response.json())
+					.then(data => {
+						const dataPets = {
+							name: data.entry[0].resource.name[0].given[0],
+							species:
+								data.entry[0].resource.extension[0].extension[0].valueCodeableConcept.coding[0].display,
+							breed:
+								data.entry[0].resource.extension[0].extension[1].valueCodeableConcept.coding[0].display,
+							gender: data.entry[0].resource.gender,
+							birthDate: data.entry[0].resource.birthDate
+						};
+						setStore({ pets: dataPets });
+						setStore({ haveTheData: true });
+					})
+					.catch(error => console.log(error));
+			},
 
-            })},
-                
 			getPetInformation: pets => {
 				fetch(`https://fhir.cens.cl/baseR4/Patient/${pets}`, {
 					method: "GET",
