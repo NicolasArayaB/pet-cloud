@@ -8,12 +8,11 @@ import Vaccines from "../component/vet/vaccinesTable";
 
 const VetInfo = props => {
 	const { store, actions } = useContext(Context);
-
-	//const chip = props.location.state.chip;
 	const chip = props.location.state.chip;
+
 	useEffect(async () => {
 		await actions.getPetById(chip);
-		console.log(store.pets, "<--- store");
+		await actions.getCondition("001");
 	}, []);
 
 	return (
@@ -36,7 +35,7 @@ const VetInfo = props => {
 			</Row>
 			<Row className="m-3">
 				<Col md={6}>
-					<Checkup />
+					<Checkup condition={store.conditions[0]} />
 				</Col>
 				<Col md={6}>
 					<Vaccines />

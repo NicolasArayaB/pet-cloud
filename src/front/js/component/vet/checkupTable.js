@@ -1,12 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { Table } from "react-bootstrap";
+import PropTypes from "prop-types";
 import Context from "../../store/appContext";
 
-const Checkup = () => {
-	//	const { store } = useContext(Context);
-	//
-	//	const pet = store.pet.entry;
-	//	console.log(pet, "<-- pet");
+const Checkup = props => {
+	console.log(props.condition);
 	return (
 		<Table bordered hover>
 			<thead className="table-secondary">
@@ -26,7 +24,7 @@ const Checkup = () => {
 				</tr>
 				<tr>
 					<th>Enfermedades: </th>
-					<th>Ninguna</th>
+					<th>{props.condition}</th>
 				</tr>
 				<tr>
 					<th>Esterelizado: </th>
@@ -39,6 +37,10 @@ const Checkup = () => {
 			</tbody>
 		</Table>
 	);
+};
+
+Checkup.propTypes = {
+	condition: PropTypes.string
 };
 
 export default Checkup;

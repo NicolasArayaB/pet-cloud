@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			login: [],
 			users: [],
 			pets: {},
-			haveTheData: false
+			conditions: []
 		},
 
 		actions: {
@@ -105,6 +105,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ haveTheData: true });
 					})
 					.catch(error => console.log(error));
+			},
+
+			getCondition: id => {
+				fetch(`https://fhir.cens.cl/baseR4/Condition/ENF-${id}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				})
+					.then(response => response.json())
+					.then(data => {
+						const store = getStore();
+						const condition = data.code.coding[0].display;
+						setStore({ conditions: [...store.conditions, condition] });
+					});
 			},
 
 			getPetInformation: pets => {
