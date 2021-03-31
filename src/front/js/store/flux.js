@@ -85,16 +85,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getPetById: id => {
-				fetch(`https://fhir.cens.cl/baseR4/Observation?subject:Patient.identifier=${id}`, {
+				fetch(`https://fhir.cens.cl/baseR4/Patient?identifier=${id}`, {
 					method: "GET",
 					headers: { "Content-type": "application/json" }
 				})
 					.then(response => response.json())
 					.then(result => {
 						setStore({ pet: result });
+						console.log(result, "<---flux data");
 					})
 					.catch(error => console.log("error", error));
-			}
+			},
+
+			getPetStore: () => getStore("pet")
 		}
 	};
 };
