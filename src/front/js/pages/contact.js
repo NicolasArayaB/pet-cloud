@@ -5,9 +5,10 @@ import { Context } from "../store/appContext";
 
 export const Contact = () => {
 	const { actions } = useContext(Context);
+
 	const [validated, setValidated] = useState(false);
 	const [showToast, setShowToast] = useState(false);
-	const [redirect, setRedirect] = useState(null);
+	const [redirect, setRedirect] = useState(false);
 
 	const toggleShowToast = () => setShowToast(!showToast);
 
