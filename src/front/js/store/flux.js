@@ -1,4 +1,4 @@
-const getState = ({ getStore, getActions, setStore }) => {
+const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
 			login: [],
@@ -42,8 +42,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						firstName: firstNameLocal
 					}
 				});
-				console.log("-->", tokenLocal);
-				console.log("-->", JSON.stringify(userLocal));
+				console.log("tokenLocal -->", tokenLocal);
+				console.log("userLocal -->", JSON.stringify(userLocal));
 			},
 
 			sendContactMsg: (name, email, message, role) => {
@@ -141,13 +141,118 @@ const getState = ({ getStore, getActions, setStore }) => {
 							email: data.contact[0].telecom[1].value
 						};
 						setStore({ pets: dataPets });
-
 						console.log("-->> data:", dataPets);
 					})
 					.catch(error => {
 						console.log(error);
 					});
 				console.log(JSON.stringify(pets), "<--pet data");
+			},
+
+			createNewPet: (
+				name,
+				identifier,
+				gender,
+				birthDate,
+				species,
+				breed,
+				genderStatus,
+				petOwner_name,
+				petOwner_mother,
+				petOwner_father,
+				address,
+				phone,
+				email
+			) => {
+				const newPet = {
+					resourceType: "Patient",
+					extension: [
+						{
+							url: "http://hl7.org/fhir/StructureDefinition/patient-animal",
+							extension: [
+								{
+									url: "species",
+									valueCodeableConcept: {
+										coding: [
+											{
+												system: "http://hl7.org/fhir/animal-species",
+												display: species
+											}
+										]
+									}
+								},
+								{
+									url: "breed",
+									valueCodeableConcept: {
+										coding: [
+											{
+												system: "http://snomed.info/sct",
+												display: breed
+											}
+										]
+									}
+								},
+								{
+									url: "genderStatus",
+									valueCodeableConcept: {
+										coding: [
+											{
+												system: "http://hl7.org/fhir/animal-genderstatus",
+												code: genderStatus
+											}
+										]
+									}
+								}
+							]
+						}
+					],
+					identifier: [
+						{
+							type: { text: "CHIP identifier" },
+							system: "https://registratumascota.cl",
+							value: identifier
+						}
+					],
+					name: [{ given: name }],
+					gender: gender,
+					birthDate: birthDate,
+					contact: [
+						{
+							name: {
+								extension: [
+									{
+										url: "http://hl7.org/fhir/StructureDefinition/humanname-father-family",
+										valueString: petOwner_father
+									},
+									{
+										url: "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family",
+										valueString: { petOwner_mother }
+									}
+								],
+								given: petOwner_name
+							},
+							telecom: [
+								{ system: "phone", value: phone, use: "work" },
+								{ system: "email", value: email }
+							],
+							address: { line: [address] }
+						}
+					]
+				};
+				fetch("https://fhir.cens.cl/baseR4/Patient", {
+					method: "POST",
+					headers: { "Content-type": "application/json" },
+					body: JSON.stringify(newPet)
+				})
+					.then(resp => resp.json())
+					.then(resp => {
+						console.log(resp, "<--- resp");
+						console.log("New pet has been created");
+						setStore({ pets: dataPets });
+					})
+					.catch(error => {
+						console.log("Unexpected error");
+					});
 			}
 		}
 	};

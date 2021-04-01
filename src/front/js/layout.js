@@ -35,7 +35,7 @@ const Layout = () => {
 						<Route exact path="/" component={Home} />
 						<Route exact path="/register" component={RegisterView} />
 						<Route exact path="/pass" component={ForgottenPass} />
-						<Route exact path="/contactanos" component={Contact} />
+						<Route exact path="/contact-us" component={Contact} />
 						<Route exact path="/services" component={ServicesMain} />
 						<Route exact path="/vet" component={Vet} />
 						<Route exact path="/vet/id" render={props => <VetInfo {...props} />} />
