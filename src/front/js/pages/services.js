@@ -2,10 +2,11 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import CardInfo from "../component/services/cardServices";
 import CardInfoVet from "../component/services/cardServicesVet";
+import "../../styles/services.scss";
 
 function ServicesMain() {
 	return (
-		<div>
+		<div className="centerElements">
 			<Container>
 				<br />
 				<br />
@@ -26,6 +27,8 @@ function ServicesMain() {
 				<br />
 				<br />
 				<CardInfoVet />
+				<br />
+				<br />
 			</Container>
 		</div>
 	);
