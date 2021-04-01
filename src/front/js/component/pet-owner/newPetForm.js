@@ -1,31 +1,48 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Form, Col, Button, Toast } from "react-bootstrap";
 import { Context } from "../../store/appContext";
+import { Redirect } from "react-router-dom";
 
-export const newPetForm = () => {
-	const { actions } = useContext(Context);
+const NewPetForm = () => {
+	const { store, actions } = useContext(Context);
 	const [name, setName] = useState("");
 	const [identifier, setIdentifier] = useState("");
 	const [gender, setGender] = useState("");
 	const [birthDate, setBirthDate] = useState("");
 	const [species, setSpecies] = useState("");
 	const [breed, setBreed] = useState("");
-	const [petOwnerName, setPetOwnerName] = useState("");
+	const [genderStatus, setGenderStatus] = useState("");
+	const [petOwner_name, setPetOwner_name] = useState("");
+	const [petOwner_mother, setPetOwner_mother] = useState("");
+	const [petOwner_father, setPetOwner_father] = useState("");
+	const [address, setAddress] = useState("");
 	const [phone, setPhone] = useState("");
 	const [email, setEmail] = useState("");
+	const [validated, setValidated] = useState("");
+	const [redirect, setRedirect] = useState("");
 	const [showToast, setShowToast] = useState(false);
 
 	const toggleShowToast = () => setShowToast(!showToast);
 
-	useEffect(async () => {
-		await actions.createNewPet();
-	}, []);
-
-	const submitHandler = e => {
-		e.preventDefault();
-
+	const handleSubmit = () => {
 		setValidated(true);
-		actions.registerUser(name, identifier, gender, birthDate, species, breed, petOwnerName, phone, email);
+		console.log("Submitted");
+		console.log(gender);
+		actions.createNewPet(
+			name,
+			identifier,
+			gender,
+			birthDate,
+			species,
+			breed,
+			genderStatus,
+			petOwner_name,
+			petOwner_mother,
+			petOwner_father,
+			address,
+			phone,
+			email
+		);
 		toggleShowToast();
 	};
 
@@ -36,7 +53,8 @@ export const newPetForm = () => {
 
 	return (
 		<div>
-			<Form.Group onSubmit={e => submitHandler(e)}>
+			{redirect ? <Redirect to="/" /> : ""}
+			<Form.Group>
 				<span>{JSON.stringify(store.pets)}</span>
 				<Toast show={showToast} onClose={closeTost} delay={3000} autohide className="mt-4 mx-auto">
 					<Toast.Header>
@@ -86,6 +104,7 @@ export const newPetForm = () => {
 							value={gender}
 							onChange={e => setGender(e.target.value)}
 							placeholder="Ingresa el género">
+							<option />
 							<option>male</option>
 							<option>female</option>
 							<option>Unknown</option>
@@ -120,9 +139,30 @@ export const newPetForm = () => {
 							value={species}
 							onChange={e => setSpecies(e.target.value)}
 							placeholder="Ingresa la especie">
+							<option />
 							<option>Dog</option>
 							<option>Cat</option>
 							<option>Other</option>
+						</Form.Control>
+					</Col>
+				</Form.Row>
+				<br />
+				<Form.Row>
+					<Form.Label column lg={2}>
+						Estado Reproductivo
+					</Form.Label>
+					<Col>
+						<Form.Control
+							as="select"
+							type="text"
+							name="genderStatus"
+							value={genderStatus}
+							onChange={e => setGenderStatus(e.target.value)}
+							placeholder="Ingresa Estado Reproductivo">
+							<option />
+							<option>neutered</option>
+							<option>intact</option>
+							<option>unknown</option>
 						</Form.Control>
 					</Col>
 				</Form.Row>
@@ -144,15 +184,45 @@ export const newPetForm = () => {
 				<hr />
 				<Form.Row>
 					<Form.Label column lg={2}>
-						Nombre completo dueño
+						Nombre del dueño
 					</Form.Label>
 					<Col>
 						<Form.Control
 							type="text"
-							name="petOwnerName"
-							value={petOwnerName}
-							onChange={e => setPetOwnerName(e.target.value)}
-							placeholder="Ingresa el nombre completo del dueño"
+							name="petOwner_name"
+							value={petOwner_name}
+							onChange={e => setPetOwner_name(e.target.value)}
+							placeholder="Ingresa el nombre del dueño"
+						/>
+					</Col>
+				</Form.Row>
+				<br />
+				<Form.Row>
+					<Form.Label column lg={2}>
+						Apellido paterno
+					</Form.Label>
+					<Col>
+						<Form.Control
+							type="text"
+							name="petOwner_father"
+							value={petOwner_father}
+							onChange={e => setPetOwner_father(e.target.value)}
+							placeholder="Ingresa el apellido paterno del dueño"
+						/>
+					</Col>
+				</Form.Row>
+				<br />
+				<Form.Row>
+					<Form.Label column lg={2}>
+						Apellido materno
+					</Form.Label>
+					<Col>
+						<Form.Control
+							type="text"
+							name="petOwner_mother"
+							value={petOwner_mother}
+							onChange={e => setPetOwner_mother(e.target.value)}
+							placeholder="Ingresa el apellido materno del dueño"
 						/>
 					</Col>
 				</Form.Row>
@@ -202,10 +272,12 @@ export const newPetForm = () => {
 					</Col>
 				</Form.Row>
 				<br />
+				<Button className="petBtn" type="submit" onClick={handleSubmit}>
+					Crear nueva mascota
+				</Button>
 			</Form.Group>
-			<Button className="petBtn" type="submit">
-				Crear nueva mascota
-			</Button>
 		</div>
 	);
 };
+
+export default NewPetForm;

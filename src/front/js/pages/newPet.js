@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import NewPetForm from "../component/pet-owner/newPetForm";
 
-export const NewPet = () => {
+const NewPet = () => {
 	return (
 		<div>
 			<Container>
@@ -13,3 +13,5 @@ export const NewPet = () => {
 		</div>
 	);
 };
+
+export default NewPet;
