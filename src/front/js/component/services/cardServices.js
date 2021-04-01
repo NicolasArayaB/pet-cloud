@@ -15,7 +15,9 @@ const CardInfo = () => {
 						style={{ width: "12rem" }}
 					/>
 					<Card.Body>
-						<Card.Text>Identifica rapidamente a tu mascota</Card.Text>
+						<Card.Text style={{ color: "#E37222" }}>
+							Identifica a tus mascota rápidamente en tu cuenta
+						</Card.Text>
 					</Card.Body>
 				</Card>
 
@@ -27,7 +29,9 @@ const CardInfo = () => {
 						style={{ width: "12rem" }}
 					/>
 					<Card.Body>
-						<Card.Text>Obten el historial de tu mascota a un click</Card.Text>
+						<Card.Text style={{ color: "grey" }}>
+							Próximamente: Obten el historial de tu mascota a un click
+						</Card.Text>
 					</Card.Body>
 				</Card>
 
@@ -39,7 +43,9 @@ const CardInfo = () => {
 						style={{ width: "12rem" }}
 					/>
 					<Card.Body>
-						<Card.Text>Recibe notificaciones de los proximos controles</Card.Text>
+						<Card.Text style={{ color: "grey" }}>
+							Próximamente: Recibe notificaciones de los próximos controles de tu mascota
+						</Card.Text>
 					</Card.Body>
 				</Card>
 			</CardGroup>

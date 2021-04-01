@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
 import CardInfo from "../component/services/cardServices";
 import CardInfoVet from "../component/services/cardServicesVet";
 import "../../styles/services.scss";
@@ -8,27 +8,19 @@ function ServicesMain() {
 	return (
 		<div className="centerElements">
 			<Container>
-				<br />
-				<br />
-				<h1>SERVICIOS</h1>
-				<br />
-				<br />
-				<h2>¿Eres dueño de mascota?</h2>
-				<br />
-				<br />
-				<br />
-				<br />
-				<CardInfo />
-				<br />
-				<br />
-				<h2>¿Eres veterinaria?</h2>
-				<br />
-				<br />
-				<br />
-				<br />
-				<CardInfoVet />
-				<br />
-				<br />
+				<Row className="justify-content-center my-4">
+					<Col xs={12} md={4}>
+						<h1>Servicios</h1>
+						<h2>¿Eres dueño de mascota?</h2>
+					</Col>
+					<CardInfo />
+				</Row>
+				<Row className="justify-content-center">
+					<Col xs={12} md={4}>
+						<h2>¿Eres veterinaria?</h2>
+					</Col>
+					<CardInfoVet />
+				</Row>
 			</Container>
 		</div>
 	);

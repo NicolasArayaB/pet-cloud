@@ -15,7 +15,9 @@ const CardInfoVet = () => {
 						style={{ width: "12rem" }}
 					/>
 					<Card.Body>
-						<Card.Text>Enrola facilmente a los veterinario en nuestra aplicación</Card.Text>
+						<Card.Text style={{ color: "#E37222" }}>
+							Enrola fácilmente a los veterinarios en nuestra aplicación
+						</Card.Text>
 					</Card.Body>
 				</Card>
 
@@ -27,7 +29,9 @@ const CardInfoVet = () => {
 						style={{ width: "12rem" }}
 					/>
 					<Card.Body>
-						<Card.Text>Busca los controles de tus mascotas atendidas</Card.Text>
+						<Card.Text style={{ color: "#E37222" }}>
+							Agrega mascotas en forma estándar en tu registro clínico
+						</Card.Text>
 					</Card.Body>
 				</Card>
 
@@ -39,7 +43,9 @@ const CardInfoVet = () => {
 						style={{ width: "12rem" }}
 					/>
 					<Card.Body>
-						<Card.Text>Edita y crea nuevos controles para las mascotas</Card.Text>
+						<Card.Text style={{ color: "grey" }}>
+							Próximamente: Edita y crea nuevos controles para las mascotas
+						</Card.Text>
 					</Card.Body>
 				</Card>
 			</CardGroup>

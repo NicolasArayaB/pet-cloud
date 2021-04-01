@@ -12,6 +12,7 @@ export const Home = () => {
 
 	return (
 		<div className="text-center mt-3">
+			<h1>Bienvenido a PetCloud</h1>
 			<CarouselVet />
 			<Container>
 				<Row className="justify-content-center mx-5">
