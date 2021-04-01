@@ -7,14 +7,17 @@ const CardInfo = () => {
 		<div>
 			<CardGroup>
 				<Card border="light">
-					<Card.Img variant="top" src="holder.js/100px160" />
+					<img src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/15-create-services-view/src/front/img/Services1.png" />
 					<Card.Body>
 						<Card.Text>Identifica rapidamente a tu mascota</Card.Text>
 					</Card.Body>
 				</Card>
 
 				<Card border="light">
-					<Card.Img variant="top" src="holder.js/100px160" />
+					<Card.Img
+						variant="top"
+						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/15-create-services-view/src/front/img/Services1.png"
+					/>
 					<Card.Body>
 						<Card.Text>Obten el historial de tu mascota a un click</Card.Text>
 					</Card.Body>
