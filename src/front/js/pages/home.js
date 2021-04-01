@@ -9,6 +9,7 @@ import "../../styles/home.scss";
 export const Home = () => {
 	return (
 		<div className="text-center mt-3">
+			<h1>Bienvenido a PetCloud</h1>
 			<CarouselVet />
 			<Container>
 				<Row className="mx-5">

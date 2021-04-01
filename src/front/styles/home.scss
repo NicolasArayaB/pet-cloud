@@ -4,12 +4,12 @@ body, html {
 
 .carrusel-images {
    background-size: cover;
-   width: 1000px; 
-   height: 160px;
    border: 2px solid #e37222;
-   border-radius: 5px; 
+   border-radius: 5px;
+   height: 160px;
+   overflow: scroll;  
    resize: both; 
-   overflow: scroll; 
+   width: 1000px; 
 }
 
 h1 {
