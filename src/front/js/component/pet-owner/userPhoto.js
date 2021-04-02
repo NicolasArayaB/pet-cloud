@@ -1,20 +1,27 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Card, CardGroup } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 
 const UserPhoto = () => {
 	return (
 		<div>
-			<Container>
-				<Row>
-					<Col xs={6} md={4}>
-						<Image
-							src="https://cdn4.vectorstock.com/i/thumb-large/40/53/passport-photo-young-handsome-man-close-up-vector-21284053.jpg"
-							roundedCircle
-						/>
-					</Col>
-				</Row>
-			</Container>
+			<CardGroup>
+				<Card>
+					<Card.Img
+						variant="top"
+						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
+					/>
+					<Card.Body />
+				</Card>
+				<Card>
+					<Card.Img
+						variant="top"
+						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto02.png"
+						style={{ width: "12rem" }}
+					/>
+					<Card.Body />
+				</Card>
+			</CardGroup>
 		</div>
 	);
 };
