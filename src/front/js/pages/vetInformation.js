@@ -10,11 +10,17 @@ const VetInfo = props => {
 	const { store, actions } = useContext(Context);
 	const chip = props.location.state.chip;
 
+	let id = null;
+
+	if (store.petById.id) id = store.petById.id.split("-")[1];
+
 	useEffect(async () => {
 		await actions.getPetById(chip);
+		await actions.getPetInformation("001");
 		await actions.getCondition("001");
-	}, []);
-
+		await actions.getObservation("001");
+		await actions.getVaccines("001");
+	});
 	return (
 		<Container>
 			<Row className="m-3">
@@ -29,16 +35,21 @@ const VetInfo = props => {
 			<Row className="m-3">
 				<Col className="text-center">
 					<p>
-						{store.pets.species} | {store.pets.breed} | {store.pets.gender} | {store.pets.birthDate}
+						{store.petById.species} | {store.petById.breed} | {store.petById.gender} |{" "}
+						{store.petById.birthDate}
 					</p>
 				</Col>
 			</Row>
 			<Row className="m-3">
 				<Col md={6}>
-					<Checkup condition={store.conditions[0]} />
+					<Checkup
+						condition={store.conditions[0]}
+						observations={store.observations}
+						genderStatus={store.pets.genderStatus}
+					/>
 				</Col>
 				<Col md={6}>
-					<Vaccines />
+					<Vaccines date={store.vaccines.date} vaccine={store.vaccines.vaccine} />
 				</Col>
 			</Row>
 		</Container>

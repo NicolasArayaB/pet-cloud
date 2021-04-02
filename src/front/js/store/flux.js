@@ -1,10 +1,13 @@
 const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
+			conditions: [],
 			login: [],
 			users: [],
+			observations: {},
 			pets: {},
-			conditions: []
+			petById: {},
+			vaccines: {}
 		},
 
 		actions: {
@@ -16,10 +19,8 @@ const getState = ({ getStore, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						console.log("--data--", data);
 						setStore({ login: data });
 						if (typeof Storage !== "undefined") {
-							console.log(data.token, "---> data.token");
 							localStorage.setItem("token", data.token);
 							localStorage.setItem("user", JSON.stringify(data.user));
 							localStorage.setItem("first_name", JSON.stringify(data.first_name));
@@ -76,13 +77,11 @@ const getState = ({ getStore, setStore }) => {
 				})
 					.then(response => response.json())
 					.then(data => {
-						console.log(data, "<--");
 						setStore({ user: data });
 					})
 					.catch(error => {
 						console.log(error);
 					});
-				console.log(JSON.stringify(user), "<--user register data");
 			},
 
 			getPetById: id => {
@@ -93,6 +92,7 @@ const getState = ({ getStore, setStore }) => {
 					.then(response => response.json())
 					.then(data => {
 						const dataPets = {
+							id: data.entry[0].resource.id,
 							name: data.entry[0].resource.name[0].given[0],
 							species:
 								data.entry[0].resource.extension[0].extension[0].valueCodeableConcept.coding[0].display,
@@ -101,7 +101,7 @@ const getState = ({ getStore, setStore }) => {
 							gender: data.entry[0].resource.gender,
 							birthDate: data.entry[0].resource.birthDate
 						};
-						setStore({ pets: dataPets });
+						setStore({ petById: dataPets });
 						setStore({ haveTheData: true });
 					})
 					.catch(error => console.log(error));
@@ -120,19 +120,52 @@ const getState = ({ getStore, setStore }) => {
 					});
 			},
 
-			getPetInformation: pets => {
-				fetch(`https://fhir.cens.cl/baseR4/Patient/${pets}`, {
+			getObservation: id => {
+				fetch(`https://fhir.cens.cl/baseR4/Observation/INF-${id}`, {
 					method: "GET",
 					headers: { "Content-type": "application/json" }
 				})
 					.then(response => response.json())
 					.then(data => {
-						console.log(data, "<-- getPet data");
+						const lastUpdate = data.meta.lastUpdated.split("T");
+						const obsData = {
+							update: lastUpdate[0],
+							weight: data.valueQuantity.value + " " + data.valueQuantity.unit
+						};
+						setStore({ observations: obsData });
+					});
+			},
+
+			getVaccines: id => {
+				fetch(`https://fhir.cens.cl/baseR4/Immunization/VAC-${id}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				})
+					.then(response => response.json())
+					.then(data => {
+						const vaccine = {
+							vaccine: data.vaccineCode.text,
+							date: data.occurrenceDateTime
+						};
+						setStore({ vaccines: vaccine });
+					});
+			},
+
+			getPetInformation: pets => {
+				fetch(`https://fhir.cens.cl/baseR4/Patient/PET-${pets}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				})
+					.then(response => response.json())
+					.then(data => {
 						const dataPets = {
 							name: data.name[0].given[0],
 							identifier: data.identifier[0].value,
 							gender: data.gender,
 							birthDate: data.birthDate,
+							species: data.extension[0].extension[0].valueCodeableConcept.coding[0].display,
+							breed: data.extension[0].extension[1].valueCodeableConcept.coding[0].display,
+							genderStatus: data.extension[0].extension[2].valueCodeableConcept.coding[0].code,
 							petOwner_name: data.contact[0].name.given[0],
 							petOwner_father: data.contact[0].name.extension[0].valueString,
 							petOwner_mother: data.contact[0].name.extension[1].valueString,
@@ -141,12 +174,10 @@ const getState = ({ getStore, setStore }) => {
 							email: data.contact[0].telecom[1].value
 						};
 						setStore({ pets: dataPets });
-						console.log("-->> data:", dataPets);
 					})
 					.catch(error => {
 						console.log(error);
 					});
-				console.log(JSON.stringify(pets), "<--pet data");
 			},
 
 			createNewPet: (
@@ -246,7 +277,6 @@ const getState = ({ getStore, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(resp => {
-						console.log(resp, "<--- resp");
 						console.log("New pet has been created");
 						setStore({ pets: dataPets });
 					})
