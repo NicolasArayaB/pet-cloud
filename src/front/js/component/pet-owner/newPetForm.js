@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import { Form, Col, Button, Toast } from "react-bootstrap";
+import { Form, Col, Button, Row, Toast } from "react-bootstrap";
 import { Context } from "../../store/appContext";
 import { Redirect } from "react-router-dom";
 
 const NewPetForm = () => {
-	const { store, actions } = useContext(Context);
+	const { actions } = useContext(Context);
 	const [name, setName] = useState("");
 	const [identifier, setIdentifier] = useState("");
 	const [gender, setGender] = useState("");
@@ -18,16 +18,23 @@ const NewPetForm = () => {
 	const [address, setAddress] = useState("");
 	const [phone, setPhone] = useState("");
 	const [email, setEmail] = useState("");
-	const [validated, setValidated] = useState("");
+	const [setValidated] = useState("");
 	const [redirect, setRedirect] = useState("");
 	const [showToast, setShowToast] = useState(false);
+
+	const expresions = {
+		identifier: /^\d[9]$/, // 15 numbers
+		email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+		phone: /^\d[9]$/ // 9 numbers
+		// password: /^.{6,12}$/, // 6 a 12 digitos.
+	};
 
 	const toggleShowToast = () => setShowToast(!showToast);
 
 	const handleSubmit = () => {
 		setValidated(true);
 		console.log("Submitted");
-		console.log(gender);
+		console.log(email);
 		actions.createNewPet(
 			name,
 			identifier,
@@ -51,17 +58,33 @@ const NewPetForm = () => {
 		setRedirect(true);
 	};
 
+	const validation = () => {
+		if (RegExp) {
+			if (RegExp.test(e.target.value)) {
+				console.log("Right input");
+			} else {
+				console.log("Wrong input");
+			}
+		}
+	};
+
 	return (
 		<div>
 			{redirect ? <Redirect to="/" /> : ""}
 			<Form.Group>
-				<span>{JSON.stringify(store.pets)}</span>
-				<Toast show={showToast} onClose={closeTost} delay={3000} autohide className="mt-4 mx-auto">
-					<Toast.Header>
-						<strong className="mr-auto">Mascota Registrada</strong>
-					</Toast.Header>
-					<Toast.Body>Mascota ingresada en forma exitosa</Toast.Body>
-				</Toast>
+				<Row className="text-center">
+					<Col xs={12} md={12}>
+						<h3
+							className="nombre mt-4 text-center"
+							style={{
+								color: "white",
+								backgroundColor: "#66B9BF",
+								borderRadius: "5px"
+							}}>
+							Datos de la mascota
+						</h3>
+					</Col>
+				</Row>
 				<Form.Row>
 					<Form.Label column lg={2}>
 						Nombre Mascota
@@ -87,6 +110,8 @@ const NewPetForm = () => {
 							name="identifier"
 							value={identifier}
 							onChange={e => setIdentifier(e.target.value)}
+							RegExp={expresions.identifier}
+							errorLegend="Debe ingresar un CHIP de 15 digitos"
 							placeholder="Ingresa el Chip ID"
 						/>
 					</Col>
@@ -181,7 +206,19 @@ const NewPetForm = () => {
 						/>
 					</Col>
 				</Form.Row>
-				<hr />
+				<Row className="text-center">
+					<Col xs={12} md={12}>
+						<h3
+							className="nombre mt-4 text-center"
+							style={{
+								color: "white",
+								backgroundColor: "#66B9BF",
+								borderRadius: "5px"
+							}}>
+							Datos del dueño de la mascota
+						</h3>
+					</Col>
+				</Row>
 				<Form.Row>
 					<Form.Label column lg={2}>
 						Nombre del dueño
@@ -252,6 +289,7 @@ const NewPetForm = () => {
 							name="phone"
 							value={phone}
 							onChange={e => setPhone(e.target.value)}
+							regularExpresion={expresions.phone}
 							placeholder="Ingresa el numero de teléfono"
 						/>
 					</Col>
@@ -267,14 +305,21 @@ const NewPetForm = () => {
 							name="email"
 							value={email}
 							onChange={e => setEmail(e.target.value)}
+							regularExpresion={expresions.email}
 							placeholder="Ingresa el correo electrónico"
 						/>
 					</Col>
 				</Form.Row>
 				<br />
-				<Button className="petBtn" type="submit" onClick={handleSubmit}>
+				<Button className="petBtn" type="submit" size="lg" onClick={handleSubmit}>
 					Crear nueva mascota
 				</Button>
+				<Toast show={showToast} onClose={closeTost} delay={3000} autohide className="mt-4 mx-auto">
+					<Toast.Header>
+						<strong className="mr-auto">Mascota Registrada</strong>
+					</Toast.Header>
+					<Toast.Body>Mascota ingresada en forma exitosa</Toast.Body>
+				</Toast>
 			</Form.Group>
 		</div>
 	);

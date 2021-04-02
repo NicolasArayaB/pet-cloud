@@ -6,12 +6,12 @@ export const PetInformation = () => {
 	const { store, actions } = useContext(Context);
 
 	useEffect(async () => {
-		await actions.getPetInformation("PET-001");
+		await actions.getPetInformation("002");
 	}, []);
 
 	return (
 		<Container>
-			<span>{JSON.stringify(store.pets)}</span>
+			{/* <span>{JSON.stringify(store.pets)}</span> */}
 			<Row className="text-center">
 				<Col xs={12} md={12}>
 					<h2 className="nombre mt-4">Hola {store.pets.name} </h2>
@@ -28,7 +28,8 @@ export const PetInformation = () => {
 						className="nombre mt-4 text-center"
 						style={{
 							color: "white",
-							backgroundColor: "#66B9BF"
+							backgroundColor: "#66B9BF",
+							borderRadius: "5px"
 						}}>
 						Mis Datos
 					</h3>
@@ -74,7 +75,19 @@ export const PetInformation = () => {
 							</Form>
 						</ListGroupItem>
 					</ListGroup>
-					<hr />
+					<Row className="text-center">
+						<Col xs={12} md={12}>
+							<h3
+								className="nombre mt-4 text-center"
+								style={{
+									color: "white",
+									backgroundColor: "#66B9BF",
+									borderRadius: "5px"
+								}}>
+								Datos de mi dueño
+							</h3>
+						</Col>
+					</Row>
 					<ListGroup className="list-group-flush" style={{ color: "#E37222" }}>
 						<ListGroupItem>
 							<Form>
