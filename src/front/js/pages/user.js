@@ -1,27 +1,14 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import UserFiles from "../component/pet-owner/userFiles";
 import UserPhoto from "../component/pet-owner/userPhoto";
+import "../../styles/user.scss";
 
 function User() {
 	return (
 		<div>
 			<Container>
-				<Row>
-					<Col>
-						{" "}
-						<UserPhoto />
-					</Col>
-					<Col />
-					<Col />
-				</Row>
-				<Row>
-					<Col>
-						<UserFiles />
-					</Col>
-					<Col />
-					<Col />
-				</Row>
+				<h1 className="titlePet">Tus Mascotas</h1>
+				<UserPhoto />
 			</Container>
 		</div>
 	);
