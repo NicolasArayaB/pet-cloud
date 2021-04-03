@@ -6,10 +6,10 @@ import "../../../styles/user.scss";
 const UserPhoto = () => {
 	return (
 		<div>
-			<CardGroup>
+			<CardGroup className="marginGroup">
 				<Card border="white">
 					<Card.Img
-						className="img-pet"
+						className="img-pet rounded-circle"
 						variant="top"
 						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
 						style={{ width: "12rem" }}
@@ -18,7 +18,7 @@ const UserPhoto = () => {
 				</Card>
 				<Card border="white">
 					<Card.Img
-						className="img-pet"
+						className="img-pet rounded-circle"
 						variant="top"
 						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto02.png"
 						style={{ width: "12rem" }}
