@@ -3,12 +3,20 @@ import { Table } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 const Checkup = props => {
+	let date = "";
+
+	if (props.observations.update != undefined) {
+		date = props.observations.update
+			.split("-")
+			.reverse()
+			.join("-");
+	}
 	return (
 		<Table bordered hover>
 			<thead className="table-secondary">
 				<tr>
 					<th>Ultimo Control</th>
-					<th>{props.observations.update}</th>
+					<th>{date}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -31,7 +39,7 @@ const Checkup = props => {
 
 Checkup.propTypes = {
 	condition: PropTypes.string,
-	observations: PropTypes.string,
+	observations: PropTypes.object,
 	genderStatus: PropTypes.string
 };
 

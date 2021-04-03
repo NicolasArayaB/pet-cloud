@@ -1,4 +1,4 @@
-const getState = ({ getStore, setStore }) => {
+const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			conditions: [],
@@ -84,30 +84,31 @@ const getState = ({ getStore, setStore }) => {
 					});
 			},
 
-			getPetById: id => {
-				fetch(`https://fhir.cens.cl/baseR4/Patient?identifier=${parseInt(id)}`, {
+			getPetById: async id => {
+				const request = await fetch(`https://fhir.cens.cl/baseR4/Patient?identifier=${parseInt(id)}`, {
 					method: "GET",
 					headers: { "Content-type": "application/json" }
-				})
-					.then(response => response.json())
-					.then(data => {
-						const dataPets = {
-							id: data.entry[0].resource.id,
-							name: data.entry[0].resource.name[0].given[0],
-							species:
-								data.entry[0].resource.extension[0].extension[0].valueCodeableConcept.coding[0].display,
-							breed:
-								data.entry[0].resource.extension[0].extension[1].valueCodeableConcept.coding[0].display,
-							gender: data.entry[0].resource.gender,
-							birthDate: data.entry[0].resource.birthDate
-						};
-						setStore({ petById: dataPets });
-						setStore({ haveTheData: true });
-					})
-					.catch(error => console.log(error));
+				});
+				const data = await request.json();
+				const dataPets = {
+					id: data.entry[0].resource.id,
+					name: data.entry[0].resource.name[0].given[0],
+					species: data.entry[0].resource.extension[0].extension[0].valueCodeableConcept.coding[0].display,
+					breed: data.entry[0].resource.extension[0].extension[1].valueCodeableConcept.coding[0].display,
+					gender: data.entry[0].resource.gender,
+					birthDate: data.entry[0].resource.birthDate
+				};
+
+				setStore({ petById: dataPets });
+				const petId = getStore().petById.id.split("-")[1];
+
+				await getActions().getPetInformation(petId);
+				await getActions().getPetCondition(petId);
+				await getActions().getPetObservation(petId);
+				await getActions().getPetVaccines(petId);
 			},
 
-			getCondition: id => {
+			getPetCondition: id => {
 				fetch(`https://fhir.cens.cl/baseR4/Condition/ENF-${id}`, {
 					method: "GET",
 					headers: { "Content-type": "application/json" }
@@ -120,7 +121,7 @@ const getState = ({ getStore, setStore }) => {
 					});
 			},
 
-			getObservation: id => {
+			getPetObservation: id => {
 				fetch(`https://fhir.cens.cl/baseR4/Observation/INF-${id}`, {
 					method: "GET",
 					headers: { "Content-type": "application/json" }
@@ -136,7 +137,7 @@ const getState = ({ getStore, setStore }) => {
 					});
 			},
 
-			getVaccines: id => {
+			getPetVaccines: id => {
 				fetch(`https://fhir.cens.cl/baseR4/Immunization/VAC-${id}`, {
 					method: "GET",
 					headers: { "Content-type": "application/json" }

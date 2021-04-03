@@ -3,6 +3,14 @@ import { Table } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 const Vaccines = props => {
+	let formattedDate = "";
+
+	if (props.date != undefined) {
+		formattedDate = props.date
+			.split("-")
+			.reverse()
+			.join("-");
+	}
 	return (
 		<Table bordered hover>
 			<thead className="table-secondary">
@@ -15,7 +23,7 @@ const Vaccines = props => {
 			<tbody>
 				<tr>
 					<th>{props.vaccine}</th>
-					<th>{props.date}</th>
+					<th>{formattedDate}</th>
 					<th>2/3</th>
 				</tr>
 			</tbody>
