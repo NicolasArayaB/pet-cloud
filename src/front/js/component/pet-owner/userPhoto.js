@@ -8,21 +8,25 @@ const UserPhoto = () => {
 		<div>
 			<CardGroup className="marginGroup">
 				<Card border="white">
-					<Card.Img
-						className="img-pet rounded-circle"
-						variant="top"
-						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
-						style={{ width: "12rem" }}
-					/>
+					<Card.Link className="img-pet" href="petDataInfo">
+						<Card.Img
+							className="rounded-circle"
+							variant="top"
+							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
+							style={{ width: "12rem" }}
+						/>
+					</Card.Link>
 					<Card.Body />
 				</Card>
 				<Card border="white">
-					<Card.Img
-						className="img-pet rounded-circle"
-						variant="top"
-						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto02.png"
-						style={{ width: "12rem" }}
-					/>
+					<Card.Link className="img-pet" href="petDataInfo">
+						<Card.Img
+							className="rounded-circle"
+							variant="top"
+							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto02.png"
+							style={{ width: "12rem" }}
+						/>
+					</Card.Link>
 					<Card.Body />
 				</Card>
 			</CardGroup>
