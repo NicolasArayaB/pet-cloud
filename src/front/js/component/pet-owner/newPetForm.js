@@ -18,12 +18,12 @@ const NewPetForm = () => {
 	const [address, setAddress] = useState("");
 	const [phone, setPhone] = useState("");
 	const [email, setEmail] = useState("");
-	const [setValidated] = useState("");
+	const [validate, setValidated] = useState("");
 	const [redirect, setRedirect] = useState("");
 	const [showToast, setShowToast] = useState(false);
 
 	const expresions = {
-		identifier: /^\d[9]$/, // 15 numbers
+		identifier: /^\d[15]$/, // 15 numbers
 		email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 		phone: /^\d[9]$/ // 9 numbers
 		// password: /^.{6,12}$/, // 6 a 12 digitos.

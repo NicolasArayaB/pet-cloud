@@ -4,7 +4,7 @@ import "../../styles/login.scss";
 import { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
-// import Form from "react-validation";
+//import Form from "react-validation";
 
 export const RegisterView = () => {
 	const [firstName, setFirstName] = useState("");
@@ -29,7 +29,7 @@ export const RegisterView = () => {
 		}
 	};
 	const validPassword = value => {
-		if (value.length > 6 || value.length < 12) {
+		if (value.length < 6 || value.length > 12) {
 			return (
 				<div className="alert alert-danger" role="alert">
 					El password debe tener entre 6 y 12 caracteres.
