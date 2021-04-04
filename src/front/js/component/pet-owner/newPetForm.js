@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Form, Col, Button, Toast } from "react-bootstrap";
+import { Form, Col, Button, Row, Toast, InputGroup } from "react-bootstrap";
 import { Context } from "../../store/appContext";
 import { Redirect } from "react-router-dom";
+import { string } from "prop-types";
 
 const NewPetForm = () => {
-	const { store, actions } = useContext(Context);
+	const { actions } = useContext(Context);
 	const [name, setName] = useState("");
 	const [identifier, setIdentifier] = useState("");
 	const [gender, setGender] = useState("");
@@ -19,49 +20,84 @@ const NewPetForm = () => {
 	const [phone, setPhone] = useState("");
 	const [email, setEmail] = useState("");
 	const [validated, setValidated] = useState("");
+	const [toastMsg, setToastMsg] = useState("");
 	const [redirect, setRedirect] = useState("");
 	const [showToast, setShowToast] = useState(false);
 
+	const expresions = {
+		identifier: /^\d{15}$/, // 15 numbers
+		email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+		phone: /^\d{9}$/ // 9 numbers
+	};
+
 	const toggleShowToast = () => setShowToast(!showToast);
 
-	const handleSubmit = () => {
-		setValidated(true);
+	const handleSubmit = e => {
+		e.preventDefault();
 		console.log("Submitted");
-		console.log(gender);
-		actions.createNewPet(
-			name,
-			identifier,
-			gender,
-			birthDate,
-			species,
-			breed,
-			genderStatus,
-			petOwner_name,
-			petOwner_mother,
-			petOwner_father,
-			address,
-			phone,
-			email
-		);
-		toggleShowToast();
+		if (identifier.length != 15) {
+			setToastMsg("El CHIP debe tener sólo 15 digitos.");
+			toggleShowToast();
+		} else if (email != email) {
+			setToastMsg("Digitar formato correcto del mail");
+			toggleShowToast();
+		} else if (phone != phone) {
+			setToastMsg("Digitar formato correcto del teléfono");
+			toggleShowToast();
+		} else if (
+			identifier == identifier.match(expresions.identifier) &&
+			email == email.match(expresions.email) &&
+			phone == phone.match(expresions.phone)
+		) {
+			console.log(identifier.match(expresions.identifier));
+			actions.createNewPet(
+				name,
+				identifier,
+				gender,
+				birthDate,
+				species,
+				breed,
+				genderStatus,
+				petOwner_name,
+				petOwner_mother,
+				petOwner_father,
+				address,
+				phone,
+				email
+			);
+			setToastMsg("Mascota ingresada en forma exitosa.");
+			setValidated(true);
+			toggleShowToast();
+		} else {
+			e.preventDefault();
+			setToastMsg("Todos los campos son requeridos");
+			toggleShowToast();
+			console.log("You have an error");
+		}
 	};
 
 	const closeTost = () => {
 		toggleShowToast();
-		setRedirect(true);
+		validated ? setRedirect(true) : "";
 	};
 
 	return (
 		<div>
 			{redirect ? <Redirect to="/" /> : ""}
 			<Form.Group>
-				<span>{JSON.stringify(store.pets)}</span>
-				<Toast show={showToast} onClose={closeTost} delay={3000} autohide className="mt-4 mx-auto">
-					<Toast.Header>
-						<strong className="mr-auto">Mascota Registrada</strong>
-					</Toast.Header>
-					<Toast.Body>Mascota ingresada en forma exitosa</Toast.Body>
-				</Toast>
+				<Row className="text-center">
+					<Col xs={12} md={12}>
+						<h3
+							className="nombre mt-4 text-center"
+							style={{
+								color: "white",
+								backgroundColor: "#66B9BF",
+								borderRadius: "5px"
+							}}>
+							Datos de la mascota
+						</h3>
+					</Col>
+				</Row>
 				<Form.Row>
 					<Form.Label column lg={2}>
 						Nombre Mascota
@@ -181,7 +217,19 @@ const NewPetForm = () => {
 						/>
 					</Col>
 				</Form.Row>
-				<hr />
+				<Row className="text-center">
+					<Col xs={12} md={12}>
+						<h3
+							className="nombre mt-4 text-center"
+							style={{
+								color: "white",
+								backgroundColor: "#66B9BF",
+								borderRadius: "5px"
+							}}>
+							Datos del dueño de la mascota
+						</h3>
+					</Col>
+				</Row>
 				<Form.Row>
 					<Form.Label column lg={2}>
 						Nombre del dueño
@@ -247,13 +295,18 @@ const NewPetForm = () => {
 						Teléfono
 					</Form.Label>
 					<Col>
-						<Form.Control
-							type="text"
-							name="phone"
-							value={phone}
-							onChange={e => setPhone(e.target.value)}
-							placeholder="Ingresa el numero de teléfono"
-						/>
+						<InputGroup className="mb-2">
+							<InputGroup.Prepend>
+								<InputGroup.Text>+56</InputGroup.Text>
+							</InputGroup.Prepend>
+							<Form.Control
+								type="text"
+								name="phone"
+								value={phone}
+								onChange={e => setPhone(e.target.value)}
+								placeholder="XXXXXXXXX"
+							/>
+						</InputGroup>
 					</Col>
 				</Form.Row>
 				<br />
@@ -272,9 +325,22 @@ const NewPetForm = () => {
 					</Col>
 				</Form.Row>
 				<br />
-				<Button className="petBtn" type="submit" onClick={handleSubmit}>
-					Crear nueva mascota
-				</Button>
+				<Row>
+					<Col xs={12} md={6}>
+						<Button className="petBtn" type="submit" size="lg" onClick={handleSubmit}>
+							Crear nueva mascota
+						</Button>
+					</Col>
+					<Col xs={12} md={6}>
+						<Toast show={showToast} onClose={closeTost} delay={5000} autohide className="my-4 mx-auto">
+							<Toast.Header>
+								<i className="far fa-hand-point-right" />
+								<strong className="mr-2">Mensaje</strong>
+							</Toast.Header>
+							<Toast.Body>{toastMsg}</Toast.Body>
+						</Toast>
+					</Col>
+				</Row>
 			</Form.Group>
 		</div>
 	);

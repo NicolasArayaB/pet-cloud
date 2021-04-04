@@ -4,9 +4,9 @@ import "../../styles/login.scss";
 import { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
-// import Form from "react-validation";
 
 export const RegisterView = () => {
+	const { actions } = useContext(Context);
 	const [firstName, setFirstName] = useState("");
 	const [fatherFamilyName, setFatherFamilyName] = useState("");
 	const [motherFamilyName, setMotherFamilyName] = useState("");
@@ -14,84 +14,52 @@ export const RegisterView = () => {
 	const [password, setPassword] = useState("");
 	const [validated, setValidated] = useState(false);
 	const [showToast, setShowToast] = useState(false);
+	const [toastMsg, setToastMsg] = useState("");
 	const [redirect, setRedirect] = useState(null);
-	const { actions } = useContext(Context);
+
+	const expresions = {
+		password: /^\d{6,12}$/, // between 6 and 12 characters
+		email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+	};
 
 	const toggleShowToast = () => setShowToast(!showToast);
 
-	const required = value => {
-		if (!value) {
-			return (
-				<div className="alert alert-danger" role="alert">
-					Este campo es requerido
-				</div>
-			);
-		}
-	};
-	const validPassword = value => {
-		if (value.length > 6 || value.length < 12) {
-			return (
-				<div className="alert alert-danger" role="alert">
-					El password debe tener entre 6 y 12 caracteres.
-				</div>
-			);
-		}
-	};
-
 	const handleSubmit = e => {
 		e.preventDefault();
-		actions.registerUser({
-			firstName: firstName,
-			fatherFamilyName: fatherFamilyName,
-			motherFamilyName: motherFamilyName,
-			email: email,
-			password: password
-		});
-
-		setValidated(true);
-		actions.registerUser(firstName, fatherFamilyName, motherFamilyName, email, password);
-		toggleShowToast();
-	};
-
-	const onChangeFirstName = e => {
-		const firstName = e.target.value;
-		setFirstName(firstName);
-	};
-	const onChangeFatherFamilyName = e => {
-		const fatherFamilyName = e.target.value;
-		setFatherFamilyName(fatherFamilyName);
-	};
-	const onChangeMotherFamilyName = e => {
-		const motherFamilyName = e.target.value;
-		setMotherFamilyName(motherFamilyName);
-	};
-	const onChangeEmail = e => {
-		const email = e.target.value;
-		setEmail(email);
-	};
-	const onChangePassword = e => {
-		const password = e.target.value;
-		setPassword(password);
+		if (password.length < 6 || password.length > 12) {
+			setToastMsg("El password debe tener entre 6 y 12 carácteres");
+			toggleShowToast();
+		} else if (email != email) {
+			setToastMsg("Digitar formato correcto del mail");
+			toggleShowToast();
+		} else if (password == password.match(expresions.password) && email == email.match(expresions.email)) {
+			actions.registerUser(firstName, fatherFamilyName, motherFamilyName, email, password);
+			setToastMsg("Usuario registrado en forma exitosa.");
+			setValidated(true);
+			toggleShowToast();
+		} else {
+			e.preventDefault();
+			setToastMsg("Todos los campos son requeridos");
+			toggleShowToast();
+			console.log("You have an error");
+		}
 	};
 
 	const closeTost = () => {
 		toggleShowToast();
-		setRedirect(true);
+		validated ? setRedirect(true) : "";
 	};
 
 	return (
 		<Container className="registerForms">
 			{redirect ? <Redirect to="/" /> : ""}
-			<Toast show={showToast} onClose={closeTost} delay={3000} autohide className="mt-4 mx-auto">
+			<Toast show={showToast} onClose={closeTost} delay={5000} autohide className="mt-4 mx-auto">
 				<Toast.Header>
-					<strong className="mr-auto">Muchas gracias por ser parte de PetCloud</strong>
+					<strong className="mr-auto">Mensaje</strong>
 				</Toast.Header>
-				<Toast.Body>Tu registro ha sido exitoso</Toast.Body>
+				<Toast.Body>{toastMsg}</Toast.Body>
 			</Toast>
 			<Form
-				noValidate
-				validated={validated}
-				onSubmit={handleSubmit}
 				autocomplete="off"
 				className="p-5 text-center">
 				<h2>Registrate</h2>
@@ -100,8 +68,7 @@ export const RegisterView = () => {
 					placeholder="Nombre"
 					name="firstName"
 					value={firstName}
-					onChange={onChangeFirstName}
-					required
+					onChange={e => setFirstName(e.target.value)}
 					className="m-3"
 				/>
 				<Form.Control
@@ -109,8 +76,7 @@ export const RegisterView = () => {
 					placeholder="Apellido Paterno"
 					name="fatherFamilyName"
 					value={fatherFamilyName}
-					onChange={onChangeFatherFamilyName}
-					required
+					onChange={e => setFatherFamilyName(e.target.value)}
 					className="m-3"
 				/>
 				<Form.Control
@@ -118,8 +84,7 @@ export const RegisterView = () => {
 					placeholder="Apellido Materno"
 					name="motherFamilyName"
 					value={motherFamilyName}
-					onChange={onChangeMotherFamilyName}
-					required
+					onChange={e => setMotherFamilyName(e.target.value)}
 					className="m-3"
 				/>
 				<Form.Control
@@ -127,8 +92,7 @@ export const RegisterView = () => {
 					placeholder="Ingresa tu e-mail"
 					name="email"
 					value={email}
-					onChange={onChangeEmail}
-					required
+					onChange={e => setEmail(e.target.value)}
 					className="m-3"
 				/>
 				<Form.Group>
@@ -137,18 +101,17 @@ export const RegisterView = () => {
 						placeholder="Ingresa una contraseña"
 						name="password"
 						value={password}
-						onChange={onChangePassword}
-						required
+						onChange={e => setPassword(e.target.value)}
 						className="pass"
 					/>
-					<Form.Text className="passText">La contraseña debe tener entre 6 a 12 caracteres</Form.Text>
+					<Form.Text className="passText">La contraseña debe tener entre 6 a 12 carácteres</Form.Text>
 				</Form.Group>
 				<Form.Text className="info mt-5">
 					Al hacer clic en Registrate, aceptas nuestras Condiciones, la Política de datos y la Política de
 					cookies.
 				</Form.Text>
 				<Form.Check type="checkbox" label="Soy veterinario" />
-				<Button type="submit" className="my-1 petBtn">
+				<Button type="submit" className="my-1 petBtn" onClick={handleSubmit}>
 					Registrate
 				</Button>
 			</Form>
