@@ -44,35 +44,6 @@ export const RegisterView = () => {
 			console.log("You have an error");
 		}
 	};
-	// setValidated(true);
-	// actions.registerUser(firstName, fatherFamilyName, motherFamilyName, email, password);
-	// toggleShowToast();
-
-	// const onChangeFirstName = e => {
-	// 	const firstName = e.target.value;
-	// 	setFirstName(firstName);
-	// };
-	// const onChangeFatherFamilyName = e => {
-	// 	const fatherFamilyName = e.target.value;
-	// 	setFatherFamilyName(fatherFamilyName);
-	// };
-	// const onChangeMotherFamilyName = e => {
-	// 	const motherFamilyName = e.target.value;
-	// 	setMotherFamilyName(motherFamilyName);
-	// };
-	// const onChangeEmail = e => {
-	// 	const email = e.target.value;
-	// 	setEmail(email);
-	// };
-	// const onChangePassword = e => {
-	// 	const password = e.target.value;
-	// 	setPassword(password);
-	// };
-
-	// const closeTost = () => {
-	// 	toggleShowToast();
-	// 	setRedirect(true);
-	// };
 
 	const closeTost = () => {
 		toggleShowToast();
@@ -89,9 +60,6 @@ export const RegisterView = () => {
 				<Toast.Body>{toastMsg}</Toast.Body>
 			</Toast>
 			<Form
-				// noValidate
-				// validated={validated}
-				// onSubmit={handleSubmit}
 				autocomplete="off"
 				className="p-5 text-center">
 				<h2>Registrate</h2>
@@ -100,7 +68,6 @@ export const RegisterView = () => {
 					placeholder="Nombre"
 					name="firstName"
 					value={firstName}
-					// onChange={onChangeFirstName}
 					onChange={e => setFirstName(e.target.value)}
 					className="m-3"
 				/>
@@ -110,7 +77,6 @@ export const RegisterView = () => {
 					name="fatherFamilyName"
 					value={fatherFamilyName}
 					onChange={e => setFatherFamilyName(e.target.value)}
-					// onChange={onChangeFatherFamilyName}
 					className="m-3"
 				/>
 				<Form.Control
@@ -119,7 +85,6 @@ export const RegisterView = () => {
 					name="motherFamilyName"
 					value={motherFamilyName}
 					onChange={e => setMotherFamilyName(e.target.value)}
-					// onChange={onChangeMotherFamilyName}
 					className="m-3"
 				/>
 				<Form.Control
@@ -128,7 +93,6 @@ export const RegisterView = () => {
 					name="email"
 					value={email}
 					onChange={e => setEmail(e.target.value)}
-					// onChange={onChangeEmail}
 					className="m-3"
 				/>
 				<Form.Group>
@@ -138,7 +102,6 @@ export const RegisterView = () => {
 						name="password"
 						value={password}
 						onChange={e => setPassword(e.target.value)}
-						// onChange={onChangePassword}
 						className="pass"
 					/>
 					<Form.Text className="passText">La contraseña debe tener entre 6 a 12 carácteres</Form.Text>
