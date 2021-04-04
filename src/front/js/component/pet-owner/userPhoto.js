@@ -8,7 +8,7 @@ const UserPhoto = () => {
 		<div>
 			<CardGroup className="marginGroup">
 				<Card border="white">
-					<Card.Link className="img-pet" href="petDataInfo">
+					<Card.Link className="img-pet" href="user/information">
 						<Card.Img
 							className="rounded-circle"
 							variant="top"
@@ -19,7 +19,7 @@ const UserPhoto = () => {
 					<Card.Body />
 				</Card>
 				<Card border="white">
-					<Card.Link className="img-pet" href="petDataInfo">
+					<Card.Link className="img-pet" href="user/information">
 						<Card.Img
 							className="rounded-circle"
 							variant="top"
