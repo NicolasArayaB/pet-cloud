@@ -97,13 +97,10 @@ class Veterinary_organization(db.Model):
 class Pet(db.Model):
     __tablename__ = 'pet'
     id = Column(Integer, primary_key=True)
+    name = Column(String(100))
     chip_identifier = Column(String(50))
-    nickname = Column(String(100))
-    species = Column(String(100))
-    breed = Column(String(100))
-    gender = Column(String(100))
-    pet_user_fk = Column(Integer, ForeignKey('user.id'))
-    pet_users = relationship("User", foreign_keys=[pet_user_fk])
+    user_email = Column(String, ForeignKey('user.email'))
+    users_email = relationship("User", foreign_keys=[user_email])
 
     def __repr__(self):
         return '<Pet %r>' % self.id

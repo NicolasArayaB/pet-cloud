@@ -49,8 +49,7 @@ const NewPetForm = () => {
 			email == email.match(expresions.email) &&
 			phone == phone.match(expresions.phone)
 		) {
-			console.log(identifier.match(expresions.identifier));
-			actions.createNewPet(
+			actions.FhireNewPet(
 				name,
 				identifier,
 				gender,
@@ -65,6 +64,7 @@ const NewPetForm = () => {
 				phone,
 				email
 			);
+			actions.petCloudNewPet(name, identifier, email);
 			setToastMsg("Mascota ingresada en forma exitosa.");
 			setValidated(true);
 			toggleShowToast();

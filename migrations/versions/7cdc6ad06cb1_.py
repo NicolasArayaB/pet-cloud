@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 168829341d6c
+Revision ID: 7cdc6ad06cb1
 Revises: 
-Create Date: 2021-03-29 13:44:17.406294
+Create Date: 2021-04-05 15:53:34.672181
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '168829341d6c'
+revision = '7cdc6ad06cb1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,13 +30,10 @@ def upgrade():
     )
     op.create_table('pet',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('chip_identifier', sa.String(length=50), nullable=True),
     sa.Column('nickname', sa.String(length=100), nullable=True),
-    sa.Column('species', sa.String(length=100), nullable=True),
-    sa.Column('breed', sa.String(length=100), nullable=True),
-    sa.Column('gender', sa.String(length=100), nullable=True),
-    sa.Column('pet_user_fk', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['pet_user_fk'], ['user.id'], ),
+    sa.Column('chip_identifier', sa.String(length=50), nullable=True),
+    sa.Column('pet_user_fk', sa.String(), nullable=True),
+    sa.ForeignKeyConstraint(['pet_user_fk'], ['user.email'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('user_contact',

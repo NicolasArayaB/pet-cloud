@@ -1,7 +1,6 @@
-import React from "react";
-import { Container, Form, Button, Toast } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Container, Form, Button, Toast, Row, Col } from "react-bootstrap";
 import "../../styles/login.scss";
-import { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -12,13 +11,14 @@ export const RegisterView = () => {
 	const [motherFamilyName, setMotherFamilyName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [isVet, setIsVet] = useState("0");
 	const [validated, setValidated] = useState(false);
 	const [showToast, setShowToast] = useState(false);
 	const [toastMsg, setToastMsg] = useState("");
 	const [redirect, setRedirect] = useState(null);
 
 	const expresions = {
-		password: /^\d{6,12}$/, // between 6 and 12 characters
+		password: /^\d{6,8}$/, // between 6 and 8 characters
 		email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
 	};
 
@@ -26,14 +26,21 @@ export const RegisterView = () => {
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		if (password.length < 6 || password.length > 12) {
-			setToastMsg("El password debe tener entre 6 y 12 carácteres");
+		if (password.length < 6 || password.length > 8) {
+			setToastMsg("El password debe tener entre 6 y 8 carácteres");
 			toggleShowToast();
 		} else if (email != email) {
 			setToastMsg("Digitar formato correcto del mail");
 			toggleShowToast();
 		} else if (password == password.match(expresions.password) && email == email.match(expresions.email)) {
-			actions.registerUser(firstName, fatherFamilyName, motherFamilyName, email, password);
+			actions.registerUser({
+				firstName: firstName,
+				fatherFamilyName: fatherFamilyName,
+				motherFamilyName: motherFamilyName,
+				email: email,
+				password: password,
+				isVet: isVet
+			});
 			setToastMsg("Usuario registrado en forma exitosa.");
 			setValidated(true);
 			toggleShowToast();
@@ -48,6 +55,8 @@ export const RegisterView = () => {
 	const closeTost = () => {
 		toggleShowToast();
 		validated ? setRedirect(true) : "";
+
+		console.log(isVet);
 	};
 
 	return (
@@ -59,9 +68,7 @@ export const RegisterView = () => {
 				</Toast.Header>
 				<Toast.Body>{toastMsg}</Toast.Body>
 			</Toast>
-			<Form
-				autocomplete="off"
-				className="p-5 text-center">
+			<Form autocomplete="off" className="p-5 text-center">
 				<h2>Registrate</h2>
 				<Form.Control
 					type="text"
@@ -104,13 +111,38 @@ export const RegisterView = () => {
 						onChange={e => setPassword(e.target.value)}
 						className="pass"
 					/>
-					<Form.Text className="passText">La contraseña debe tener entre 6 a 12 carácteres</Form.Text>
+					<Form.Text className="passText">La contraseña debe tener entre 6 a 8 carácteres</Form.Text>
 				</Form.Group>
 				<Form.Text className="info mt-5">
 					Al hacer clic en Registrate, aceptas nuestras Condiciones, la Política de datos y la Política de
 					cookies.
 				</Form.Text>
-				<Form.Check type="checkbox" label="Soy veterinario" />
+				{/* // 	type="checkbox"
+				// 	label="Soy veterinario"
+				// 	name="isVet"
+				// 	value={1}
+				// 	onChange={e => setIsVet(e.target.value)}
+				// /> */}
+				<Row>
+					<Col xs={12} md={6}>
+						<Form.Check
+							type="radio"
+							label="Soy veterinario"
+							name="isVet"
+							value={1}
+							onChange={e => setIsVet(e.target.value)}
+						/>
+					</Col>
+					<Col xs={12} md={6}>
+						<Form.Check
+							type="radio"
+							label="Soy Dueño de Mascota"
+							name="isVet"
+							value={0}
+							onChange={e => setIsVet(e.target.value)}
+						/>
+					</Col>
+				</Row>
 				<Button type="submit" className="my-1 petBtn" onClick={handleSubmit}>
 					Registrate
 				</Button>
