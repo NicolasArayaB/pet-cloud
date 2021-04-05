@@ -17,7 +17,7 @@ import { PetInformation } from "./component/pet-owner/petInformation";
 import VetInfo from "./pages/vetInformation";
 import NewPet from "./pages/newPet";
 import { ForgottenPass } from "./pages/forgottenPassword";
-import { PrivateRoute } from "../js/privateRoute";
+import { useToken } from "./useToken";
 import ServicesMain from "./pages/services";
 
 //create your first component

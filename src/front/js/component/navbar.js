@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Container, Row, Col, Button, DropdownButton, Dropdown } from "react-bootstrap";
 
@@ -11,10 +11,6 @@ export const MyNavbar = () => {
 	const { store, actions } = useContext(Context);
 
 	const handleShow = () => setShow(!show);
-
-	useEffect(() => {
-		actions.getToken();
-	}, []);
 
 	return (
 		<>

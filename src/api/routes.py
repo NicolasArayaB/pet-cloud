@@ -42,7 +42,7 @@ def handle_hash():
 
     return jsonify(response_token), 200
 
-# #path to generate login for user
+# path to generate login for user
 @api.route('/login', methods=['POST'])
 def login():
     
@@ -70,13 +70,13 @@ def login():
         "user": user.serialize(),
         "token": access_token,
         "expires": expiration.total_seconds()*1000,
-        "userId": user.id,
-        "first_name": user.first_name
+        "first_name": user.first_name,
+        "is_vet": user.is_vet
     }
 
     return jsonify(data), 200
 
-# #generate register for user
+# generate register for user
 @api.route('/register', methods=['POST'])
 def register():
 
@@ -85,29 +85,30 @@ def register():
     mother_family_name = request.json.get("motherFamilyName", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
+    is_vet = request.json.get("isVet", None)
 
+    first_name = request.json.get("firstName", None)
+    if not first_name:
+        return "First Name required", 401
+    
+    father_family_name = request.json.get("fatherFamilyName", None)
+    if not father_family_name:
+        return "Father Family Name required", 401
+
+    mother_family_name = request.json.get("motherFamilyName", None)
+    if not mother_family_name:
+        return "Mother Family Name required", 401
+    
     if not email:
         return "Email required", 401
+    
+    email_query = User.query.filter_by(email=email).first()
+    if email_query:
+        return "This email has been already taken", 401
 
     password = request.json.get("password", None)
     if not password:
         return "Password required", 401
-    
-    first_name = request.json.get("firstName", None)
-    if not first_name:
-        return "First Name required", 401
-
-    father_family_name = request.json.get("fatherFamilyName", None)
-    if not father_family_name:
-        return "Father Family Name required", 401
-    
-    mother_family_name = request.json.get("motherFamilyName", None)
-    if not mother_family_name:
-        return "Mother Family Name required", 401
-
-    email_query = User.query.filter_by(email=email).first()
-    if email_query:
-        return "This email has been already taken", 401
 
     user = User()
     user.first_name = first_name
@@ -117,6 +118,7 @@ def register():
     # hashed_password = create_access_token(password)
     hashed_password = generate_password_hash(password)
     user.password = hashed_password
+    user.is_vet = is_vet
   
     # print(user)
     db.session.add(user)

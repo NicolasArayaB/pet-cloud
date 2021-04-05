@@ -1,24 +1,42 @@
 import React, { useContext, useState } from "react";
 import { Modal, Form, Container, Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Context } from "../../store/appContext";
 
 const LoginModal = params => {
-	const { actions } = useContext(Context);
+	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [auth, setAuth] = useState(null);
 
-	const submitHandler = e => {
+	const handleRoute = () => {
+		if (store.role == 1) {
+			console.log("vet");
+			setAuth("/vet");
+		} else if (store.role == 0) {
+			console.log("user");
+			setAuth("/user");
+		} else {
+			console.log("home");
+			setAuth("/");
+		}
+	};
+
+	const submitHandler = async e => {
 		e.preventDefault();
 		params.close();
 
-		actions.setLogin({
+		await actions.setLogin({
 			email: email,
 			password: password
 		});
+		await actions.getRole();
+		handleRoute();
 	};
+
 	return (
 		<Modal show={params.show} onHide={params.close}>
+			{auth ? <Redirect to={auth} /> : ""}
 			<Modal.Header closeButton>
 				<Modal.Title>Login</Modal.Title>
 			</Modal.Header>
