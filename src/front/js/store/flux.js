@@ -179,7 +179,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => {
 						console.log(error);
 					});
-			},
+            },
+            
+            getUserId: (email) => {
+                fetch(process.env.BACKEND_URL + "/api/user_id", {
+                    method: "GET",
+                    headers: { "Content-type": "application/json"}
+                })
+                .them(response => response.json())
+                .then(data => console.log(data))
+            },
 
 			createNewPet: (
 				name,
@@ -283,8 +292,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => {
 						console.log("Unexpected error");
-					});
-			}
+                    });
+                
+            }
 		}
 	};
 };

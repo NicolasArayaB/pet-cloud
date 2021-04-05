@@ -76,6 +76,17 @@ def login():
 
     return jsonify(data), 200
 
+# get user Id
+@api.route('/user_id')
+def handle_user_id():
+    user = User.query.filter_by(email='nicolasaraya@gmail.com')
+    user = user.serialize()
+    response_body = {
+        "id": user.id
+    }
+
+    return jsonify(response_body), 200
+
 # #generate register for user
 @api.route('/register', methods=['POST'])
 def register():
