@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Pet
 from api.utils import generate_sitemap, APIException
 from werkzeug.security import generate_password_hash, check_password_hash     # its allowed to manage tokens for user authentication        
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity   #from models import User
@@ -76,7 +76,22 @@ def login():
 
     return jsonify(data), 200
 
+<<<<<<< HEAD
 # generate register for user
+=======
+# get user Id
+@api.route('/user_pets')
+def handle_user_pets():
+    pets = Pet.query.all()
+    pets = list(map(lambda x: x.serialize(), pets))
+    
+    response_body = {
+        "pets": pets
+    }
+    return jsonify(response_body), 200
+
+# #generate register for user
+>>>>>>> 9ab669000fc28eb03efdf7879775f6ded03f1e8d
 @api.route('/register', methods=['POST'])
 def register():
 
@@ -122,6 +137,27 @@ def register():
 
     response_token = {
         "msg": "User added successfully"   
+    }
+
+    return jsonify(response_token), 200
+
+# create new pet
+@api.route('/pet', methods=['POST'])
+def new_pet():
+    name = request.json.get("name", None)
+    chip_identifier = request.json.get("chip", None)
+    userEmail = request.json.get("email", None)
+
+    pet = Pet()
+    pet.name = name
+    pet.chip_identifier = chip_identifier
+    pet.user_email = userEmail
+
+    db.session.add(pet)
+    db.session.commit()
+
+    response_token = {
+        "msg": "Pet added successfully"   
     }
 
     return jsonify(response_token), 200

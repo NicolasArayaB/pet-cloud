@@ -8,7 +8,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			pets: {},
 			petById: {},
 			vaccines: {},
-			role: []
+			role: [],
+			userPets: []
 		},
 
 		actions: {
@@ -32,6 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (typeof Storage !== "undefined") {
 							localStorage.setItem("token", loginData.token);
 							localStorage.setItem("is_vet", JSON.stringify(loginData.is_vet));
+							localStorage.setItem("email", loginData.email);
 						} else {
 							// LocalStorage no soportado en este navegador
 							alert("Lo sentimos, tu navegador no es compatible.");
@@ -44,6 +46,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const role = localStorage.getItem("is_vet");
 				console.log(role, "<--- Role");
 				setStore({ role: role });
+			},
+
+			getToken: () => {
+				const tokenLocal = localStorage.getItem("token");
+				const userLocal = JSON.parse(localStorage.getItem("user"));
+				const firstNameLocal = JSON.parse(localStorage.getItem("first_name"));
+				setStore({
+					role: {
+						token: tokenLocal,
+						user: userLocal,
+						firstName: firstNameLocal
+					}
+				});
+				console.log("tokenLocal -->", tokenLocal);
+				console.log("userLocal -->", JSON.stringify(userLocal));
 			},
 
 			sendContactMsg: (name, email, message, role) => {
@@ -180,7 +197,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			createNewPet: (
+			getPets: () => {
+				const selectPets = pets => {
+					if (pets.user_email == localStorage.getItem("email")) {
+						return pets.name;
+					}
+				};
+
+				fetch(process.env.BACKEND_URL + "/api/user_pets", {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				})
+					.then(response => response.json())
+					.then(data => {
+						let userPets = data.pets.filter(selectPets);
+						console.log(userPets, "getPets");
+						setStore({ userPets: userPets });
+					})
+					.catch(error => console.log(error));
+			},
+
+			fhirNewPet: (
 				name,
 				identifier,
 				gender,
@@ -195,7 +232,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				phone,
 				email
 			) => {
-				const newPet = {
+				const fhirNewPet = {
 					resourceType: "Patient",
 					extension: [
 						{
@@ -273,12 +310,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://fhir.cens.cl/baseR4/Patient", {
 					method: "POST",
 					headers: { "Content-type": "application/json" },
-					body: JSON.stringify(newPet)
+					body: JSON.stringify(fhirNewPet)
 				})
 					.then(resp => resp.json())
 					.then(resp => {
 						console.log("New pet has been created");
 						setStore({ pets: dataPets });
+					})
+					.catch(error => {
+						console.log("Unexpected error");
+					});
+			},
+
+			petCloudNewPet: (name, identifier, email) => {
+				const petCloudNewPet = {
+					name: name,
+					chip: identifier,
+					email: email
+				};
+
+				fetch(process.env.BACKEND_URL + "/api/pet", {
+					method: "POST",
+					body: JSON.stringify(petCloudNewPet),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						console.log(data, "<--- new petCloud");
 					})
 					.catch(error => {
 						console.log("Unexpected error");

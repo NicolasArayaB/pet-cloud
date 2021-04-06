@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext";
 import { Container, Form, Button, Toast, Row, Col } from "react-bootstrap";
 import "../../styles/login.scss";
 import { Redirect } from "react-router-dom";
-import { Context } from "../store/appContext";
 
 export const RegisterView = () => {
 	const { actions } = useContext(Context);

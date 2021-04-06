@@ -4,6 +4,12 @@ import PetPhoto from "../component/pet-owner/petPhoto";
 import "../../styles/user.scss";
 
 function User() {
+	const { store, actions } = useContext(Context);
+
+	useEffect(async () => {
+		await actions.getPets();
+	}, []);
+
 	return (
 		<div>
 			<Container>
