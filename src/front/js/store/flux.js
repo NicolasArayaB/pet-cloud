@@ -112,7 +112,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					species: data.entry[0].resource.extension[0].extension[0].valueCodeableConcept.coding[0].display,
 					breed: data.entry[0].resource.extension[0].extension[1].valueCodeableConcept.coding[0].display,
 					gender: data.entry[0].resource.gender,
-					birthDate: data.entry[0].resource.birthDate
+					birthDate: data.entry[0].resource.birthDate,
+					petOwner_name: data.entry[0].resource.contact[0].name.given[0],
+					petOwner_father: data.entry[0].resource.contact[0].name.extension[0].valueString,
+					// petOwner_mother: data.entry[0].resource.contact[0].name.extension[1].valueString,
+					address: data.entry.contact[0].resource.address.line[0],
+					phone: data.entry.contact[0].resource.telecom[0].value,
+					email: data.entry.contact[0].resource.telecom[1].value
 				};
 
 				setStore({ petById: dataPets });
@@ -294,7 +300,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 									},
 									{
 										url: "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family",
-										valueString: { petOwner_mother }
+										valueString: petOwner_mother
 									}
 								],
 								given: petOwner_name

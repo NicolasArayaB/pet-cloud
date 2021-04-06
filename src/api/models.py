@@ -107,7 +107,8 @@ class Pet(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "user_email": self.user_email
+            "user_email": self.user_email,
+            "chip_identifier": self.chip_identifier
         }
 
 class Pet_controls(db.Model):

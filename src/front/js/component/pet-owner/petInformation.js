@@ -1,17 +1,19 @@
 import React, { useContext, useEffect } from "react";
 import { Container, Row, Col, ListGroup, ListGroupItem, Form, Image } from "react-bootstrap";
 import { Context } from "../../store/appContext";
+import PropTypes from "prop-types";
 
-export const PetInformation = () => {
+export const PetInformation = props => {
 	const { store, actions } = useContext(Context);
+	const chip = props.location.state.chip_identifier;
 
 	useEffect(async () => {
-		await actions.getPetInformation("002");
+		await actions.getPetById(chip);
 	}, []);
 
 	return (
 		<Container>
-			{/* <span>{JSON.stringify(store.pets)}</span> */}
+			<span>{JSON.stringify(store.pets)}</span>
 			<Row className="text-center">
 				<Col xs={12} md={12}>
 					<h2 className="nombre mt-4">Hola {store.pets.name} </h2>
@@ -99,13 +101,7 @@ export const PetInformation = () => {
 										<Form.Control
 											type="text"
 											name="userPetOwner"
-											value={
-												store.pets.petOwner_name +
-												" " +
-												store.pets.petOwner_father +
-												" " +
-												store.pets.petOwner_mother
-											}
+											value={store.pets.petOwner_name + " " + store.pets.petOwner_father}
 										/>
 									</Col>
 								</Form.Group>
@@ -140,4 +136,11 @@ export const PetInformation = () => {
 			</Row>
 		</Container>
 	);
+};
+
+PetInformation.propTypes = {
+	location: PropTypes.shape({
+		pathname: PropTypes.string.isRequired,
+		state: PropTypes.object.isRequired
+	}).isRequired
 };

@@ -76,9 +76,6 @@ def login():
 
     return jsonify(data), 200
 
-<<<<<<< HEAD
-# generate register for user
-=======
 # get user Id
 @api.route('/user_pets')
 def handle_user_pets():
@@ -91,7 +88,6 @@ def handle_user_pets():
     return jsonify(response_body), 200
 
 # #generate register for user
->>>>>>> 9ab669000fc28eb03efdf7879775f6ded03f1e8d
 @api.route('/register', methods=['POST'])
 def register():
 
