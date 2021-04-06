@@ -8,7 +8,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			pets: {},
 			petById: {},
 			vaccines: {},
-			role: []
+			role: [],
+			userPets: []
 		},
 
 		actions: {
@@ -32,6 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (typeof Storage !== "undefined") {
 							localStorage.setItem("token", loginData.token);
 							localStorage.setItem("is_vet", JSON.stringify(loginData.is_vet));
+							localStorage.setItem("email", loginData.email);
 						} else {
 							// LocalStorage no soportado en este navegador
 							alert("Lo sentimos, tu navegador no es compatible.");
@@ -189,16 +191,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			getUserId: email => {
-				fetch(process.env.BACKEND_URL + "/api/user_id", {
+			getPets: () => {
+				const selectPets = pets => {
+					if (pets.user_email == localStorage.getItem("email")) {
+						return pets.name;
+					}
+				};
+
+				fetch(process.env.BACKEND_URL + "/api/user_pets", {
 					method: "GET",
 					headers: { "Content-type": "application/json" }
 				})
-					.them(response => response.json())
-					.then(data => console.log(data));
+					.then(response => response.json())
+					.then(data => {
+						let userPets = data.pets.filter(selectPets);
+						console.log(userPets, "getPets");
+						setStore({ userPets: userPets });
+					})
+					.catch(error => console.log(error));
 			},
 
-			FhireNewPet: (
+			fhireNewPet: (
 				name,
 				identifier,
 				gender,
@@ -213,7 +226,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				phone,
 				email
 			) => {
-				const FhireNewPet = {
+				const fhireNewPet = {
 					resourceType: "Patient",
 					extension: [
 						{
@@ -291,7 +304,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://fhir.cens.cl/baseR4/Patient", {
 					method: "POST",
 					headers: { "Content-type": "application/json" },
-					body: JSON.stringify(FhireNewPet)
+					body: JSON.stringify(fhireNewPet)
 				})
 					.then(resp => resp.json())
 					.then(resp => {

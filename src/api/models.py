@@ -108,8 +108,8 @@ class Pet(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "nickname": self.nickname,
-            # do not serialize the password, its a security breach
+            "name": self.name,
+            "user_email": self.user_email
         }
 
 class Pet_controls(db.Model):
