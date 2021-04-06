@@ -41,11 +41,8 @@ const Layout = () => {
 						<Route exact path="/vet/id" render={props => <VetInfo {...props} />} />
 						<Route exact path="/user" component={User} />
 						<Route exact path="/user/information" component={PetInformation} />
-<<<<<<< HEAD
 						<Route exact path="/pass" component={ForgottenPass} />
 						<Route exact path="/vet/id" component={VetInfo} />
-=======
->>>>>>> 9ab669000fc28eb03efdf7879775f6ded03f1e8d
 						<Route exact path="/newPet" component={NewPet} />
 						<Route>
 							<div className="text-center">
