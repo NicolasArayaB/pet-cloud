@@ -211,7 +211,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log(error));
 			},
 
-			fhireNewPet: (
+			fhirNewPet: (
 				name,
 				identifier,
 				gender,
@@ -226,7 +226,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				phone,
 				email
 			) => {
-				const fhireNewPet = {
+				const fhirNewPet = {
 					resourceType: "Patient",
 					extension: [
 						{
@@ -304,7 +304,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://fhir.cens.cl/baseR4/Patient", {
 					method: "POST",
 					headers: { "Content-type": "application/json" },
-					body: JSON.stringify(fhireNewPet)
+					body: JSON.stringify(fhirNewPet)
 				})
 					.then(resp => resp.json())
 					.then(resp => {

@@ -49,7 +49,7 @@ const NewPetForm = () => {
 			email == email.match(expresions.email) &&
 			phone == phone.match(expresions.phone)
 		) {
-			actions.fhireNewPet(
+			actions.fhirNewPet(
 				name,
 				identifier,
 				gender,
