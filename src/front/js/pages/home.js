@@ -1,24 +1,29 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
+import React from "react";
+import { Container, Row, Col, Button } from "react-bootstrap";
+
+import CarouselVet from "../component/home/carouselVet";
+import CardVet from "../component/home/cardVet";
+import CardUser from "../component/home/cardUser";
 import "../../styles/home.scss";
-import CarouselVet from "../../js/component/carouselVet";
-import CardVet from "../../js/component/cardVet";
-import { Container, Row } from "react-bootstrap";
-import CardUser from "../component/cardUser";
 
 export const Home = () => {
-	const { store, actions } = useContext(Context);
-
 	return (
-		<div className="text-center mt-5">
-			<h1>Pet Cloud</h1>
+		<div className="text-center mt-3">
+			<h1>Bienvenido a PetCloud</h1>
 			<CarouselVet />
-			<br />
 			<Container>
-				<Row>
-					<CardVet />
-					<CardUser />
+				<Row className="mx-5">
+					<Col xs={12} md={6} className="mx-auto">
+						<CardVet />
+					</Col>
+					<Col xs={12} md={6}>
+						<CardUser />
+					</Col>
+					<Col>
+						<Button className="petBtn btn-lg my-4" href="/register">
+							Registrate
+						</Button>
+					</Col>
 				</Row>
 			</Container>
 		</div>

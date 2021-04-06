@@ -2,6 +2,16 @@ body, html {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.carrusel-images {
+   background-size: cover;
+   border: 2px solid #e37222;
+   border-radius: 5px;
+   height: 160px;
+   overflow: scroll;  
+   resize: both; 
+   width: 1000px; 
+}
+
 h1 {
     color: #66B9BF
 }

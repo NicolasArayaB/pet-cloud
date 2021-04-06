@@ -1,11 +1,23 @@
+.forgottenPass {
+    width: fit-content;
+}
+
+.info {
+    font-size: 10px;
+}
+
 .registerForm {
     margin-top: 2rem;
     border: 1px solid #cac8c8;
     border-radius: 5px;
 }
 
-.forgottenPass {
-    width: fit-content;
+.modal-header {
+    background-color: #e37222;
+}
+
+.modal-body a {
+    color: #07889b;
 }
 
 .pass {
@@ -15,21 +27,4 @@
 .passText {
     float: left;
     margin-left: 1.5rem;
-}
-
-.info {
-    font-size: 10px;
-}
-
-.submitBtn {
-    background-color: #66b9bf;
-    color: black;
-}
-
-.modal-header {
-    background-color: #e37222;
-}
-
-.modal-body a {
-    color: #07889b;
 }

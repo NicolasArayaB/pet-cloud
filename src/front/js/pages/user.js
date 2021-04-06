@@ -1,28 +1,21 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { Context } from "../store/appContext";
 import { Container, Row, Col } from "react-bootstrap";
-import UserFiles from "../../js/component/userFiles";
-import UserPhoto from "../../js/component/userPhoto";
-import UserData from "../../js/component/userData";
+import UserPhoto from "../component/pet-owner/userPhoto";
+import "../../styles/user.scss";
 
 function User() {
+	const { store, actions } = useContext(Context);
+
+	useEffect(async () => {
+		await actions.getPets();
+	}, []);
+
 	return (
 		<div>
 			<Container>
-				<Row>
-					<Col>
-						{" "}
-						<UserPhoto />
-					</Col>
-					<Col />
-					<Col />
-				</Row>
-				<Row>
-					<Col>
-						<UserFiles />
-					</Col>
-					<Col />
-					<Col />
-				</Row>
+				<h1 className="titlePet">Tus Mascotas</h1>
+				<UserPhoto />
 			</Container>
 		</div>
 	);

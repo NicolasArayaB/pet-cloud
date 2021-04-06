@@ -1,25 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Container, Row, Col, Button } from "react-bootstrap";
+import { Navbar, Container, Row, Col, Button, DropdownButton, Dropdown } from "react-bootstrap";
 
+import { Context } from "../store/appContext";
 import HomeNavInfo from "./homeNavInfo";
-import LoginModal from "./loginModal";
+import LoginModal from "./login/loginModal";
 
 export const MyNavbar = () => {
 	const [show, setShow] = useState(false);
+	const { store, actions } = useContext(Context);
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+	const handleShow = () => setShow(!show);
+
+	useEffect(() => {
+		actions.getToken();
+	}, []);
 
 	return (
 		<>
-			<LoginModal show={show} close={handleClose} />
+			<LoginModal show={show} close={handleShow} />
 			<Navbar collapseOnSelect expand="lg" className="petCloudBar" variant="light">
 				<Navbar.Brand href="#home">
 					<Link to="/">
 						<img
 							className="logo"
-							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/navbar/src/front/img/petcloudlogo.png"
+							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/navbar/src/front/img/petcloud-logo.png"
 						/>
 					</Link>
 				</Navbar.Brand>
@@ -31,9 +36,22 @@ export const MyNavbar = () => {
 								<HomeNavInfo />
 							</Col>
 							<Col sm={2}>
-								<Button onClick={handleShow} className="mx-4 btn petBtn">
-									Login
-								</Button>
+								{store.login.token != null ? (
+									<Dropdown>
+										<Dropdown.Toggle id="loggedButton">
+											Hola {store.login.first_name}
+										</Dropdown.Toggle>
+										<Dropdown.Menu>
+											<Dropdown.Item href="/" onClick={localStorage.clear()}>
+												Cerrar sesión
+											</Dropdown.Item>
+										</Dropdown.Menu>
+									</Dropdown>
+								) : (
+									<Button onClick={handleShow} className="mx-4 btn petBtn">
+										Login
+									</Button>
+								)}
 							</Col>
 						</Row>
 					</Container>

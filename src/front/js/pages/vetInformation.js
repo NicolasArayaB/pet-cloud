@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import { Context } from "../store/appContext";
+import PropTypes from "prop-types";
 
-import Checkup from "../component/checkupTable";
-import Vaccines from "../component/vaccinesTable";
+import Checkup from "../component/vet/checkupTable";
+import Vaccines from "../component/vet/vaccinesTable";
 
-const VetInfo = () => {
+const VetInfo = props => {
+	const { store, actions } = useContext(Context);
+	const chip = props.location.state.chip;
+
+	useEffect(async () => {
+		await actions.getPetById(chip);
+	}, []);
+
 	return (
 		<Container>
-			{/* Hay que sacar estos datos de la db */}
 			<Row className="m-3">
 				<Col />
 				<Col className="text-center">
-					<h2>Cachupin</h2>
+					<h2>{store.pets.name}</h2>
 				</Col>
 				<Col>
 					<Button className="petBtn float-right">Nuevo Control</Button>
@@ -19,19 +27,33 @@ const VetInfo = () => {
 			</Row>
 			<Row className="m-3">
 				<Col className="text-center">
-					<p>Perro | Chilean Terrier | Macho | 5 años | Jugueton</p>
+					<p>
+						{store.petById.species} | {store.petById.breed} | {store.petById.gender} |{" "}
+						{store.petById.birthDate}
+					</p>
 				</Col>
 			</Row>
 			<Row className="m-3">
 				<Col md={6}>
-					<Checkup />
+					<Checkup
+						condition={store.conditions[0]}
+						observations={store.observations}
+						genderStatus={store.pets.genderStatus}
+					/>
 				</Col>
 				<Col md={6}>
-					<Vaccines />
+					<Vaccines date={store.vaccines.date} vaccine={store.vaccines.vaccine} />
 				</Col>
 			</Row>
 		</Container>
 	);
+};
+
+VetInfo.propTypes = {
+	location: PropTypes.shape({
+		pathname: PropTypes.string.isRequired,
+		state: PropTypes.object.isRequired
+	}).isRequired
 };
 
 export default VetInfo;

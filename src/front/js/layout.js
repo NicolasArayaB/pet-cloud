@@ -13,12 +13,12 @@ import { Footer } from "./component/footer";
 import { Contact } from "./pages/contact";
 import { Link } from "react-router-dom";
 import User from "./pages/user";
-import { petDataInfo } from "./pages/petDataInfo";
-import { PetInformation } from "./component/petInformation";
+import { PetInformation } from "./component/pet-owner/petInformation";
 import VetInfo from "./pages/vetInformation";
 import NewPet from "./pages/newPet";
 import { ForgottenPass } from "./pages/forgottenPassword";
 import { PrivateRoute } from "../js/privateRoute";
+import ServicesMain from "./pages/services";
 
 //create your first component
 const Layout = () => {
@@ -34,17 +34,24 @@ const Layout = () => {
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route exact path="/register" component={RegisterView} />
+						<Route exact path="/pass" component={ForgottenPass} />
+						<Route exact path="/contact-us" component={Contact} />
+						<Route exact path="/services" component={ServicesMain} />
 						<Route exact path="/vet" component={Vet} />
-						<Route exact path="/contactanos" component={Contact} />
+						<Route exact path="/vet/id" render={props => <VetInfo {...props} />} />
 						<Route exact path="/user" component={User} />
 						<Route exact path="/user/information" component={PetInformation} />
+<<<<<<< HEAD
 						<Route exact path="/pass" component={ForgottenPass} />
 						<Route exact path="/vet/id" component={VetInfo} />
+=======
+>>>>>>> 9ab669000fc28eb03efdf7879775f6ded03f1e8d
 						<Route exact path="/newPet" component={NewPet} />
 						<Route>
 							<div className="text-center">
 								<h1>Lo siento, pero Pet Cloud no encuentra esta página</h1>
 								<h2>
+									<i className="fas fa-paw" style={{ color: "#e37222" }} />
 									Sigue navegando con nosotros{" "}
 									<i className="fas fa-paw" style={{ color: "#e37222" }} />
 								</h2>

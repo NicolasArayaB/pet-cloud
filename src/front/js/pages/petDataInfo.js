@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/home.scss";
-import PetInformation from "../../js/component/petInformation";
+import PetInformation from "../component/pet-owner/petInformation";
 
 export const petDataInfo = () => {
 	return (
