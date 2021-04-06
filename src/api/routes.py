@@ -19,7 +19,7 @@ def handle_start():
 
     return jsonify(response_body), 200
 
-@api.route('/hello', methods=['POST', 'GET'])
+@api.route('/users', methods=['POST', 'GET'])
 def user_handle_hello():
     users = User.query.all()
     users = list(map(lambda x: x.serialize(), users))
@@ -87,15 +87,12 @@ def register():
     password = request.json.get("password", None)
     is_vet = request.json.get("isVet", None)
 
-    first_name = request.json.get("firstName", None)
     if not first_name:
         return "First Name required", 401
     
-    father_family_name = request.json.get("fatherFamilyName", None)
     if not father_family_name:
         return "Father Family Name required", 401
 
-    mother_family_name = request.json.get("motherFamilyName", None)
     if not mother_family_name:
         return "Mother Family Name required", 401
     
@@ -106,7 +103,6 @@ def register():
     if email_query:
         return "This email has been already taken", 401
 
-    password = request.json.get("password", None)
     if not password:
         return "Password required", 401
 

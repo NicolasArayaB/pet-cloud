@@ -18,7 +18,7 @@ const CardUser = () => {
 			</Card.Body>
 			<ListGroup className="list-group-flush" style={{ color: "#E37222" }}>
 				<ListGroupItem>Conoce a tu mascota</ListGroupItem>
-				<ListGroupItem>Revisa sus próximos controles </ListGroupItem>
+				<ListGroupItem>Próximamente: Revisa sus próximos controles </ListGroupItem>
 			</ListGroup>
 		</Card>
 	);

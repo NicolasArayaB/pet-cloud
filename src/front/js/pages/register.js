@@ -144,7 +144,7 @@ export const RegisterView = () => {
 					</Col>
 				</Row>
 				<Button type="submit" className="my-1 petBtn" onClick={handleSubmit}>
-					Registrate
+					Regístrate
 				</Button>
 			</Form>
 		</Container>

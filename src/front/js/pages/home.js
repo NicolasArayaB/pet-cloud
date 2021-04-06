@@ -41,7 +41,7 @@ export const Home = () => {
 					</Col>
 					<Col>
 						<Button className="petBtn btn-lg my-4" href="/register">
-							Registrate
+							Regístrate
 						</Button>
 					</Col>
 				</Row>
