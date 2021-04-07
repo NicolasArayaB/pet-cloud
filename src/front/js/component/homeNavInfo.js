@@ -15,7 +15,7 @@ const HomeNavInfo = () => {
 				</Nav.Link>
 			</Nav.Item>
 			<Nav.Item>
-				<Nav.Link href="/contact-us">Contactanos</Nav.Link>
+				<Nav.Link href="/contact-us">Contáctanos</Nav.Link>
 			</Nav.Item>
 		</Nav>
 	);

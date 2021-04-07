@@ -12,7 +12,7 @@ export const Footer = () => (
 		</Link>
 		<span className="footerLink">|</span>
 		<Link to="/contact-us" className="footerLink">
-			Contactanos
+			Contáctanos
 		</Link>
 	</footer>
 );
