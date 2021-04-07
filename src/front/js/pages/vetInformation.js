@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
-
 import Checkup from "../component/vet/checkupTable";
 import Vaccines from "../component/vet/vaccinesTable";
 

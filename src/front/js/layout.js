@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
@@ -6,8 +6,8 @@ import { Home } from "./pages/home";
 import { RegisterView } from "./pages/register";
 import { Vet } from "./pages/vet";
 
-import injectContext from "./store/appContext";
-
+import injectContext, { Context } from "./store/appContext";
+// import { Context } from "./store/appContext";
 import { MyNavbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Contact } from "./pages/contact";
@@ -17,12 +17,13 @@ import { PetInformation } from "./component/pet-owner/petInformation";
 import VetInfo from "./pages/vetInformation";
 import NewPet from "./pages/newPet";
 import { ForgottenPass } from "./pages/forgottenPassword";
-import { PrivateRoute } from "../js/privateRoute";
+import { useToken } from "./useToken";
 import ServicesMain from "./pages/services";
 import A from "./pages/newCheckup";
 
 //create your first component
 const Layout = () => {
+	const { store } = useContext(Context);
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
 	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 	const basename = process.env.BASENAME || "";
@@ -32,6 +33,7 @@ const Layout = () => {
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<MyNavbar />
+					<span>{JSON.stringify(store.role)}</span>
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route exact path="/register" component={RegisterView} />
@@ -41,7 +43,7 @@ const Layout = () => {
 						<Route exact path="/vet" component={Vet} />
 						<Route exact path="/vet/id" render={props => <VetInfo {...props} />} />
 						<Route exact path="/user" component={User} />
-						<Route exact path="/user/information" component={PetInformation} />
+						<Route exact path="/user/information" render={props => <PetInformation {...props} />} />
 						<Route exact path="/newPet" component={NewPet} />
 						<Route exact path="/checkup" component={A} />
 						<Route>

@@ -16,7 +16,7 @@ const CardInfo = () => {
 					/>
 					<Card.Body>
 						<Card.Text style={{ color: "#E37222" }}>
-							Identifica a tus mascota rápidamente en tu cuenta
+							Identifica a tus mascotas rápidamente en tu cuenta
 						</Card.Text>
 					</Card.Body>
 				</Card>

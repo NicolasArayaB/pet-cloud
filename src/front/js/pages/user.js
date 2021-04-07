@@ -1,7 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+import { Container } from "react-bootstrap";
 import { Context } from "../store/appContext";
-import { Container, Row, Col } from "react-bootstrap";
-import UserPhoto from "../component/pet-owner/userPhoto";
+import PetPhoto from "../component/pet-owner/petPhoto";
 import "../../styles/user.scss";
 
 function User() {
@@ -12,12 +12,19 @@ function User() {
 	}, []);
 
 	return (
-		<div>
-			<Container>
-				<h1 className="titlePet">Tus Mascotas</h1>
-				<UserPhoto />
-			</Container>
-		</div>
+		<Container>
+			<h1 className="titlePet">Tus Mascotas registradas</h1>
+			{store.userPets.map((item, index) => {
+				return (
+					<PetPhoto
+						// {name  userPets.name},
+						// {identifier userPets.identifier}
+						key={index}
+						{...item}
+					/>
+				);
+			})}
+		</Container>
 	);
 }
 

@@ -8,13 +8,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			pets: {},
 			petById: {},
 			vaccines: {},
-			role: [],
+			role: {},
 			userPets: [],
 			id: []
 		},
 
 		actions: {
-			setLogin: user => {
+			setLogin: (user, history) => {
 				fetch(process.env.BACKEND_URL + "/api/login", {
 					method: "POST",
 					body: JSON.stringify(user),
@@ -22,7 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						console.log(data, "<--- data login");
+						console.log(history, "<--- data login");
 						const loginData = {
 							token: data.token,
 							email: data.user.email,
@@ -35,6 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							localStorage.setItem("token", loginData.token);
 							localStorage.setItem("is_vet", JSON.stringify(loginData.is_vet));
 							localStorage.setItem("email", loginData.email);
+							history.push(data.is_vet === "1" ? "/vet" : "/user");
 						} else {
 							// LocalStorage no soportado en este navegador
 							alert("Lo sentimos, tu navegador no es compatible.");
@@ -47,11 +48,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const tokenLocal = localStorage.getItem("token");
 				const userLocal = JSON.parse(localStorage.getItem("user"));
 				const firstNameLocal = JSON.parse(localStorage.getItem("first_name"));
+				const role = localStorage.getItem("is_vet");
 				setStore({
 					role: {
 						token: tokenLocal,
 						user: userLocal,
-						firstName: firstNameLocal
+						firstName: firstNameLocal,
+						role: role
 					}
 				});
 				console.log("tokenLocal -->", tokenLocal);
@@ -116,7 +119,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					species: data.entry[0].resource.extension[0].extension[0].valueCodeableConcept.coding[0].display,
 					breed: data.entry[0].resource.extension[0].extension[1].valueCodeableConcept.coding[0].display,
 					gender: data.entry[0].resource.gender,
-					birthDate: data.entry[0].resource.birthDate
+					birthDate: data.entry[0].resource.birthDate,
+					petOwner_name: data.entry[0].resource.contact[0].name.given[0],
+					petOwner_father: data.entry[0].resource.contact[0].name.extension[0].valueString,
+					petOwner_mother: data.entry[0].resource.contact[0].name.extension[1].valueString,
+					address: data.entry[0].resource.contact[0].address.line[0],
+					phone: data.entry[0].resource.contact[0].telecom[0].value,
+					email: data.entry[0].resource.contact[0].telecom[1].value
 				};
 
 				setStore({ petById: dataPets });
@@ -312,110 +321,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			// updateGenderStatus: (id, status) => {
-			//     const updateData = {
-			//         "resourceType": "Patient",
-			//         "id": `PET-${id}`,
-			//         "extension": [
-			//             {
-			//                 "url": "http://hl7.org/fhir/StructureDefinition/patient-animal",
-			//                 "extension": [
-			//                     {
-			//                         "url": "species",
-			//                         "valueCodeableConcept": {
-			//                             "coding": [
-			//                                 {
-			//                                     "system": "http://hl7.org/fhir/animal-species",
-			//                                     "display": "Dog"
-			//                                 }
-			//                             ]
-			//                         }
-			//                     },
-			//                     {
-			//                         "url": "breed",
-			//                         "valueCodeableConcept": {
-			//                             "coding": [
-			//                                 {
-			//                                     "system": "http://snomed.info/sct",
-			//                                     "code": "132462005",
-			//                                     "display": "perro viejo pastor alemán"
-			//                                 }
-			//                             ]
-			//                         }
-			//                     },
-			//                     {
-			//                         "url": "genderStatus",
-			//                         "valueCodeableConcept": {
-			//                             "coding": [
-			//                                 {
-			//                                     "system": "http://hl7.org/fhir/animal-genderstatus",
-			//                                     "code": "intact"
-			//                                 }
-			//                             ]
-			//                         }
-			//                     }
-			//                 ]
-			//             }
-			//         ],
-			//         "identifier": [
-			//             {
-			//                 "type": {
-			//                     "text": "CHIP identifier"
-			//                 },
-			//                 "system": "https://registratumascota.cl",
-			//                 "value": "345678901234567",
-			//                 "period": {
-			//                     "start": "2015-05-31"
-			//                 }
-			//             }
-			//         ],
-			//         "name": [
-			//             {
-			//                 "given": [
-			//                     "Brunito"
-			//                 ]
-			//             }
-			//         ],
-			//         "gender": "male",
-			//         "birthDate": "2010-02-11",
-			//         "contact": [
-			//             {
-			//                 "name": {
-			//                     "extension": [
-			//                         {
-			//                             "url": "http://hl7.org/fhir/StructureDefinition/humanname-father-family",
-			//                             "valueString": "Ramirez"
-			//                         },
-			//                         {
-			//                             "url": "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family",
-			//                             "valueString": "Hernandez"
-			//                         }
-			//                     ],
-			//                     "given": [
-			//                         "Fernando"
-			//                     ]
-			//                 },
-			//                 "telecom": [
-			//                     {
-			//                         "system": "phone",
-			//                         "value": "90538592",
-			//                         "use": "work"
-			//                     },
-			//                     {
-			//                         "system": "email",
-			//                         "value": "fernando@gmail.com"
-			//                     }
-			//                 ],
-			//                 "address": {
-			//                     "line": [
-			//                         "Saturno 345, Puerto Montt, Chile"
-			//                     ]
-			//                 }
-			//             }
-			//         ]
-			//     }
-			// }
-
 			getPets: () => {
 				const selectPets = pets => {
 					if (pets.user_email == localStorage.getItem("email")) {
@@ -513,7 +418,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 									},
 									{
 										url: "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family",
-										valueString: { petOwner_mother }
+										valueString: petOwner_mother
 									}
 								],
 								given: petOwner_name

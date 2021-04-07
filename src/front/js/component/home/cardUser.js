@@ -4,8 +4,8 @@ import { Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 const CardUser = () => {
 	return (
 		<Card border="0" className="mx-auto" style={{ width: "20rem", backgroundColor: "", marginTop: "20px" }}>
-			<Card.Header className="bg-danger" style={{ color: "white" }}>
-				¿No tienes el historial clínico de tus mascotas en línea?
+			<Card.Header className="bg-danger" style={{ color: "white", borderRadius: "40px" }}>
+				¿No tienes todas tus mascotas en línea?
 			</Card.Header>
 			<Card.Img
 				variant="top"
@@ -18,7 +18,7 @@ const CardUser = () => {
 			</Card.Body>
 			<ListGroup className="list-group-flush" style={{ color: "#E37222" }}>
 				<ListGroupItem>Conoce a tu mascota</ListGroupItem>
-				<ListGroupItem>Revisa sus próximos controles </ListGroupItem>
+				<ListGroupItem>Próximamente: Revisa sus próximos controles </ListGroupItem>
 			</ListGroup>
 		</Card>
 	);
