@@ -168,10 +168,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				fetch("https://fhir.cens.cl/baseR4/Condition/", {
 					method: "POST",
-					headers: { "Context-type": "application/json" }
+					headers: { "Content-type": "application/json" },
+					body: JSON.stringify(condData)
 				})
 					.then(data => data.json())
-					.then(data => console.log(data, "cond data"));
+					.then(data => console.log(data, "cond data"))
+					.catch(error => console.log(error));
 			},
 
 			getPetObservation: id => {
@@ -228,7 +230,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://fhir.cens.cl/baseR4/Observation/", {
 					method: "POST",
 					headers: { "Content-type": "application/json" },
-					body: obsData
+					body: JSON.stringify(obsData)
 				})
 					.then(response => response.json())
 					.then(data => console.log(data, "weight"));
@@ -275,7 +277,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://fhir.cens.cl/baseR4/Immunization/", {
 					method: "POST",
 					headers: { "Content-type": "application/json" },
-					body: vacData
+					body: JSON.stringify(vacData)
 				})
 					.then(data => data.json())
 					.then(data => console.log(data, "vaccines"));

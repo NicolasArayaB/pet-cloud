@@ -11,9 +11,8 @@ const VetInfo = props => {
 	const { store, actions } = useContext(Context);
 	const chip = props.location.state.chip;
 
-	useEffect(async () => {
-		await actions.getPetById(chip);
-		await console.log(chip, "chip");
+	useEffect(() => {
+		actions.getPetById(chip);
 	}, []);
 
 	return (
@@ -51,13 +50,13 @@ const VetInfo = props => {
 			</Row>
 		</Container>
 	);
-};
 
-VetInfo.propTypes = {
-	location: PropTypes.shape({
-		pathname: PropTypes.string.isRequired,
-		state: PropTypes.object.isRequired
-	}).isRequired
+	VetInfo.propTypes = {
+		location: PropTypes.shape({
+			pathname: PropTypes.string.isRequired,
+			state: PropTypes.object.isRequired
+		}).isRequired
+	};
 };
 
 export default VetInfo;

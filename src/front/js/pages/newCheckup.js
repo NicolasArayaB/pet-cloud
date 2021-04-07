@@ -22,11 +22,9 @@ const NewCheckup = props => {
 	};
 	const { store, actions } = useContext(Context);
 	const [formState, dispatch] = useReducer(formReducer, initialFormState);
-	const [showToast, setShowToast] = useState("");
+	const [showToast, setShowToast] = useState(false);
 	const [redirect, setRedirect] = useState(null);
 	const chip = props.location.state.chip;
-
-	const toggleShowToast = () => setShowToast(!showToast);
 
 	const handleTextChange = e => {
 		dispatch({
@@ -40,22 +38,22 @@ const NewCheckup = props => {
 		e.preventDefault();
 		console.log(store.id, "store id");
 		actions.newPetObservation(store.id, formState.weight, "Kg");
-		// actions.newPetVaccine(store.id, formState.vaccines, "2");
-		// actions.newPetCondition(store.id, formState.condition);
+		actions.newPetVaccine(store.id, formState.vaccines, "2");
+		actions.newPetCondition(store.id, formState.condition);
+		setShowToast(true);
 	};
 
 	const closeToast = () => {
-		toggleShowToast();
 		setRedirect(true);
+		setShowToast(!showToast);
 	};
 
-	useEffect(async () => {
-		await actions.getIdByChip(chip);
+	useEffect(() => {
+		actions.getIdByChip(chip);
 	}, []);
 
 	return (
 		<Container className="registerForms">
-			{redirect ? <Redirect to="/vet" /> : ""}
 			<Toast show={showToast} onClose={closeToast} delay={5000} autohide className="mt-4 mx-auto">
 				<Toast.Header>
 					<strong className="mr-auto">Mensaje</strong>
@@ -63,6 +61,7 @@ const NewCheckup = props => {
 				<Toast.Body>Control fue ingresado con exito</Toast.Body>
 			</Toast>
 			<Row>
+				{redirect ? <Redirect to="/vet" /> : ""}
 				<Col>
 					<Form onSubmit={handleSubmit} autoComplete="off" className="p-5 text-center">
 						<h2>Nuevo Control</h2>
