@@ -21,19 +21,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						console.log(history, "<--- data login");
+						console.log(history, "<--- History");
 						const loginData = {
 							token: data.token,
 							email: data.user.email,
-							first_name: data.first_name,
 							id: data.user.id,
+							firstName: data.first_name,
 							is_vet: data.is_vet
 						};
 						setStore({ login: loginData });
 						if (typeof Storage !== "undefined") {
 							localStorage.setItem("token", loginData.token);
-							localStorage.setItem("is_vet", JSON.stringify(loginData.is_vet));
 							localStorage.setItem("email", loginData.email);
+							localStorage.setItem("firstName", loginData.firstName);
+							localStorage.setItem("is_vet", JSON.stringify(loginData.is_vet));
 							history.push(data.is_vet === "1" ? "/vet" : "/user");
 						} else {
 							// LocalStorage no soportado en este navegador
@@ -43,27 +44,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("Error loading message from backend", error));
 			},
 
-			// getRole: () => {
-			// 	const role = localStorage.getItem("is_vet");
-			// 	console.log(role, "<--- Role");
-			// 	setStore({ role: role });
-			// },
-
 			getToken: () => {
 				const tokenLocal = localStorage.getItem("token");
-				const userLocal = JSON.parse(localStorage.getItem("user"));
-				const firstNameLocal = JSON.parse(localStorage.getItem("first_name"));
+				const firstNameLocal = localStorage.getItem("firstName");
 				const role = localStorage.getItem("is_vet");
+				console.log(firstNameLocal, "FN Local");
 				setStore({
 					role: {
 						token: tokenLocal,
-						user: userLocal,
 						firstName: firstNameLocal,
 						role: role
 					}
 				});
 				console.log("tokenLocal -->", tokenLocal);
-				console.log("userLocal -->", JSON.stringify(userLocal));
+				console.log("firstNameLocal -->", firstNameLocal);
 			},
 
 			sendContactMsg: (name, email, message, role) => {
@@ -97,6 +91,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(data => {
 						setStore({ user: data });
+						console.log(data);
 					})
 					.catch(error => {
 						console.log(error);

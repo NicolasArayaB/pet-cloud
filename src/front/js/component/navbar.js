@@ -31,13 +31,11 @@ export const MyNavbar = props => {
 								<HomeNavInfo />
 							</Col>
 							<Col sm={2}>
-								{store.login.token != null ? (
+								{store.role.token != null ? (
 									<Dropdown>
-										<Dropdown.Toggle id="loggedButton">
-											Hola {store.login.first_name}
-										</Dropdown.Toggle>
+										<Dropdown.Toggle id="loggedButton">Hola {store.role.firstName}</Dropdown.Toggle>
 										<Dropdown.Menu>
-											<Dropdown.Item href="/" onClick={localStorage.clear()}>
+											<Dropdown.Item href="/" onClick={() => localStorage.clear()}>
 												Cerrar sesión
 											</Dropdown.Item>
 										</Dropdown.Menu>
