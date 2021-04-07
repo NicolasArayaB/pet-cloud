@@ -1,39 +1,46 @@
 import React from "react";
 import { Table } from "react-bootstrap";
+import PropTypes from "prop-types";
 
-const Checkup = () => {
+const Checkup = props => {
+	let date = "";
+
+	if (props.observations.update != undefined) {
+		date = props.observations.update
+			.split("-")
+			.reverse()
+			.join("-");
+	}
 	return (
 		<Table bordered hover>
 			<thead className="table-secondary">
 				<tr>
 					<th>Ultimo Control</th>
-					<th>15/03/2021</th>
+					<th>{date}</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<th>Motivo: </th>
-					<th>Control sano</th>
-				</tr>
-				<tr>
 					<th>Peso: </th>
-					<th>15 kg</th>
+					<th>{props.observations.weight}</th>
 				</tr>
 				<tr>
 					<th>Enfermedades: </th>
-					<th>Ninguna</th>
+					<th>{props.condition}</th>
 				</tr>
 				<tr>
-					<th>Esterelizado: </th>
-					<th>No</th>
-				</tr>
-				<tr>
-					<th>Observaciones: </th>
-					<th>Esta sano</th>
+					<th>Estado reproductivo: </th>
+					<th>{props.genderStatus}</th>
 				</tr>
 			</tbody>
 		</Table>
 	);
+};
+
+Checkup.propTypes = {
+	condition: PropTypes.string,
+	observations: PropTypes.object,
+	genderStatus: PropTypes.string
 };
 
 export default Checkup;

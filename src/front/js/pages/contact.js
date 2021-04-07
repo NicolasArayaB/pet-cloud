@@ -1,48 +1,77 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import React, { useState, useContext } from "react";
+import { Container, Row, Col, Form, Button, Toast } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const Contact = () => {
+	const { actions } = useContext(Context);
+
 	const [validated, setValidated] = useState(false);
+	const [showToast, setShowToast] = useState(false);
+	const [redirect, setRedirect] = useState(false);
+
+	const toggleShowToast = () => setShowToast(!showToast);
 
 	const handleSubmit = event => {
-		const form = event.currentTarget;
-		if (form.checkValidity() === false) {
-			event.preventDefault();
-			event.stopPropagation();
-		}
+		event.preventDefault();
 
-		setValidated(true);
+		const form = event.target;
+		const role = form.roleFormControl.value;
+		const name = form.nameFormControl.value;
+		const email = form.emailFormControl.value;
+		const message = form.messageFormControl.value;
+
+		if (form.checkValidity() === false) {
+			event.stopPropagation();
+		} else {
+			setValidated(true);
+			actions.sendContactMsg(name, email, message, role);
+			toggleShowToast();
+		}
 	};
+
+	const closeTost = () => {
+		toggleShowToast();
+		setRedirect(true);
+	};
+
 	return (
 		<Container>
+			{redirect ? <Redirect to="/" /> : ""}
 			<Row className="justify-content-center">
 				<Col xs={12} md={6}>
+					<Toast show={showToast} onClose={closeTost} className="mt-4 mx-auto">
+						<Toast.Header>
+							<strong className="mr-auto">Muchas gracias</strong>
+						</Toast.Header>
+						<Toast.Body>Responderemos a tu consulta a la brevedad</Toast.Body>
+					</Toast>
 					<Form noValidate validated={validated} onSubmit={handleSubmit}>
-						<Form.Group controlId="exampleForm.ControlSelect1">
+						<Form.Group controlId="roleFormControl">
 							<Form.Label style={{ marginTop: "40px" }}>Selecciona tu perfil</Form.Label>
-							<Form.Control as="select">
+							<Form.Control as="select" name="role">
 								<option>Soy Veterinario</option>
 								<option>Soy Dueño de mascota</option>
 							</Form.Control>
 						</Form.Group>
-						<Form.Group controlId="validationCustom02">
-							<Form.Control required type="text" placeholder="Ingresa tu Nombre y Apellido" />
+						<Form.Group controlId="nameFormControl">
+							<Form.Control name="Name" required type="text" placeholder="Ingresa tu Nombre y Apellido" />
 							<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
 						</Form.Group>
-						<Form.Group controlId="exampleForm.ControlInput1">
-							<Form.Control type="email" placeholder="Ingresa tu mail: nombre@ejemplo.com" required />
+						<Form.Group controlId="emailFormControl">
+							<Form.Control
+								name="email"
+								type="email"
+								placeholder="Ingresa tu mail: nombre@ejemplo.com"
+								required
+							/>
 							<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
 						</Form.Group>
-						<Form.Group controlId="exampleForm.ControlTextarea1">
-							<Form.Label>Cuentanos de Tu problema</Form.Label>
-							<Form.Control as="textarea" rows={3} required />
+						<Form.Group controlId="messageFormControl">
+							<Form.Label>Cuéntanos de Tu problema</Form.Label>
+							<Form.Control name="message" as="textarea" rows={3} required />
 						</Form.Group>
-						<Button
-							variant="outline-secondary"
-							style={{ backgroundColor: "#66b9bf", border: 0 }}
-							size="lg"
-							block
-							type="submit">
+						<Button className="petBtn" size="lg" block type="submit">
 							Enviar
 						</Button>
 					</Form>

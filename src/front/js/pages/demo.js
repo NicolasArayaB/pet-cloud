@@ -6,12 +6,12 @@ import { Context } from "../store/appContext";
 import "../../styles/demo.scss";
 
 export const Demo = () => {
-	const { store, actions } = useContext(Context);
+	// const { store, actions } = useContext(Context);
 
 	return (
 		<div className="container">
 			<ul className="list-group">
-				{store.demo.map((item, index) => {
+				{/* {store.demo.map((item, index) => {
 					return (
 						<li
 							key={index}
@@ -20,8 +20,8 @@ export const Demo = () => {
 							<Link to={"/single/" + index}>
 								<span>Link to: {item.title}</span>
 							</Link>
-							{// Conditional render example
-							// Check to see if the background is orange, if so, display the message
+                            {
+                            
 							item.background === "orange" ? (
 								<p style={{ color: item.initial }}>
 									Check store/flux.js scroll to the actions to see the code
@@ -32,7 +32,7 @@ export const Demo = () => {
 							</button>
 						</li>
 					);
-				})}
+				})} */}
 			</ul>
 			<br />
 			<Link to="/">

@@ -10,12 +10,12 @@ const HomeNavInfo = () => {
 				</Nav.Link>
 			</Nav.Item>
 			<Nav.Item>
-				<Nav.Link href="#" className="mx-4">
+				<Nav.Link href="/services" className="mx-4">
 					Nuestros Servicios
 				</Nav.Link>
 			</Nav.Item>
 			<Nav.Item>
-				<Nav.Link href="/contactanos">Contactanos</Nav.Link>
+				<Nav.Link href="/contact-us">Contáctanos</Nav.Link>
 			</Nav.Item>
 		</Nav>
 	);

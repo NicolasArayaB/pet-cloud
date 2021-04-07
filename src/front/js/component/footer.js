@@ -7,12 +7,12 @@ export const Footer = () => (
 			Home
 		</Link>
 		<span className="footerLink">|</span>
-		<Link to="/" className="footerLink">
+		<Link to="/services" className="footerLink">
 			Servicios
 		</Link>
 		<span className="footerLink">|</span>
-		<Link to="/contactanos" className="footerLink">
-			Contactanos
+		<Link to="/contact-us" className="footerLink">
+			Contáctanos
 		</Link>
 	</footer>
 );

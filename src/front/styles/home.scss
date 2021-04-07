@@ -2,10 +2,21 @@ body, html {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-h1 {
-    color: #66B9BF
+.carrusel-images {
+   background-size: cover;
+   border: 2px solid #e37222;
+   border-radius: 5px;
+   height: 160px;
+   overflow: scroll;  
+   resize: both; 
+   width: 1000px; 
 }
 
-.button-card {
-   color:rgb(19, 17, 17);
+h1   {
+    color: #66B9BF;
+    font-weight: bolder;
+}
+
+.brand-title   {
+    color: #66B9BF;  
 }
