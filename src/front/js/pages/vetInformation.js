@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
@@ -12,6 +13,7 @@ const VetInfo = props => {
 
 	useEffect(async () => {
 		await actions.getPetById(chip);
+		await console.log(chip, "chip");
 	}, []);
 
 	return (
@@ -22,7 +24,9 @@ const VetInfo = props => {
 					<h2>{store.pets.name}</h2>
 				</Col>
 				<Col>
-					<Button className="petBtn float-right">Nuevo Control</Button>
+					<Link to={{ pathname: "/checkup", state: { chip: chip } }}>
+						<Button className="petBtn float-right">Nuevo Control</Button>
+					</Link>
 				</Col>
 			</Row>
 			<Row className="m-3">

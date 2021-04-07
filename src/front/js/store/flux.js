@@ -9,7 +9,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			petById: {},
 			vaccines: {},
 			role: [],
-			userPets: []
+			userPets: [],
+			id: []
 		},
 
 		actions: {
@@ -93,6 +94,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(error);
 					});
 			},
+			getIdByChip: async id => {
+				const request = await fetch(`https://fhir.cens.cl/baseR4/Patient?identifier=${parseInt(id)}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				});
+				const data = await request.json();
+				const petId = data.entry[0].resource.id;
+				setStore({ id: petId.split("-")[1] });
+			},
 
 			getPetById: async id => {
 				const request = await fetch(`https://fhir.cens.cl/baseR4/Patient?identifier=${parseInt(id)}`, {
@@ -131,6 +141,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
+			newPetCondition: (id, cond) => {
+				const condData = {
+					resourceType: "Condition",
+					clinicalStatus: {
+						coding: [
+							{
+								system: "http://terminology.hl7.org/CodeSystem/condition-clinical",
+								code: "active"
+							}
+						]
+					},
+					code: {
+						coding: [
+							{
+								system: "http://snomed.info/sct",
+								display: cond
+							}
+						],
+						text: cond
+					},
+					subject: {
+						reference: `Patient/PET-${id}`
+					}
+				};
+
+				fetch("https://fhir.cens.cl/baseR4/Condition/", {
+					method: "POST",
+					headers: { "Context-type": "application/json" }
+				})
+					.then(data => data.json())
+					.then(data => console.log(data, "cond data"));
+			},
+
 			getPetObservation: id => {
 				fetch(`https://fhir.cens.cl/baseR4/Observation/INF-${id}`, {
 					method: "GET",
@@ -147,6 +190,50 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
+			newPetObservation: (id, weight, unit) => {
+				const obsData = {
+					resourceType: "Observation",
+					status: "final",
+					category: [
+						{
+							coding: [
+								{
+									system: "http://terminology.hl7.org/CodeSystem/observation-category",
+									code: "vital-signs",
+									display: "Signos Vitales"
+								}
+							]
+						}
+					],
+					code: {
+						coding: [
+							{
+								system: "http://loinc.org",
+								code: "8302-2",
+								display: "Peso"
+							}
+						]
+					},
+					subject: {
+						reference: `Patient/PET-${id}`
+					},
+					effectiveDateTime: "2021-07-02",
+					valueQuantity: {
+						value: weight,
+						unit: unit,
+						system: "http://unitsofmeasure.org"
+					}
+				};
+
+				fetch("https://fhir.cens.cl/baseR4/Observation/", {
+					method: "POST",
+					headers: { "Content-type": "application/json" },
+					body: obsData
+				})
+					.then(response => response.json())
+					.then(data => console.log(data, "weight"));
+			},
+
 			getPetVaccines: id => {
 				fetch(`https://fhir.cens.cl/baseR4/Immunization/VAC-${id}`, {
 					method: "GET",
@@ -160,6 +247,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 						};
 						setStore({ vaccines: vaccine });
 					});
+			},
+
+			newPetVaccine: (id, vaccine, value) => {
+				const vacData = {
+					resourceType: "Immunization",
+					status: "completed",
+					vaccineCode: {
+						coding: [
+							{
+								system: "http://hl7.org/fhir/sid/cvx",
+								code: "40"
+							}
+						],
+						text: vaccine
+					},
+					patient: {
+						reference: `Patient/PET-${id}`
+					},
+					occurrenceDateTime: "2020-01-10",
+					doseQuantity: {
+						value: value,
+						system: "http://unitsofmeasure.org",
+						code: "UI"
+					}
+				};
+				fetch("https://fhir.cens.cl/baseR4/Immunization/", {
+					method: "POST",
+					headers: { "Content-type": "application/json" },
+					body: vacData
+				})
+					.then(data => data.json())
+					.then(data => console.log(data, "vaccines"));
 			},
 
 			getPetInformation: pets => {
@@ -190,6 +309,110 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(error);
 					});
 			},
+
+			// updateGenderStatus: (id, status) => {
+			//     const updateData = {
+			//         "resourceType": "Patient",
+			//         "id": `PET-${id}`,
+			//         "extension": [
+			//             {
+			//                 "url": "http://hl7.org/fhir/StructureDefinition/patient-animal",
+			//                 "extension": [
+			//                     {
+			//                         "url": "species",
+			//                         "valueCodeableConcept": {
+			//                             "coding": [
+			//                                 {
+			//                                     "system": "http://hl7.org/fhir/animal-species",
+			//                                     "display": "Dog"
+			//                                 }
+			//                             ]
+			//                         }
+			//                     },
+			//                     {
+			//                         "url": "breed",
+			//                         "valueCodeableConcept": {
+			//                             "coding": [
+			//                                 {
+			//                                     "system": "http://snomed.info/sct",
+			//                                     "code": "132462005",
+			//                                     "display": "perro viejo pastor alemán"
+			//                                 }
+			//                             ]
+			//                         }
+			//                     },
+			//                     {
+			//                         "url": "genderStatus",
+			//                         "valueCodeableConcept": {
+			//                             "coding": [
+			//                                 {
+			//                                     "system": "http://hl7.org/fhir/animal-genderstatus",
+			//                                     "code": "intact"
+			//                                 }
+			//                             ]
+			//                         }
+			//                     }
+			//                 ]
+			//             }
+			//         ],
+			//         "identifier": [
+			//             {
+			//                 "type": {
+			//                     "text": "CHIP identifier"
+			//                 },
+			//                 "system": "https://registratumascota.cl",
+			//                 "value": "345678901234567",
+			//                 "period": {
+			//                     "start": "2015-05-31"
+			//                 }
+			//             }
+			//         ],
+			//         "name": [
+			//             {
+			//                 "given": [
+			//                     "Brunito"
+			//                 ]
+			//             }
+			//         ],
+			//         "gender": "male",
+			//         "birthDate": "2010-02-11",
+			//         "contact": [
+			//             {
+			//                 "name": {
+			//                     "extension": [
+			//                         {
+			//                             "url": "http://hl7.org/fhir/StructureDefinition/humanname-father-family",
+			//                             "valueString": "Ramirez"
+			//                         },
+			//                         {
+			//                             "url": "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family",
+			//                             "valueString": "Hernandez"
+			//                         }
+			//                     ],
+			//                     "given": [
+			//                         "Fernando"
+			//                     ]
+			//                 },
+			//                 "telecom": [
+			//                     {
+			//                         "system": "phone",
+			//                         "value": "90538592",
+			//                         "use": "work"
+			//                     },
+			//                     {
+			//                         "system": "email",
+			//                         "value": "fernando@gmail.com"
+			//                     }
+			//                 ],
+			//                 "address": {
+			//                     "line": [
+			//                         "Saturno 345, Puerto Montt, Chile"
+			//                     ]
+			//                 }
+			//             }
+			//         ]
+			//     }
+			// }
 
 			getPets: () => {
 				const selectPets = pets => {
