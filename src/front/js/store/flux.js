@@ -9,7 +9,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			petById: {},
 			vaccines: {},
 			role: {},
-			userPets: []
+			userPets: [],
+			id: []
 		},
 
 		actions: {
@@ -42,12 +43,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.log("Error loading message from backend", error));
 			},
-
-			// getRole: () => {
-			// 	const role = localStorage.getItem("is_vet");
-			// 	console.log(role, "<--- Role");
-			// 	setStore({ role: role });
-			// },
 
 			getToken: () => {
 				const tokenLocal = localStorage.getItem("token");
@@ -102,6 +97,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(error);
 					});
 			},
+			getIdByChip: async id => {
+				const request = await fetch(`https://fhir.cens.cl/baseR4/Patient?identifier=${parseInt(id)}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				});
+				const data = await request.json();
+				const petId = data.entry[0].resource.id;
+				setStore({ id: petId.split("-")[1] });
+			},
 
 			getPetById: async id => {
 				const request = await fetch(`https://fhir.cens.cl/baseR4/Patient?identifier=${parseInt(id)}`, {
@@ -146,6 +150,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
+			newPetCondition: (id, cond) => {
+				const condData = {
+					resourceType: "Condition",
+					clinicalStatus: {
+						coding: [
+							{
+								system: "http://terminology.hl7.org/CodeSystem/condition-clinical",
+								code: "active"
+							}
+						]
+					},
+					code: {
+						coding: [
+							{
+								system: "http://snomed.info/sct",
+								display: cond
+							}
+						],
+						text: cond
+					},
+					subject: {
+						reference: `Patient/PET-${id}`
+					}
+				};
+
+				fetch("https://fhir.cens.cl/baseR4/Condition/", {
+					method: "POST",
+					headers: { "Content-type": "application/json" },
+					body: JSON.stringify(condData)
+				})
+					.then(data => data.json())
+					.then(data => console.log(data, "cond data"))
+					.catch(error => console.log(error));
+			},
+
 			getPetObservation: id => {
 				fetch(`https://fhir.cens.cl/baseR4/Observation/INF-${id}`, {
 					method: "GET",
@@ -162,6 +201,50 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
+			newPetObservation: (id, weight, unit) => {
+				const obsData = {
+					resourceType: "Observation",
+					status: "final",
+					category: [
+						{
+							coding: [
+								{
+									system: "http://terminology.hl7.org/CodeSystem/observation-category",
+									code: "vital-signs",
+									display: "Signos Vitales"
+								}
+							]
+						}
+					],
+					code: {
+						coding: [
+							{
+								system: "http://loinc.org",
+								code: "8302-2",
+								display: "Peso"
+							}
+						]
+					},
+					subject: {
+						reference: `Patient/PET-${id}`
+					},
+					effectiveDateTime: "2021-07-02",
+					valueQuantity: {
+						value: weight,
+						unit: unit,
+						system: "http://unitsofmeasure.org"
+					}
+				};
+
+				fetch("https://fhir.cens.cl/baseR4/Observation/", {
+					method: "POST",
+					headers: { "Content-type": "application/json" },
+					body: JSON.stringify(obsData)
+				})
+					.then(response => response.json())
+					.then(data => console.log(data, "weight"));
+			},
+
 			getPetVaccines: id => {
 				fetch(`https://fhir.cens.cl/baseR4/Immunization/VAC-${id}`, {
 					method: "GET",
@@ -175,6 +258,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 						};
 						setStore({ vaccines: vaccine });
 					});
+			},
+
+			newPetVaccine: (id, vaccine, value) => {
+				const vacData = {
+					resourceType: "Immunization",
+					status: "completed",
+					vaccineCode: {
+						coding: [
+							{
+								system: "http://hl7.org/fhir/sid/cvx",
+								code: "40"
+							}
+						],
+						text: vaccine
+					},
+					patient: {
+						reference: `Patient/PET-${id}`
+					},
+					occurrenceDateTime: "2020-01-10",
+					doseQuantity: {
+						value: value,
+						system: "http://unitsofmeasure.org",
+						code: "UI"
+					}
+				};
+				fetch("https://fhir.cens.cl/baseR4/Immunization/", {
+					method: "POST",
+					headers: { "Content-type": "application/json" },
+					body: JSON.stringify(vacData)
+				})
+					.then(data => data.json())
+					.then(data => console.log(data, "vaccines"));
 			},
 
 			getPetInformation: pets => {
