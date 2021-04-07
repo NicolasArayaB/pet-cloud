@@ -1,17 +1,16 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Container, Row, Col, Button, DropdownButton, Dropdown } from "react-bootstrap";
-
 import { Context } from "../store/appContext";
 import HomeNavInfo from "./homeNavInfo";
 import LoginModal from "./login/loginModal";
 
-export const MyNavbar = () => {
+export const MyNavbar = props => {
 	const [show, setShow] = useState(false);
-	const { store, actions } = useContext(Context);
+	const { store } = useContext(Context);
 
 	const handleShow = () => setShow(!show);
-
+	console.log("estamos esperando el history", history);
 	return (
 		<>
 			<LoginModal show={show} close={handleShow} />

@@ -26,7 +26,7 @@ const PetPhoto = props => {
 							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
 							style={{ width: "12rem" }}
 						/>
-						<ListGroup variant="flush">
+						<ListGroup className="pets-list" variant="list-group-flush">
 							<ListGroup.Item>{props.name}</ListGroup.Item>
 						</ListGroup>
 					</Card.Link>

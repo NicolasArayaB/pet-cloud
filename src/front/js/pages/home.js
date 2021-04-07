@@ -23,13 +23,13 @@ export const Home = () => {
 	// };
 
 	// useEffect(() => {
-	// 	actions.getRole();
+	// 	actions.getToken();
 	// 	console.log(store.role);
 	// }, []);
 
 	return (
 		<div className="text-center mt-3">
-			<h1>Bienvenido a PetCloud</h1>
+			<h1 className="brand-title">Bienvenido a PetCloud</h1>
 			<CarouselVet />
 			<Container>
 				<Row className="mx-5">

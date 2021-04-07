@@ -12,21 +12,19 @@ function User() {
 	}, []);
 
 	return (
-		<div>
-			<Container>
-				<h1 className="titlePet">Tus Mascotas registradas</h1>
-				{store.userPets.map((item, index) => {
-					return (
-						<PetPhoto
-							// {name  userPets.name},
-							// {identifier userPets.identifier}
-							key={index}
-							{...item}
-						/>
-					);
-				})}
-			</Container>
-		</div>
+		<Container>
+			<h1 className="titlePet">Tus Mascotas registradas</h1>
+			{store.userPets.map((item, index) => {
+				return (
+					<PetPhoto
+						// {name  userPets.name},
+						// {identifier userPets.identifier}
+						key={index}
+						{...item}
+					/>
+				);
+			})}
+		</Container>
 	);
 }
 

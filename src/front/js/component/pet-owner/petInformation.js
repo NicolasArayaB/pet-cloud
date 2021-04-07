@@ -5,20 +5,24 @@ import PropTypes from "prop-types";
 
 export const PetInformation = props => {
 	const { store, actions } = useContext(Context);
-	const chip = props.location.state.chip_identifier;
+	const chip = props.location.state.chip;
 
 	useEffect(async () => {
+		// await actions.getPetInformation(chip);
 		await actions.getPetById(chip);
 	}, []);
 
 	return (
 		<Container>
 			<span>{JSON.stringify(store.pets)}</span>
+			<span>{JSON.stringify(store.petById)}</span>
+			<span>{JSON.stringify(store.userPets)}</span>
 			<Row className="text-center">
 				<Col xs={12} md={12}>
 					<h2 className="nombre mt-4">Hola {store.pets.name} </h2>
 					<Image
-						src="https://images.all-free-download.com/images/graphiclarge/dog_icons_vector_281192.jpg"
+						// src="https://images.all-free-download.com/images/graphiclarge/dog_icons_vector_281192.jpg"
+						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
 						style={{ height: "200px" }}
 						roundedCircle
 					/>
@@ -101,7 +105,13 @@ export const PetInformation = props => {
 										<Form.Control
 											type="text"
 											name="userPetOwner"
-											value={store.pets.petOwner_name + " " + store.pets.petOwner_father}
+											value={
+												store.pets.petOwner_name +
+												" " +
+												store.pets.petOwner_father +
+												" " +
+												store.pets.petOwner_mother
+											}
 										/>
 									</Col>
 								</Form.Group>

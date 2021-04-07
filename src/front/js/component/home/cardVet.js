@@ -5,7 +5,7 @@ import "../../../styles/home.scss";
 const CardVet = () => {
 	return (
 		<Card border="0" className="mx-auto" style={{ width: "20rem", backgroundColor: "", marginTop: "20px" }}>
-			<Card.Header className="bg-danger" style={{ color: "white" }}>
+			<Card.Header className="bg-danger" style={{ color: "white", borderRadius: "40px" }}>
 				¿No tienes el historial de las mascotas que atiendes?
 			</Card.Header>
 			<Card.Img
