@@ -67,8 +67,8 @@ def login():
     access_token = create_access_token(identity=user.email, expires_delta=expiration)
 
     data = {
-        "user": user.serialize(),
         "token": access_token,
+        "user": user.serialize(),
         "expires": expiration.total_seconds()*1000,
         "first_name": user.first_name,
         "is_vet": user.is_vet
