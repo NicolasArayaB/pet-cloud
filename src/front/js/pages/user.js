@@ -15,14 +15,7 @@ function User() {
 		<Container>
 			<h1 className="titlePet">Tus Mascotas registradas</h1>
 			{store.userPets.map((item, index) => {
-				return (
-					<PetPhoto
-						// {name  userPets.name},
-						// {identifier userPets.identifier}
-						key={index}
-						{...item}
-					/>
-				);
+				return <PetPhoto key={index} {...item} />;
 			})}
 		</Container>
 	);

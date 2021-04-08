@@ -19,7 +19,7 @@ function ServicesMain() {
 					</Col>
 					<CardInfo />
 				</Row>
-				<Row className="mt-5">
+				<Row className="mt-5 pb-5">
 					<CardInfoVet />
 					<Col className="pt-5">
 						<h2>¿Eres medico veterinario?</h2>

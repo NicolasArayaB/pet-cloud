@@ -69,7 +69,7 @@ export const RegisterView = () => {
 				<Toast.Body>{toastMsg}</Toast.Body>
 			</Toast>
 			<Form autoComplete="off" className="p-5 text-center">
-				<h2>Registrate</h2>
+				<h2>Regístrate</h2>
 				<Form.Control
 					type="text"
 					placeholder="Nombre"
@@ -117,17 +117,11 @@ export const RegisterView = () => {
 					Al hacer clic en Registrate, aceptas nuestras Condiciones, la Política de datos y la Política de
 					cookies.
 				</Form.Text>
-				{/* // 	type="checkbox"
-				// 	label="Soy veterinario"
-				// 	name="isVet"
-				// 	value={1}
-				// 	onChange={e => setIsVet(e.target.value)}
-				// /> */}
 				<Row>
 					<Col xs={12} md={6}>
 						<Form.Check
 							type="radio"
-							label="Soy veterinario"
+							label="Soy Veterinario"
 							name="isVet"
 							value={1}
 							onChange={e => setIsVet(e.target.value)}

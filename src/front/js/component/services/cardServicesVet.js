@@ -26,7 +26,7 @@ const CardInfoVet = () => {
 						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/15-create-services-view/src/front/img/Services6.png"
 						style={{ width: "12rem" }}
 					/>
-					<p style={{ color: "grey" }}>Próximamente: Edita y crea nuevos controles para las mascotas</p>
+					<p style={{ color: "grey" }}>Crea nuevos controles para las mascotas</p>
 				</Col>
 			</Row>
 		</Container>
