@@ -36,6 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							localStorage.setItem("firstName", loginData.firstName);
 							localStorage.setItem("is_vet", JSON.stringify(loginData.is_vet));
 							history.push(data.is_vet === "1" ? "/vet" : "/user");
+							history.go();
 						} else {
 							// LocalStorage no soportado en este navegador
 							alert("Lo sentimos, tu navegador no es compatible.");
