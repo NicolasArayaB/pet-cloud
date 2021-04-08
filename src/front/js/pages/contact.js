@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Button, Toast } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Contact = () => {
+const Contact = () => {
 	const { actions } = useContext(Context);
 
 	const [validated, setValidated] = useState(false);
@@ -36,47 +36,58 @@ export const Contact = () => {
 	};
 
 	return (
-		<Container>
-			{redirect ? <Redirect to="/" /> : ""}
-			<Row className="justify-content-center">
-				<Col xs={12} md={6}>
-					<Toast show={showToast} onClose={closeTost} className="mt-4 mx-auto">
-						<Toast.Header>
-							<strong className="mr-auto">Muchas gracias</strong>
-						</Toast.Header>
-						<Toast.Body>Responderemos a tu consulta a la brevedad</Toast.Body>
-					</Toast>
-					<Form noValidate validated={validated} onSubmit={handleSubmit}>
-						<Form.Group controlId="roleFormControl">
-							<Form.Label style={{ marginTop: "40px" }}>Selecciona tu perfil</Form.Label>
-							<Form.Control as="select" name="role">
-								<option>Soy Veterinario</option>
-								<option>Soy Dueño de mascota</option>
-							</Form.Control>
-						</Form.Group>
-						<Form.Group controlId="nameFormControl">
-							<Form.Control name="Name" required type="text" placeholder="Ingresa tu Nombre y Apellido" />
-							<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
-						</Form.Group>
-						<Form.Group controlId="emailFormControl">
-							<Form.Control
-								name="email"
-								type="email"
-								placeholder="Ingresa tu mail: nombre@ejemplo.com"
-								required
-							/>
-							<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
-						</Form.Group>
-						<Form.Group controlId="messageFormControl">
-							<Form.Label>Cuéntanos de Tu problema</Form.Label>
-							<Form.Control name="message" as="textarea" rows={3} required />
-						</Form.Group>
-						<Button className="petBtn" size="lg" block type="submit">
-							Enviar
-						</Button>
-					</Form>
-				</Col>
-			</Row>
-		</Container>
+		<section className="pb-5 contact">
+			<Container>
+				{redirect ? <Redirect to="/" /> : ""}
+				<Row className="justify-content-center">
+					<Col xs={12} md={6}>
+						<Toast show={showToast} onClose={closeTost} className="mt-4 mx-auto">
+							<Toast.Header>
+								<strong className="mr-auto">Muchas gracias</strong>
+							</Toast.Header>
+							<Toast.Body>Responderemos a tu consulta a la brevedad</Toast.Body>
+						</Toast>
+						<div className="p-3 mt-5 contactContainer">
+							<Form noValidate validated={validated} onSubmit={handleSubmit}>
+								<Form.Group controlId="roleFormControl">
+									<Form.Label className="contactLabel">Selecciona tu perfil</Form.Label>
+									<Form.Control className="contactInput" as="select" name="role">
+										<option>Soy Veterinario</option>
+										<option>Soy Dueño de mascota</option>
+									</Form.Control>
+								</Form.Group>
+								<Form.Group controlId="nameFormControl">
+									<Form.Control
+										name="Name"
+										required
+										type="text"
+										placeholder="Ingresa tu Nombre y Apellido"
+									/>
+									<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
+								</Form.Group>
+								<Form.Group controlId="emailFormControl">
+									<Form.Control
+										name="email"
+										type="email"
+										placeholder="Ingresa tu mail: nombre@ejemplo.com"
+										required
+									/>
+									<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
+								</Form.Group>
+								<Form.Group controlId="messageFormControl">
+									<Form.Label className="contactLabel">Cuéntanos de Tu problema</Form.Label>
+									<Form.Control name="message" as="textarea" rows={3} required />
+								</Form.Group>
+								<Button className="petBtn" size="lg" block type="submit">
+									Enviar
+								</Button>
+							</Form>
+						</div>
+					</Col>
+				</Row>
+			</Container>
+		</section>
 	);
 };
+
+export default Contact;

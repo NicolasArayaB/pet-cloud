@@ -3,22 +3,20 @@ import { Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 
 const CardUser = () => {
 	return (
-		<Card border="0" className="mx-auto" style={{ width: "20rem", backgroundColor: "", marginTop: "20px" }}>
-			<Card.Header className="bg-danger" style={{ color: "white", borderRadius: "40px" }}>
-				¿No tienes todas tus mascotas en línea?
-			</Card.Header>
+		<Card border="0" className="mx-auto mt-5" style={{ width: "20rem", backgroundColor: "transparent" }}>
 			<Card.Img
 				variant="top"
-				src="https://image.flaticon.com/icons/png/512/53/53086.png"
-				style={{ height: "200px" }}
+				src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/18.1-front-proposal/src/front/img/pet-amico.png"
+				style={{ width: "300px" }}
 			/>
 			<Card.Body>
-				<Card.Title style={{ color: "#07889B" }}> Dueñ@ de mascota</Card.Title>
-				<Card.Text />
+				<Card.Title style={{ color: "#66b9bf" }}>Dueño de mascota</Card.Title>
 			</Card.Body>
-			<ListGroup className="list-group-flush" style={{ color: "#E37222" }}>
-				<ListGroupItem>Conoce a tu mascota</ListGroupItem>
-				<ListGroupItem>Próximamente: Revisa sus próximos controles </ListGroupItem>
+			<ListGroup className="list-group-flush" style={{ color: "#66b9bf" }}>
+				<ListGroupItem className="card-li-item">&#10004; Conoce a tu mascota</ListGroupItem>
+				<ListGroupItem className="card-li-item">
+					&#10004; Próximamente: Revisa sus próximos controles{" "}
+				</ListGroupItem>
 			</ListGroup>
 		</Card>
 	);

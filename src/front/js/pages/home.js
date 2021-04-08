@@ -6,26 +6,32 @@ import CardUser from "../component/home/cardUser";
 import "../../styles/home.scss";
 
 import Welcome from "../component/home/welcome";
+import ServicesMain from "../pages/services";
+import Contact from "../pages/contact";
 
 export const Home = () => {
 	return (
-		<div className="text-center">
+		<Container fluid>
 			<Welcome />
-			<Container>
-				<Row className="mx-5">
-					<Col xs={12} md={6} className="mx-auto">
-						<CardVet />
-					</Col>
-					<Col xs={12} md={6}>
-						<CardUser />
-					</Col>
-					<Col>
-						<Button className="petBtn btn-lg my-4" href="/register">
-							Regístrate
-						</Button>
-					</Col>
-				</Row>
-			</Container>
-		</div>
+			<section className="cards">
+				<Container fluid>
+					<Row className="mx-5">
+						<Col xs={12} md={6} className="mx-auto pt-5">
+							<CardVet />
+						</Col>
+						<Col xs={12} md={6} className="mx-auto pt-5">
+							<CardUser />
+						</Col>
+						<Col className="mx-auto py-5">
+							<Button className="petBtn btn-lg my-4" href="/register">
+								Regístrate!
+							</Button>
+						</Col>
+					</Row>
+				</Container>
+			</section>
+			<ServicesMain />
+			<Contact />
+		</Container>
 	);
 };

@@ -13,7 +13,7 @@ export const MyNavbar = props => {
 	return (
 		<>
 			<LoginModal show={show} close={handleShow} />
-			<Navbar collapseOnSelect expand="lg" className="petCloudBar">
+			<Navbar collapseOnSelect expand="lg" className="petCloudBar fixed-top">
 				<Navbar.Brand href="#home">
 					<Link to="/">
 						<img
