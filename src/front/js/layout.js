@@ -7,7 +7,6 @@ import { RegisterView } from "./pages/register";
 import { Vet } from "./pages/vet";
 
 import injectContext, { Context } from "./store/appContext";
-// import { Context } from "./store/appContext";
 import { MyNavbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Contact } from "./pages/contact";

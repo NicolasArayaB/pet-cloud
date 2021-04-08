@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Container, Row, Col, Form, Button, Toast } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
+import "../../styles/contact.scss";
 
 export const Contact = () => {
 	const { actions } = useContext(Context);
@@ -49,7 +50,7 @@ export const Contact = () => {
 					<Form noValidate validated={validated} onSubmit={handleSubmit}>
 						<Form.Group controlId="roleFormControl">
 							<Form.Label style={{ marginTop: "40px" }}>Selecciona tu perfil</Form.Label>
-							<Form.Control as="select" name="role">
+							<Form.Control as="select" name="role" className="role-option">
 								<option>Soy Veterinario</option>
 								<option>Soy Dueño de mascota</option>
 							</Form.Control>

@@ -3,10 +3,12 @@
 }
 
 .search-btn, .search-btn:hover, .search-btn:focus {
-    padding: 0;
     background-color: transparent;
     border-color: transparent;
+    border-radius: 50%;
     box-shadow: none;
+    padding: 0;
+    
 }
 
 #search-addon1 {

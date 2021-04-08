@@ -33,9 +33,14 @@ export const MyNavbar = props => {
 							<Col sm={2}>
 								{store.role.token != null ? (
 									<Dropdown>
-										<Dropdown.Toggle id="loggedButton">Hola {store.role.firstName}</Dropdown.Toggle>
+										<Dropdown.Toggle style={{ color: "#f4eaea" }} id="loggedButton">
+											Hola {store.role.firstName}
+										</Dropdown.Toggle>
 										<Dropdown.Menu>
-											<Dropdown.Item href="/" onClick={() => localStorage.clear()}>
+											<Dropdown.Item
+												style={{ color: "#07889B" }}
+												href="/"
+												onClick={() => localStorage.clear()}>
 												Cerrar sesión
 											</Dropdown.Item>
 										</Dropdown.Menu>

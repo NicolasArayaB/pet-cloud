@@ -34,12 +34,23 @@
     border: 3px black;
 }
 
-.petBtn, .petBtn:hover, .petBtn:focus {
+.petBtn, .petBtn:focus {
     background-color: #66b9bf !important;
     border-color: #66b9bf;
     color: black;
+    border: 2px solid;
     box-shadow: none;
+    text-decoration:none;
+    transition-duration: 0.4s;
 }
+
+
+.petBtn:hover {
+  background-color: #66b9bf;
+  color: white;
+}
+
+
 
 .petCloudBar{
     background-color: #e37222 !important;

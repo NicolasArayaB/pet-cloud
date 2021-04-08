@@ -10,22 +10,6 @@ import "../../styles/home.scss";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	//const [auth, setAuth] = useState("");
-
-	// const handleRoute = () => {
-	// 	if (store.role == "1") {
-	// 		return "/vet";
-	// 	} else if (store.role == "0") {
-	// 		return "/user";
-	// 	} else {
-	// 		return "/";
-	// 	}
-	// };
-
-	// useEffect(() => {
-	// 	actions.getToken();
-	// 	console.log(store.role);
-	// }, []);
 
 	return (
 		<div className="text-center mt-3">

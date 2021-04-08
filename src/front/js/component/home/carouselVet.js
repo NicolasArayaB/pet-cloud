@@ -14,8 +14,8 @@ const CarouselVet = () => {
 						style={{ height: "500px" }}
 					/>
 					<Carousel.Caption>
-						<h3>Trabaja sin preocupaciones</h3>
-						<p>Tu Veterinario se encarga de la atención de tu mascota, no de los registros clínicos.</p>
+						<h2>Trabaja sin preocupaciones</h2>
+						<h5>Tu Veterinario se encarga de la atención de tu mascota, no de los registros clínicos.</h5>
 					</Carousel.Caption>
 				</Carousel.Item>
 				<Carousel.Item>
@@ -27,8 +27,8 @@ const CarouselVet = () => {
 					/>
 
 					<Carousel.Caption>
-						<h3>Tu mascota feliz</h3>
-						<p>Disfruta más la vida, la historia clínica de tu mascota esta en línea.</p>
+						<h2>Tu mascota feliz</h2>
+						<h5>Disfruta más la vida, la historia clínica de tu mascota esta en línea.</h5>
 					</Carousel.Caption>
 				</Carousel.Item>
 				<Carousel.Item>
@@ -40,8 +40,8 @@ const CarouselVet = () => {
 					/>
 
 					<Carousel.Caption>
-						<h3>Trabaja sin preocupaciones</h3>
-						<p>El Veterinario se encarga de la atención de tu mascota, no de los registros.</p>
+						<h2>Trabaja sin preocupaciones</h2>
+						<h5>El Veterinario se encarga de la atención de tu mascota, no de los registros.</h5>
 					</Carousel.Caption>
 				</Carousel.Item>
 			</Carousel>
