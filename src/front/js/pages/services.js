@@ -6,23 +6,27 @@ import "../../styles/services.scss";
 
 function ServicesMain() {
 	return (
-		<div className="centerElements">
-			<Container>
-				<Row className="justify-content-center my-4">
-					<Col xs={12} md={4}>
-						<h1>Servicios</h1>
-						<h2>¿Eres dueño de mascota?</h2>
+		<section className="services pt-5 justify-content-center">
+			<Container fluid>
+				<Row>
+					<Col>
+						<h1 className="my-5">Servicios</h1>
+					</Col>
+				</Row>
+				<Row>
+					<Col className="pt-5 order-xs-1">
+						<h2 className="mt-2">¿Eres dueño de mascota?</h2>
 					</Col>
 					<CardInfo />
 				</Row>
-				<Row className="justify-content-center">
-					<Col xs={12} md={4}>
-						<h2>¿Eres veterinaria?</h2>
-					</Col>
+				<Row className="mt-5 pb-5">
 					<CardInfoVet />
+					<Col className="pt-5">
+						<h2>¿Eres medico veterinario?</h2>
+					</Col>
 				</Row>
 			</Container>
-		</div>
+		</section>
 	);
 }
 

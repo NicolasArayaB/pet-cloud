@@ -33,7 +33,6 @@ const Layout = () => {
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<MyNavbar />
-					<span>{JSON.stringify(store.role)}</span>
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route exact path="/register" component={RegisterView} />

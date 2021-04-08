@@ -10,11 +10,10 @@ export const MyNavbar = props => {
 	const { store } = useContext(Context);
 
 	const handleShow = () => setShow(!show);
-	console.log("estamos esperando el history", history);
 	return (
 		<>
 			<LoginModal show={show} close={handleShow} />
-			<Navbar collapseOnSelect expand="lg" className="petCloudBar" variant="light">
+			<Navbar collapseOnSelect expand="lg" className="petCloudBar fixed-top">
 				<Navbar.Brand href="#home">
 					<Link to="/">
 						<img
@@ -30,7 +29,7 @@ export const MyNavbar = props => {
 							<Col sm={10} className="d-flex justify-content-center">
 								<HomeNavInfo />
 							</Col>
-							<Col sm={2}>
+							<Col sm={2} className="pt-3">
 								{store.role.token != null ? (
 									<Dropdown>
 										<Dropdown.Toggle id="loggedButton">Hola {store.role.firstName}</Dropdown.Toggle>

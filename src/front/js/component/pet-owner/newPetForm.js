@@ -328,7 +328,7 @@ const NewPetForm = () => {
 				<Row>
 					<Col xs={12} md={6}>
 						<Button className="petBtn" type="submit" size="lg" onClick={handleSubmit}>
-							Crear nueva mascota
+							Registrar una nueva mascota
 						</Button>
 					</Col>
 					<Col xs={12} md={6}>
