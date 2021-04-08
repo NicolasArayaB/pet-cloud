@@ -6,7 +6,7 @@ import "../../styles/services.scss";
 
 function ServicesMain() {
 	return (
-		<section className="services p-5">
+		<section className="services pt-5 justify-content-center">
 			<Container fluid>
 				<Row>
 					<Col>
@@ -14,8 +14,8 @@ function ServicesMain() {
 					</Col>
 				</Row>
 				<Row>
-					<Col className="pt-5">
-						<h2>¿Eres dueño de mascota?</h2>
+					<Col className="pt-5 order-xs-1">
+						<h2 className="mt-2">¿Eres dueño de mascota?</h2>
 					</Col>
 					<CardInfo />
 				</Row>

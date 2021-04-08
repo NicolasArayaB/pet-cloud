@@ -36,8 +36,8 @@ const Contact = () => {
 	};
 
 	return (
-		<section className="pb-5 contact">
-			<Container>
+		<section className="py-5 contact">
+			<Container fluid>
 				{redirect ? <Redirect to="/" /> : ""}
 				<Row className="justify-content-center">
 					<Col xs={12} md={6}>
