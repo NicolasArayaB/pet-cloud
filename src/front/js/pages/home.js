@@ -8,29 +8,16 @@ import CardVet from "../component/home/cardVet";
 import CardUser from "../component/home/cardUser";
 import "../../styles/home.scss";
 
+import Welcome from "../component/home/welcome";
+
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	//const [auth, setAuth] = useState("");
-
-	// const handleRoute = () => {
-	// 	if (store.role == "1") {
-	// 		return "/vet";
-	// 	} else if (store.role == "0") {
-	// 		return "/user";
-	// 	} else {
-	// 		return "/";
-	// 	}
-	// };
-
-	// useEffect(() => {
-	// 	actions.getToken();
-	// 	console.log(store.role);
-	// }, []);
 
 	return (
 		<div className="text-center mt-3">
 			<h1 className="brand-title">Bienvenido a PetCloud</h1>
-			<CarouselVet />
+			{/* <CarouselVet /> */}
+			<Welcome />
 			<Container>
 				<Row className="mx-5">
 					<Col xs={12} md={6} className="mx-auto">
