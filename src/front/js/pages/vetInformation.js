@@ -19,7 +19,7 @@ const VetInfo = props => {
 			<Row className="m-3">
 				<Col />
 				<Col className="text-center">
-					<h2>{store.pets.name}</h2>
+					<h2>{store.petById.name}</h2>
 				</Col>
 				<Col>
 					<Link to={{ pathname: "/checkup", state: { chip: chip } }}>

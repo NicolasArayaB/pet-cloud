@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			conditions: [],
+			conditions: {},
 			login: [],
 			users: [],
 			observations: {},
@@ -118,6 +118,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const dataPets = {
 					id: data.entry[0].resource.id,
 					name: data.entry[0].resource.name[0].given[0],
+					chip: data.entry[0].resource.identifier[0].value,
 					species: data.entry[0].resource.extension[0].extension[0].valueCodeableConcept.coding[0].display,
 					breed: data.entry[0].resource.extension[0].extension[1].valueCodeableConcept.coding[0].display,
 					gender: data.entry[0].resource.gender,
@@ -146,9 +147,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => response.json())
 					.then(data => {
-						const store = getStore();
-						const condition = data.code.coding[0].display;
-						setStore({ conditions: [...store.conditions, condition] });
+						if (!data.issue) {
+							const store = getStore();
+							const condition = data.code.coding[0].display;
+							setStore({ conditions: condition });
+						} else setStore({ conditions: "" });
 					});
 			},
 
@@ -194,12 +197,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => response.json())
 					.then(data => {
-						const lastUpdate = data.meta.lastUpdated.split("T");
-						const obsData = {
-							update: lastUpdate[0],
-							weight: data.valueQuantity.value + " " + data.valueQuantity.unit
-						};
-						setStore({ observations: obsData });
+						if (!data.issue) {
+							const lastUpdate = data.meta.lastUpdated.split("T");
+							const obsData = {
+								update: lastUpdate[0],
+								weight: data.valueQuantity.value + " " + data.valueQuantity.unit
+							};
+							setStore({ observations: obsData });
+						} else setStore({ observations: { update: "", weight: "" } });
 					});
 			},
 
@@ -254,11 +259,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => response.json())
 					.then(data => {
-						const vaccine = {
-							vaccine: data.vaccineCode.text,
-							date: data.occurrenceDateTime
-						};
-						setStore({ vaccines: vaccine });
+						if (!data.issue) {
+							const vaccine = {
+								vaccine: data.vaccineCode.text,
+								date: data.occurrenceDateTime
+							};
+							setStore({ vaccines: vaccine });
+						} else setStore({ vaccines: { vaccine: "", date: "" } });
 					});
 			},
 
@@ -317,6 +324,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							email: data.contact[0].telecom[1].value
 						};
 						setStore({ pets: dataPets });
+						console.log(dataPets.name);
 					})
 					.catch(error => {
 						console.log(error);

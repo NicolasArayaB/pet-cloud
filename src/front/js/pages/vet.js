@@ -11,6 +11,13 @@ export const Vet = () => {
 	return (
 		<Container className="search-form">
 			{redirect ? <Redirect to={{ pathname: "/vet/id", state: { chip: chip } }} /> : ""}
+			<Row className="text-right">
+				<Col>
+					<Button className="petBtn new-pet" href="/newPet">
+						Nueva Mascota
+					</Button>
+				</Col>
+			</Row>
 			<Row className="text-center my-5">
 				<Col xs={12} className="mb-3">
 					<h3>Buscar por chip de la mascota</h3>
@@ -24,18 +31,11 @@ export const Vet = () => {
 							aria-describedby="search-addon1"
 						/>
 						<InputGroup.Append>
-							<InputGroup.Text onClick={() => setRedirect(true)} id="search-addon1">
-								&#128269;
-							</InputGroup.Text>
+							<Button type="button" className="search-btn" onClick={() => setRedirect(true)}>
+								<InputGroup.Text id="search-addon1">&#128269;</InputGroup.Text>
+							</Button>
 						</InputGroup.Append>
 					</InputGroup>
-				</Col>
-			</Row>
-			<Row className="text-center">
-				<Col>
-					<Button className="petBtn" href="/newPet">
-						Nueva Mascota
-					</Button>
 				</Col>
 			</Row>
 		</Container>

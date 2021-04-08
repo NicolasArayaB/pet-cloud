@@ -1,3 +1,19 @@
 .search-form {
     margin-top: 10rem;
 }
+
+.search-btn, .search-btn:hover, .search-btn:focus {
+    padding: 0;
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+#search-addon1 {
+    border-top-left-radius: 0%;
+    border-bottom-left-radius: 0%;
+}
+
+.new-pet {
+    margin-top: -10rem;
+}
