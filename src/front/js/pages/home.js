@@ -1,9 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
-import { Context } from "../store/appContext";
 
-import CarouselVet from "../component/home/carouselVet";
 import CardVet from "../component/home/cardVet";
 import CardUser from "../component/home/cardUser";
 import "../../styles/home.scss";
@@ -11,12 +8,8 @@ import "../../styles/home.scss";
 import Welcome from "../component/home/welcome";
 
 export const Home = () => {
-	const { store, actions } = useContext(Context);
-
 	return (
-		<div className="text-center mt-3">
-			<h1 className="brand-title">Bienvenido a PetCloud</h1>
-			{/* <CarouselVet /> */}
+		<div className="text-center">
 			<Welcome />
 			<Container>
 				<Row className="mx-5">

@@ -7,19 +7,15 @@
     background-color: transparent;
     border-color: transparent;
     box-shadow: none;
-    color: rgba(0, 0, 0, 0.5)
+    color: #EEEEEE
 }
-#loggedButton:hover{
-    color: black;
+#loggedButton:hover, .nav-link:hover {
+    color: rgb(214, 213, 213) !important;
 }
 
 .logo {
     width: 130px;
 };
-
-.menu {
-    color: black;
-}
 
 .navbar-brand {
     padding: 0;
@@ -34,13 +30,24 @@
     border: 3px black;
 }
 
-.petBtn, .petBtn:hover, .petBtn:focus {
+.petBtn, .petBtn:focus {
     background-color: #66b9bf !important;
-    border-color: #66b9bf;
-    color: black;
+    border-color: #EEEEEE;
+    border-radius: 15px;
+    color: #EEEEEE;
     box-shadow: none;
 }
 
-.petCloudBar{
-    background-color: #e37222 !important;
+.petBtn:hover {
+  border-color: rgb(214, 213, 213);
+  color: rgb(214, 213, 213);
+}
+
+.petCloudBar {
+    background-color: #66b9bf !important;
+}
+
+.nav-link {
+  color: #EEEEEE !important;
+  font-size: large;
 }

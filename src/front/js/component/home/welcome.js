@@ -3,16 +3,16 @@ import { Container, Row, Col } from "react-bootstrap";
 
 const Welcome = () => {
 	return (
-		<section>
+		<section className="welcome">
 			<Container>
 				<Row>
-					<Col>
-						<h2>La información de las mascotas, cuando y como la necesitas</h2>
+					<Col className="pt-5">
+						<h2 className="mt-5">La información de las mascotas, cuando y como la necesitas</h2>
 					</Col>
 				</Row>
 				<Row>
 					<Col>
-						<img src="" />
+						<img src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/18.1-front-proposal/src/front/img/petcloud-dog.png" />
 					</Col>
 				</Row>
 			</Container>
