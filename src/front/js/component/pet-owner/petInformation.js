@@ -5,23 +5,18 @@ import PropTypes from "prop-types";
 
 export const PetInformation = props => {
 	const { store, actions } = useContext(Context);
-	const chip = props.location.state.chip;
+	const chip = props.location.state.chip_identifier;
 
 	useEffect(async () => {
-		// await actions.getPetInformation(chip);
 		await actions.getPetById(chip);
 	}, []);
 
 	return (
 		<Container>
-			<span>{JSON.stringify(store.pets)}</span>
-			<span>{JSON.stringify(store.petById)}</span>
-			<span>{JSON.stringify(store.userPets)}</span>
 			<Row className="text-center">
 				<Col xs={12} md={12}>
-					<h2 className="nombre mt-4">Hola {store.pets.name} </h2>
+					<h2 className="nombre mt-4">Hola {store.petById.name} </h2>
 					<Image
-						// src="https://images.all-free-download.com/images/graphiclarge/dog_icons_vector_281192.jpg"
 						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
 						style={{ height: "200px" }}
 						roundedCircle
@@ -51,7 +46,7 @@ export const PetInformation = props => {
 										Mi nombre es:
 									</Form.Label>
 									<Col sm="10">
-										<Form.Control type="text" name="name" value={store.pets.name} />
+										<Form.Control type="text" name="name" value={store.petById.name} />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextIdentifier">
@@ -59,7 +54,7 @@ export const PetInformation = props => {
 										Mi número de CHIP:
 									</Form.Label>
 									<Col sm="10">
-										<Form.Control type="text" name="identifier" value={store.pets.identifier} />
+										<Form.Control type="text" name="identifier" value={store.petById.chip} />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextWeight">
@@ -67,7 +62,7 @@ export const PetInformation = props => {
 										Género:
 									</Form.Label>
 									<Col sm="10">
-										<Form.Control type="text" name="gender" value={store.pets.gender} />
+										<Form.Control type="text" name="gender" value={store.petById.gender} />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextWeight">
@@ -75,7 +70,7 @@ export const PetInformation = props => {
 										Fecha de Nacimiento:
 									</Form.Label>
 									<Col sm="10">
-										<Form.Control type="text" name="birthDate" value={store.pets.birthDate} />
+										<Form.Control type="text" name="birthDate" value={store.petById.birthDate} />
 									</Col>
 								</Form.Group>
 							</Form>
@@ -106,11 +101,11 @@ export const PetInformation = props => {
 											type="text"
 											name="userPetOwner"
 											value={
-												store.pets.petOwner_name +
+												store.petById.petOwner_name +
 												" " +
-												store.pets.petOwner_father +
+												store.petById.petOwner_father +
 												" " +
-												store.pets.petOwner_mother
+												store.petById.petOwner_mother
 											}
 										/>
 									</Col>
@@ -120,7 +115,7 @@ export const PetInformation = props => {
 										Vive en:
 									</Form.Label>
 									<Col lg="10">
-										<Form.Control type="text" name="address" value={store.pets.address} />
+										<Form.Control type="text" name="address" value={store.petById.address} />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextPhone">
@@ -128,7 +123,7 @@ export const PetInformation = props => {
 										Su teléfono es:
 									</Form.Label>
 									<Col lg="10">
-										<Form.Control type="text" name="phone" value={store.pets.phone} />
+										<Form.Control type="text" name="phone" value={store.petById.phone} />
 									</Col>
 								</Form.Group>
 								<Form.Group as={Row} controlId="formPlaintextEmail">
@@ -136,7 +131,7 @@ export const PetInformation = props => {
 										Su mail:
 									</Form.Label>
 									<Col lg="10">
-										<Form.Control type="text" name="email" value={store.pets.email} />
+										<Form.Control type="text" name="email" value={store.petById.email} />
 									</Col>
 								</Form.Group>
 							</Form>
