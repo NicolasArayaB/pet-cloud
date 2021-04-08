@@ -68,7 +68,7 @@ export const Contact = () => {
 							<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
 						</Form.Group>
 						<Form.Group controlId="messageFormControl">
-							<Form.Label>Cuentanos de Tu problema</Form.Label>
+							<Form.Label>Cuéntanos de Tu problema</Form.Label>
 							<Form.Control name="message" as="textarea" rows={3} required />
 						</Form.Group>
 						<Button className="petBtn" size="lg" block type="submit">

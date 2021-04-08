@@ -15,10 +15,7 @@ class User(db.Model):
     first_name = Column(String(100))
     father_family_name = Column(String(50))
     mother_family_name = Column(String(50))
-    # is_active = Column(Boolean, unique=False, nullable=True)
-    # gender = Column(String(50))
-    # vet_user_fk = Column(Integer, ForeignKey('vet_user.id'))
-    # vet_users = relationship("Vet_user", foreign_keys=[vet_user_fk])
+    is_vet = Column(String(5))
     
     def __repr__(self):
         return '<User %r>' % self.email
@@ -27,6 +24,7 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
+            "is_vet": self.is_vet
         
         }
 
@@ -109,7 +107,8 @@ class Pet(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "user_email": self.user_email
+            "user_email": self.user_email,
+            "chip_identifier": self.chip_identifier
         }
 
 class Pet_controls(db.Model):
@@ -130,5 +129,3 @@ class Pet_controls(db.Model):
             "vaccines": self.vaccines,
             # do not serialize the password, its a security breach
         }
-
-# db.create_all()

@@ -8,12 +8,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			pets: {},
 			petById: {},
 			vaccines: {},
-			role: [],
-			userPets: []
+			role: {},
+			userPets: [],
+			id: []
 		},
 
 		actions: {
-			setLogin: user => {
+			setLogin: (user, history) => {
 				fetch(process.env.BACKEND_URL + "/api/login", {
 					method: "POST",
 					body: JSON.stringify(user),
@@ -21,7 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						console.log(data, "<--- data login");
+						console.log(history, "<--- data login");
 						const loginData = {
 							token: data.token,
 							email: data.user.email,
@@ -34,6 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							localStorage.setItem("token", loginData.token);
 							localStorage.setItem("is_vet", JSON.stringify(loginData.is_vet));
 							localStorage.setItem("email", loginData.email);
+							history.push(data.is_vet === "1" ? "/vet" : "/user");
 						} else {
 							// LocalStorage no soportado en este navegador
 							alert("Lo sentimos, tu navegador no es compatible.");
@@ -46,11 +48,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const tokenLocal = localStorage.getItem("token");
 				const userLocal = JSON.parse(localStorage.getItem("user"));
 				const firstNameLocal = JSON.parse(localStorage.getItem("first_name"));
+				const role = localStorage.getItem("is_vet");
 				setStore({
 					role: {
 						token: tokenLocal,
 						user: userLocal,
-						firstName: firstNameLocal
+						firstName: firstNameLocal,
+						role: role
 					}
 				});
 				console.log("tokenLocal -->", tokenLocal);
@@ -93,6 +97,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(error);
 					});
 			},
+			getIdByChip: async id => {
+				const request = await fetch(`https://fhir.cens.cl/baseR4/Patient?identifier=${parseInt(id)}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				});
+				const data = await request.json();
+				const petId = data.entry[0].resource.id;
+				setStore({ id: petId.split("-")[1] });
+			},
 
 			getPetById: async id => {
 				const request = await fetch(`https://fhir.cens.cl/baseR4/Patient?identifier=${parseInt(id)}`, {
@@ -106,7 +119,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					species: data.entry[0].resource.extension[0].extension[0].valueCodeableConcept.coding[0].display,
 					breed: data.entry[0].resource.extension[0].extension[1].valueCodeableConcept.coding[0].display,
 					gender: data.entry[0].resource.gender,
-					birthDate: data.entry[0].resource.birthDate
+					birthDate: data.entry[0].resource.birthDate,
+					petOwner_name: data.entry[0].resource.contact[0].name.given[0],
+					petOwner_father: data.entry[0].resource.contact[0].name.extension[0].valueString,
+					petOwner_mother: data.entry[0].resource.contact[0].name.extension[1].valueString,
+					address: data.entry[0].resource.contact[0].address.line[0],
+					phone: data.entry[0].resource.contact[0].telecom[0].value,
+					email: data.entry[0].resource.contact[0].telecom[1].value
 				};
 
 				setStore({ petById: dataPets });
@@ -131,6 +150,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
+			newPetCondition: (id, cond) => {
+				const condData = {
+					resourceType: "Condition",
+					clinicalStatus: {
+						coding: [
+							{
+								system: "http://terminology.hl7.org/CodeSystem/condition-clinical",
+								code: "active"
+							}
+						]
+					},
+					code: {
+						coding: [
+							{
+								system: "http://snomed.info/sct",
+								display: cond
+							}
+						],
+						text: cond
+					},
+					subject: {
+						reference: `Patient/PET-${id}`
+					}
+				};
+
+				fetch("https://fhir.cens.cl/baseR4/Condition/", {
+					method: "POST",
+					headers: { "Content-type": "application/json" },
+					body: JSON.stringify(condData)
+				})
+					.then(data => data.json())
+					.then(data => console.log(data, "cond data"))
+					.catch(error => console.log(error));
+			},
+
 			getPetObservation: id => {
 				fetch(`https://fhir.cens.cl/baseR4/Observation/INF-${id}`, {
 					method: "GET",
@@ -147,6 +201,50 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
+			newPetObservation: (id, weight, unit) => {
+				const obsData = {
+					resourceType: "Observation",
+					status: "final",
+					category: [
+						{
+							coding: [
+								{
+									system: "http://terminology.hl7.org/CodeSystem/observation-category",
+									code: "vital-signs",
+									display: "Signos Vitales"
+								}
+							]
+						}
+					],
+					code: {
+						coding: [
+							{
+								system: "http://loinc.org",
+								code: "8302-2",
+								display: "Peso"
+							}
+						]
+					},
+					subject: {
+						reference: `Patient/PET-${id}`
+					},
+					effectiveDateTime: "2021-07-02",
+					valueQuantity: {
+						value: weight,
+						unit: unit,
+						system: "http://unitsofmeasure.org"
+					}
+				};
+
+				fetch("https://fhir.cens.cl/baseR4/Observation/", {
+					method: "POST",
+					headers: { "Content-type": "application/json" },
+					body: JSON.stringify(obsData)
+				})
+					.then(response => response.json())
+					.then(data => console.log(data, "weight"));
+			},
+
 			getPetVaccines: id => {
 				fetch(`https://fhir.cens.cl/baseR4/Immunization/VAC-${id}`, {
 					method: "GET",
@@ -160,6 +258,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 						};
 						setStore({ vaccines: vaccine });
 					});
+			},
+
+			newPetVaccine: (id, vaccine, value) => {
+				const vacData = {
+					resourceType: "Immunization",
+					status: "completed",
+					vaccineCode: {
+						coding: [
+							{
+								system: "http://hl7.org/fhir/sid/cvx",
+								code: "40"
+							}
+						],
+						text: vaccine
+					},
+					patient: {
+						reference: `Patient/PET-${id}`
+					},
+					occurrenceDateTime: "2020-01-10",
+					doseQuantity: {
+						value: value,
+						system: "http://unitsofmeasure.org",
+						code: "UI"
+					}
+				};
+				fetch("https://fhir.cens.cl/baseR4/Immunization/", {
+					method: "POST",
+					headers: { "Content-type": "application/json" },
+					body: JSON.stringify(vacData)
+				})
+					.then(data => data.json())
+					.then(data => console.log(data, "vaccines"));
 			},
 
 			getPetInformation: pets => {
@@ -288,7 +418,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 									},
 									{
 										url: "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family",
-										valueString: { petOwner_mother }
+										valueString: petOwner_mother
 									}
 								],
 								given: petOwner_name
