@@ -43,9 +43,7 @@ const CardInfoVet = () => {
 						style={{ width: "12rem" }}
 					/>
 					<Card.Body>
-						<Card.Text style={{ color: "grey" }}>
-							Próximamente: Edita y crea nuevos controles para las mascotas
-						</Card.Text>
+						<Card.Text style={{ color: "grey" }}>Crea nuevos controles para las mascotas</Card.Text>
 					</Card.Body>
 				</Card>
 			</CardGroup>
