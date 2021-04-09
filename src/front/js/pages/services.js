@@ -6,13 +6,8 @@ import "../../styles/services.scss";
 
 function ServicesMain() {
 	return (
-<<<<<<< HEAD
-		<section className="services justify-content-center">
-			<Container>
-=======
 		<section className="services pt-2 justify-content-center">
 			<Container fluid>
->>>>>>> 285faf4510edbcdc94b176660fc3e4b8ead87e23
 				<Row>
 					<Col>
 						<h1 className="my-5">Servicios</h1>
