@@ -6,8 +6,8 @@ import "../../styles/services.scss";
 
 function ServicesMain() {
 	return (
-		<section className="services pt-5 justify-content-center">
-			<Container fluid>
+		<section className="services justify-content-center">
+			<Container>
 				<Row>
 					<Col>
 						<h1 className="my-5">Servicios</h1>

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Container, Row, Col, Button, DropdownButton, Dropdown } from "react-bootstrap";
+import { Navbar, Container, Row, Col, Button, Dropdown } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import HomeNavInfo from "./homeNavInfo";
 import LoginModal from "./login/loginModal";
@@ -24,7 +24,7 @@ export const MyNavbar = props => {
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
-					<Container fluid className="navContainer">
+					<Container className="navContainer">
 						<Row>
 							<Col sm={10} className="d-flex justify-content-center">
 								<HomeNavInfo />
