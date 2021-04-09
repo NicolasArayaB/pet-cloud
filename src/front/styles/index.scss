@@ -14,9 +14,10 @@ h1   {
   text-align: center;
 }
 
-.footerLink {
-    color: black !important;
+.footer a {
+    color: black;
     padding: 15px;
+    font-size: small;
 }
 
 #loggedButton, #loggedButton:focus, #loggedButton::after {
@@ -67,4 +68,11 @@ h1   {
 .nav-link {
   color: #EEEEEE !important;
   font-size: large;
+}
+
+.newPetToast {
+  position: absolute;
+  bottom: 2rem;
+  left: 30rem;
+  width: fit-content;
 }
