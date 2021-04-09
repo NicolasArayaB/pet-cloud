@@ -12,7 +12,7 @@ const CardInfoVet = () => {
 						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/15-create-services-view/src/front/img/Services4.png"
 						style={{ width: "5rem" }}
 					/>
-					<p className="mt-4" style={{ color: "#grey" }}>
+					<p className="mt-4" style={{ color: "grey" }}>
 						Enrola fácilmente a los veterinarios en nuestra aplicación
 					</p>
 				</Col>
