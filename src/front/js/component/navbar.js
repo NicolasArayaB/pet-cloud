@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Container, Row, Col, Button, Dropdown } from "react-bootstrap";
 import { Context } from "../store/appContext";
-import HomeNavInfo from "./homeNavInfo";
 import LoginModal from "./login/loginModal";
 
 export const MyNavbar = props => {
@@ -13,7 +12,7 @@ export const MyNavbar = props => {
 	return (
 		<>
 			<LoginModal show={show} close={handleShow} />
-			<Navbar collapseOnSelect expand="lg" className="petCloudBar fixed-top">
+			<Navbar collapseOnSelect className="petCloudBar fixed-top">
 				<Navbar.Brand href="#home">
 					<Link to="/">
 						<img

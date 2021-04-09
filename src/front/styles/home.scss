@@ -21,6 +21,29 @@ body, html {
   color: #EEEEEE;
 }
 
+.welcomeHeader, .welcomeHeader2 {
+  position: absolute;
+  font-size: 3rem;
+  font-family: 'Londrina Solid', cursive;
+  color: #EEEEEE;
+}
+
+.welcomeHeader {
+  top: 3rem;
+  left: 3rem;
+}
+
+.welcomeHeader2 {
+  top: 10rem;
+  right: 3rem;
+}
+
+.col {
+  margin-right: 0%;
+  margin-left: 0%;
+  padding-left: 0%;
+  padding-right: 0%;
+}
 .cards {
   background-color: #EEEEEE;
 }
