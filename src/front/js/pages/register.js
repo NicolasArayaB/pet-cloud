@@ -60,7 +60,7 @@ export const RegisterView = () => {
 	};
 
 	return (
-		<Container className="registerForms">
+		<Container className="registerForms mt-5">
 			{redirect ? <Redirect to="/" /> : ""}
 			<Toast show={showToast} onClose={closeTost} delay={5000} autohide className="mt-4 mx-auto">
 				<Toast.Header>
@@ -69,7 +69,7 @@ export const RegisterView = () => {
 				<Toast.Body>{toastMsg}</Toast.Body>
 			</Toast>
 			<Form autoComplete="off" className="p-5 text-center">
-				<h2>Regístrate</h2>
+				<h1>Regístrate</h1>
 				<Form.Control
 					type="text"
 					placeholder="Nombre"
