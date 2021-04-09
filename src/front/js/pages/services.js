@@ -21,12 +21,8 @@ function ServicesMain() {
 				</Row>
 				<Row className="mt-5 pb-5">
 					<Col className="pt-5">
-<<<<<<< HEAD
-						<h2>¿Eres médico veterinario?</h2>
-=======
 						<h2 className="my-5">¿Eres médico veterinario?</h2>
 						<CardInfoVet />
->>>>>>> 534e30f69f4464e14baf6fbfa481396a8d41b263
 					</Col>
 				</Row>
 			</Container>
