@@ -5,12 +5,13 @@ import PropTypes from "prop-types";
 const Checkup = props => {
 	let date = "";
 
-	if (props.observations.update != undefined) {
-		date = props.observations.update
+	if (props.update != undefined) {
+		date = props.update
 			.split("-")
 			.reverse()
 			.join("-");
 	}
+
 	return (
 		<Table bordered hover>
 			<thead className="table-info">
@@ -22,10 +23,10 @@ const Checkup = props => {
 			<tbody>
 				<tr>
 					<th>Peso: </th>
-					<th>{props.observations.weight}</th>
+					<th>{props.weight}</th>
 				</tr>
 				<tr>
-					<th>Enfermedades: </th>
+					<th>Diagnóstico: </th>
 					<th>{props.condition}</th>
 				</tr>
 				<tr>
@@ -39,7 +40,8 @@ const Checkup = props => {
 
 Checkup.propTypes = {
 	condition: PropTypes.string,
-	observations: PropTypes.object,
+	update: PropTypes.string,
+	weight: PropTypes.integer,
 	genderStatus: PropTypes.string
 };
 

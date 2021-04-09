@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			conditions: {},
+			conditions: [],
 			login: [],
 			users: [],
 			observations: {},
@@ -22,7 +22,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						console.log(history, "<--- History");
 						const loginData = {
 							token: data.token,
 							email: data.user.email,
@@ -50,7 +49,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const tokenLocal = localStorage.getItem("token");
 				const firstNameLocal = localStorage.getItem("firstName");
 				const role = localStorage.getItem("is_vet");
-				console.log(firstNameLocal, "FN Local");
 				setStore({
 					role: {
 						token: tokenLocal,
@@ -58,8 +56,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						role: role
 					}
 				});
-				console.log("tokenLocal -->", tokenLocal);
-				console.log("firstNameLocal -->", firstNameLocal);
 			},
 
 			sendContactMsg: (name, email, message, role) => {
@@ -93,7 +89,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(data => {
 						setStore({ user: data });
-						console.log(data);
 					})
 					.catch(error => {
 						console.log(error);
@@ -109,8 +104,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ id: petId.split("-")[1] });
 			},
 
-			getPetById: async id => {
-				const request = await fetch(`https://fhir.cens.cl/baseR4/Patient?identifier=${parseInt(id)}`, {
+			getPetById: async chip => {
+				const request = await fetch(`https://fhir.cens.cl/baseR4/Patient?identifier=${parseInt(chip)}`, {
 					method: "GET",
 					headers: { "Content-type": "application/json" }
 				});
@@ -132,7 +127,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				setStore({ petById: dataPets });
-				const petId = getStore().petById.id.split("-")[1];
+
+				const petId = getStore().petById.id;
 
 				await getActions().getPetInformation(petId);
 				await getActions().getPetCondition(petId);
@@ -141,23 +137,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getPetCondition: id => {
-				fetch(`https://fhir.cens.cl/baseR4/Condition/ENF-${id}`, {
+				fetch(`https://fhir.cens.cl/baseR4/Condition?patient=${id}`, {
 					method: "GET",
 					headers: { "Content-type": "application/json" }
 				})
 					.then(response => response.json())
 					.then(data => {
-						if (!data.issue) {
-							const store = getStore();
-							const condition = data.code.coding[0].display;
+						if (data.entry != undefined) {
+							const condition = data.entry[0].resource.code.coding[0].display;
+
 							setStore({ conditions: condition });
-						} else setStore({ conditions: "" });
+						} else {
+							setStore({ conditions: "" });
+						}
 					});
 			},
 
-			newPetCondition: (id, cond) => {
+			newPetCondition: (petId, cond) => {
 				const condData = {
 					resourceType: "Condition",
+					id: petId,
 					clinicalStatus: {
 						coding: [
 							{
@@ -176,12 +175,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						text: cond
 					},
 					subject: {
-						reference: `Patient/PET-${id}`
+						reference: `Patient/${petId}`
 					}
 				};
 
-				fetch("https://fhir.cens.cl/baseR4/Condition/", {
-					method: "POST",
+				fetch(`https://fhir.cens.cl/baseR4/Condition?patient=${petId}`, {
+					method: "PUT",
 					headers: { "Content-type": "application/json" },
 					body: JSON.stringify(condData)
 				})
@@ -191,26 +190,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getPetObservation: id => {
-				fetch(`https://fhir.cens.cl/baseR4/Observation/INF-${id}`, {
+				fetch(`https://fhir.cens.cl/baseR4/Observation?patient=${id}`, {
 					method: "GET",
 					headers: { "Content-type": "application/json" }
 				})
 					.then(response => response.json())
 					.then(data => {
-						if (!data.issue) {
-							const lastUpdate = data.meta.lastUpdated.split("T");
+						if (data.entry != undefined) {
+							const lastUpdated = data.entry[0].resource.meta.lastUpdated.split("T");
 							const obsData = {
-								update: lastUpdate[0],
-								weight: data.valueQuantity.value + " " + data.valueQuantity.unit
+								update: lastUpdated[0],
+								weight:
+									data.entry[0].resource.valueQuantity.value +
+									" " +
+									data.entry[0].resource.valueQuantity.unit
 							};
 							setStore({ observations: obsData });
-						} else setStore({ observations: { update: "", weight: "" } });
+						} else if (data == null) {
+							setStore({ observations: { update: "", weight: "" } });
+						}
 					});
 			},
 
-			newPetObservation: (id, weight, unit) => {
+			newPetObservation: (petId, weight, unit) => {
 				const obsData = {
 					resourceType: "Observation",
+					id: petId,
 					status: "final",
 					category: [
 						{
@@ -233,7 +238,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						]
 					},
 					subject: {
-						reference: `Patient/PET-${id}`
+						reference: `Patient/${petId}`
 					},
 					effectiveDateTime: "2021-07-02",
 					valueQuantity: {
@@ -243,8 +248,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				};
 
-				fetch("https://fhir.cens.cl/baseR4/Observation/", {
-					method: "POST",
+				fetch(`https://fhir.cens.cl/baseR4/Observation?patient=${petId}`, {
+					method: "PUT",
 					headers: { "Content-type": "application/json" },
 					body: JSON.stringify(obsData)
 				})
@@ -253,25 +258,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getPetVaccines: id => {
-				fetch(`https://fhir.cens.cl/baseR4/Immunization/VAC-${id}`, {
+				fetch(`https://fhir.cens.cl/baseR4/Immunization?patient=${id}`, {
 					method: "GET",
 					headers: { "Content-type": "application/json" }
 				})
 					.then(response => response.json())
 					.then(data => {
-						if (!data.issue) {
+						if (data.entry != undefined) {
 							const vaccine = {
-								vaccine: data.vaccineCode.text,
-								date: data.occurrenceDateTime
+								vaccine: data.entry[0].resource.vaccineCode.text,
+								date: data.meta.lastUpdated.split("T")
 							};
 							setStore({ vaccines: vaccine });
 						} else setStore({ vaccines: { vaccine: "", date: "" } });
 					});
 			},
 
-			newPetVaccine: (id, vaccine, value) => {
+			newPetVaccine: (petId, vaccine, value) => {
 				const vacData = {
 					resourceType: "Immunization",
+					id: petId,
 					status: "completed",
 					vaccineCode: {
 						coding: [
@@ -283,7 +289,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						text: vaccine
 					},
 					patient: {
-						reference: `Patient/PET-${id}`
+						reference: `Patient/${petId}`
 					},
 					occurrenceDateTime: "2020-01-10",
 					doseQuantity: {
@@ -292,8 +298,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						code: "UI"
 					}
 				};
-				fetch("https://fhir.cens.cl/baseR4/Immunization/", {
-					method: "POST",
+				fetch(`https://fhir.cens.cl/baseR4/Immunization?patient=${petId}`, {
+					method: "PUT",
 					headers: { "Content-type": "application/json" },
 					body: JSON.stringify(vacData)
 				})
@@ -301,8 +307,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => console.log(data, "vaccines"));
 			},
 
-			getPetInformation: pets => {
-				fetch(`https://fhir.cens.cl/baseR4/Patient/PET-${pets}`, {
+			getPetInformation: id => {
+				fetch(`https://fhir.cens.cl/baseR4/Patient/${id}`, {
 					method: "GET",
 					headers: { "Content-type": "application/json" }
 				})
@@ -324,7 +330,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							email: data.contact[0].telecom[1].value
 						};
 						setStore({ pets: dataPets });
-						console.log(dataPets.name);
 					})
 					.catch(error => {
 						console.log(error);
@@ -345,7 +350,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(data => {
 						let userPets = data.pets.filter(selectPets);
-						console.log(userPets, "getPets");
+
 						setStore({ userPets: userPets });
 					})
 					.catch(error => console.log(error));
@@ -469,9 +474,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: { "Content-type": "application/json" }
 				})
 					.then(resp => resp.json())
-					.then(data => {
-						console.log(data, "<--- new petCloud");
-					})
+					.then(data => console.log("Pet has been registered"))
 					.catch(error => {
 						console.log("Unexpected error");
 					});

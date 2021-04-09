@@ -47,7 +47,7 @@ const Contact = () => {
 							</Toast.Header>
 							<Toast.Body>Responderemos a tu consulta a la brevedad</Toast.Body>
 						</Toast>
-						<h2 className="altHeader">Contactanos</h2>
+						<h2 className="altHeader">Contáctanos</h2>
 						<div className="p-3 mt-5 contactContainer">
 							<Form noValidate validated={validated} onSubmit={handleSubmit}>
 								<Form.Group controlId="roleFormControl">
@@ -76,7 +76,7 @@ const Contact = () => {
 									<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
 								</Form.Group>
 								<Form.Group controlId="messageFormControl">
-									<Form.Label className="contactLabel">Cuéntanos de Tu problema</Form.Label>
+									<Form.Label className="contactLabel">Cuéntanos de tu problema</Form.Label>
 									<Form.Control name="message" as="textarea" rows={3} required />
 								</Form.Group>
 								<Button className="petBtn" size="lg" block type="submit">

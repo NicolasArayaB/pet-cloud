@@ -84,7 +84,7 @@ const NewPetForm = () => {
 	return (
 		<div>
 			{redirect ? <Redirect to="/vet" /> : ""}
-			<Form.Group>
+			<Form.Group autoComplete="off">
 				<Row className="text-center">
 					<Col xs={12} md={12}>
 						<h3

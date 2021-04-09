@@ -15,7 +15,7 @@ const CardVet = () => {
 			</Card.Body>
 			<ListGroup className="list-group-flush" style={{ color: "#66b9bf" }}>
 				<ListGroupItem className="card-li-item">&#10004; Ficha estandarizada</ListGroupItem>
-				<ListGroupItem className="card-li-item">&#10004; Historial clinico</ListGroupItem>
+				<ListGroupItem className="card-li-item">&#10004; Próximamente: Historial clínico</ListGroupItem>
 			</ListGroup>
 		</Card>
 	);

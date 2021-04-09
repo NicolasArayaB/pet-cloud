@@ -55,8 +55,6 @@ export const RegisterView = () => {
 	const closeTost = () => {
 		toggleShowToast();
 		validated ? setRedirect(true) : "";
-
-		console.log(isVet);
 	};
 
 	return (
