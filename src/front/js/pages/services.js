@@ -21,7 +21,7 @@ function ServicesMain() {
 				</Row>
 				<Row className="mt-5 pb-5">
 					<Col className="pt-5">
-						<h2 className="my-5">¿Eres medico veterinario?</h2>
+						<h2 className="my-5">¿Eres médico veterinario?</h2>
 						<CardInfoVet />
 					</Col>
 				</Row>
