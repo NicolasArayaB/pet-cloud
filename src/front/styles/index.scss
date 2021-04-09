@@ -1,3 +1,10 @@
+
+h1   {
+    color: #66B9BF;
+    font-weight: bolder;
+}
+
+
 .container-fluid {
   padding: 0;
   text-align: center;
@@ -45,7 +52,8 @@
 
 .petBtn:hover {
   border-color: rgb(214, 213, 213);
-  color: rgb(214, 213, 213);
+  color: #1D1F23;
+  opacity: 0.9;
 }
 
 .petCloudBar {

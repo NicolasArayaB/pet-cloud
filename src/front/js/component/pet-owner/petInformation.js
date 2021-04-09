@@ -15,7 +15,7 @@ export const PetInformation = props => {
 		<Container>
 			<Row className="text-center">
 				<Col xs={12} md={12}>
-					<h2 className="nombre mt-4">Hola {store.petById.name} </h2>
+					<h2 className="pet-name">Hola {store.petById.name} </h2>
 					<Image
 						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
 						style={{ height: "200px" }}

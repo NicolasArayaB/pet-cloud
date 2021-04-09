@@ -22,7 +22,7 @@ function ServicesMain() {
 				<Row className="mt-5 pb-5">
 					<CardInfoVet />
 					<Col className="pt-5">
-						<h2>¿Eres medico veterinario?</h2>
+						<h2>¿Eres médico veterinario?</h2>
 					</Col>
 				</Row>
 			</Container>

@@ -34,7 +34,10 @@ export const MyNavbar = props => {
 									<Dropdown>
 										<Dropdown.Toggle id="loggedButton">Hola {store.role.firstName}</Dropdown.Toggle>
 										<Dropdown.Menu>
-											<Dropdown.Item href="/" onClick={() => localStorage.clear()}>
+											<Dropdown.Item
+												className="log-off"
+												href="/"
+												onClick={() => localStorage.clear()}>
 												Cerrar sesión
 											</Dropdown.Item>
 										</Dropdown.Menu>

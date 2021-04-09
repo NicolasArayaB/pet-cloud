@@ -13,7 +13,7 @@ const Vaccines = props => {
 	}
 	return (
 		<Table bordered hover>
-			<thead className="table-secondary">
+			<thead className="table-info">
 				<tr>
 					<th>Vacunas</th>
 					<th>Fecha</th>

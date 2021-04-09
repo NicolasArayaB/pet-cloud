@@ -88,7 +88,7 @@ const NewPetForm = () => {
 				<Row className="text-center">
 					<Col xs={12} md={12}>
 						<h3
-							className="nombre mt-4 text-center"
+							className="nombre mt-5 text-center"
 							style={{
 								color: "white",
 								backgroundColor: "#66B9BF",

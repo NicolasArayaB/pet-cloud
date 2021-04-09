@@ -16,19 +16,19 @@ const VetInfo = props => {
 
 	return (
 		<Container>
-			<Row className="m-3">
+			<Row className="m-3 mt-5">
 				<Col />
-				<Col className="text-center">
+				<Col className="text-center mt-5">
 					<h2>{store.petById.name}</h2>
 				</Col>
 				<Col>
 					<Link to={{ pathname: "/checkup", state: { chip: chip } }}>
-						<Button className="petBtn float-right">Nuevo Control</Button>
+						<Button className="petBtn float-right my-5">Nuevo Control</Button>
 					</Link>
 				</Col>
 			</Row>
 			<Row className="m-3">
-				<Col className="text-center">
+				<Col className="text-center mt-2">
 					<p>
 						{store.petById.species} | {store.petById.breed} | {store.petById.gender} |{" "}
 						{store.petById.birthDate}

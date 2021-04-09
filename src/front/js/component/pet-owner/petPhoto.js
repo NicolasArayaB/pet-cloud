@@ -21,7 +21,7 @@ const PetPhoto = props => {
 				<Card border="white">
 					<Card.Link className="img-pet" onClick={() => setRedirect(true)}>
 						<Card.Img
-							className="rounded-circle"
+							className="rounded-circle mx-5"
 							variant="top"
 							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
 							style={{ width: "12rem" }}

@@ -12,9 +12,19 @@
 
 }
 
+.rounded-circle {
+    cursor: pointer;
+}
+
 .pets-list {
     border-radius: 10px;
     color: #E37222;
+    cursor: pointer;
     font-size: 30px;
-    text-align: center; 
+    text-align: center;
+     
+}
+
+.pet-name {
+    margin-top: 80px;
 }

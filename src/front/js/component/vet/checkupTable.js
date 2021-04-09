@@ -13,9 +13,9 @@ const Checkup = props => {
 	}
 	return (
 		<Table bordered hover>
-			<thead className="table-secondary">
+			<thead className="table-info">
 				<tr>
-					<th>Ultimo Control</th>
+					<th>Último Control</th>
 					<th>{date}</th>
 				</tr>
 			</thead>
