@@ -18,7 +18,7 @@ export const MyNavbar = props => {
 					<Link to="/">
 						<img
 							className="logo"
-							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/navbar/src/front/img/petcloud-logo.png"
+							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/18.1-front-proposal/src/front/img/PetCloud.jpg"
 						/>
 					</Link>
 				</Navbar.Brand>
