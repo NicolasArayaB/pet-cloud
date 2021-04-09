@@ -19,7 +19,7 @@ const VetInfo = props => {
 			<Row className="m-3 mt-5">
 				<Col />
 				<Col className="text-center mt-5">
-					<h2>{store.petById.name}</h2>
+					<h2>{store.pets.name}</h2>
 				</Col>
 				<Col>
 					<Link to={{ pathname: "/checkup", state: { chip: chip } }}>
@@ -30,16 +30,16 @@ const VetInfo = props => {
 			<Row className="m-3">
 				<Col className="text-center mt-2">
 					<p>
-						{store.petById.species} | {store.petById.breed} | {store.petById.gender} |{" "}
-						{store.petById.birthDate}
+						{store.pets.species} | {store.pets.breed} | {store.pets.gender} | {store.pets.birthDate}
 					</p>
 				</Col>
 			</Row>
 			<Row className="m-3">
 				<Col md={6}>
 					<Checkup
-						condition={store.conditions[0]}
-						observations={store.observations}
+						condition={store.conditions}
+						weight={store.observations.weight}
+						update={store.observations.update}
 						genderStatus={store.pets.genderStatus}
 					/>
 				</Col>

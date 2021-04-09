@@ -36,10 +36,10 @@ const NewCheckup = props => {
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		console.log(store.id, "store id");
-		actions.newPetObservation(store.id, formState.weight, "Kg");
-		actions.newPetVaccine(store.id, formState.vaccines, "2");
-		actions.newPetCondition(store.id, formState.condition);
+		const petId = store.petById.id;
+		actions.newPetObservation(petId, formState.weight, "Kg");
+		actions.newPetVaccine(petId, formState.vaccines, "2");
+		actions.newPetCondition(petId, formState.condition);
 		setShowToast(true);
 	};
 

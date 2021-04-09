@@ -29,7 +29,7 @@ export const MyNavbar = props => {
 								{store.role.token != null ? (
 									<Dropdown>
 										<Dropdown.Toggle id="loggedButton">Hola {store.role.firstName}</Dropdown.Toggle>
-										<Dropdown.Menu>
+										<Dropdown.Menu className="navDropDn">
 											<Dropdown.Item
 												className="log-off"
 												href="/"

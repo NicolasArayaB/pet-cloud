@@ -6,7 +6,7 @@ const Vaccines = props => {
 	let formattedDate = "";
 
 	if (props.date != undefined) {
-		formattedDate = props.date
+		formattedDate = props.date[0]
 			.split("-")
 			.reverse()
 			.join("-");
