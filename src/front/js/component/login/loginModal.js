@@ -25,7 +25,7 @@ const LoginModal = params => {
 	return (
 		<Modal show={params.show} onHide={params.close}>
 			<Modal.Header closeButton>
-				<Modal.Title>Login</Modal.Title>
+				<Modal.Title style={{ color: "white" }}>Login</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
 				<Form autoComplete="off" onSubmit={e => submitHandler(e)}>

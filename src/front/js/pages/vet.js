@@ -13,7 +13,7 @@ export const Vet = () => {
 			{redirect ? <Redirect to={{ pathname: "/vet/id", state: { chip: chip } }} /> : ""}
 			<Row className="text-right">
 				<Col>
-					<Button className="petBtn new-pet" href="/newPet">
+					<Button className="petBtn new-pet my-1" href="/newPet">
 						Nueva Mascota
 					</Button>
 				</Col>

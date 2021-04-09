@@ -58,12 +58,12 @@ const NewCheckup = props => {
 				<Toast.Header>
 					<strong className="mr-auto">Mensaje</strong>
 				</Toast.Header>
-				<Toast.Body>Control fue ingresado con exito</Toast.Body>
+				<Toast.Body>Control fue ingresado con éxito</Toast.Body>
 			</Toast>
 			<Row>
 				{redirect ? <Redirect to="/vet" /> : ""}
 				<Col>
-					<Form onSubmit={handleSubmit} autoComplete="off" className="p-5 text-center">
+					<Form onSubmit={handleSubmit} autoComplete="off" className="p-5 text-center mt-5">
 						<h2>Nuevo Control</h2>
 						<Form.Control
 							type="text"
@@ -75,7 +75,7 @@ const NewCheckup = props => {
 						/>
 						<Form.Control
 							type="text"
-							placeholder="Enfermedades"
+							placeholder="Diagnóstico"
 							name="condition"
 							value={formState.condition}
 							onChange={e => handleTextChange(e)}
@@ -90,7 +90,7 @@ const NewCheckup = props => {
 							className="m-3"
 						/>
 						<Button type="submit" className="petBtn">
-							Crear Control
+							Crear nuevo control
 						</Button>
 					</Form>
 				</Col>

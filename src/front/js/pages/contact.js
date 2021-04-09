@@ -52,7 +52,7 @@ const Contact = () => {
 								<Form.Group controlId="roleFormControl">
 									<Form.Label className="contactLabel">Selecciona tu perfil</Form.Label>
 									<Form.Control className="contactInput" as="select" name="role">
-										<option>Soy Veterinario</option>
+										<option>Soy Médico Veterinario</option>
 										<option>Soy Dueño de mascota</option>
 									</Form.Control>
 								</Form.Group>
