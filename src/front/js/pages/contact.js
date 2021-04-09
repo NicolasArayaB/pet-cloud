@@ -47,6 +47,7 @@ const Contact = () => {
 							</Toast.Header>
 							<Toast.Body>Responderemos a tu consulta a la brevedad</Toast.Body>
 						</Toast>
+						<h2 className="altHeader">Contactanos</h2>
 						<div className="p-3 mt-5 contactContainer">
 							<Form noValidate validated={validated} onSubmit={handleSubmit}>
 								<Form.Group controlId="roleFormControl">

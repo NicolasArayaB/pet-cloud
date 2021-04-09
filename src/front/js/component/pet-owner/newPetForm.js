@@ -83,7 +83,7 @@ const NewPetForm = () => {
 
 	return (
 		<div>
-			{redirect ? <Redirect to="/" /> : ""}
+			{redirect ? <Redirect to="/vet" /> : ""}
 			<Form.Group>
 				<Row className="text-center">
 					<Col xs={12} md={12}>
@@ -325,22 +325,22 @@ const NewPetForm = () => {
 					</Col>
 				</Form.Row>
 				<br />
-				<Row>
-					<Col xs={12} md={6}>
-						<Button className="petBtn" type="submit" size="lg" onClick={handleSubmit}>
-							Registrar una nueva mascota
-						</Button>
-					</Col>
-					<Col xs={12} md={6}>
-						<Toast show={showToast} onClose={closeTost} delay={5000} autohide className="my-4 mx-auto">
-							<Toast.Header>
-								<i className="far fa-hand-point-right" />
-								<strong className="mr-2">Mensaje</strong>
-							</Toast.Header>
-							<Toast.Body>{toastMsg}</Toast.Body>
-						</Toast>
-					</Col>
-				</Row>
+				<span className="position-relative">
+					<Row>
+						<Col className="text-center">
+							<Button className="petBtn" type="submit" size="lg" onClick={handleSubmit}>
+								Registrar una nueva mascota
+							</Button>
+						</Col>
+					</Row>
+					<Toast show={showToast} onClose={closeTost} delay={5000} autohide className="my-4 newPetToast">
+						<Toast.Header>
+							<i className="far fa-hand-point-right" />
+							<strong className="mr-2">Mensaje</strong>
+						</Toast.Header>
+						<Toast.Body>{toastMsg}</Toast.Body>
+					</Toast>
+				</span>
 			</Form.Group>
 		</div>
 	);
