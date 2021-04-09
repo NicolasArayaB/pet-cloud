@@ -7,7 +7,7 @@ const CardVet = () => {
 		<Card border="0" className="mx-auto mt-5" style={{ width: "20rem", backgroundColor: "transparent" }}>
 			<Card.Img
 				variant="top"
-				src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/18.1-front-proposal/src/front/img/Veterinary-amico.png"
+				src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/18.1-front-proposal/src/front/img/Vet-amico.png"
 				style={{ width: "300px" }}
 			/>
 			<Card.Body>

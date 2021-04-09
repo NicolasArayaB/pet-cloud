@@ -18,7 +18,7 @@ export const MyNavbar = props => {
 					<Link to="/">
 						<img
 							className="logo"
-							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/18.1-front-proposal/src/front/img/PetCloud.jpg"
+							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/18.1-front-proposal/src/front/img/PetCloud-removebg.png"
 						/>
 					</Link>
 				</Navbar.Brand>
@@ -26,10 +26,7 @@ export const MyNavbar = props => {
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Container className="navContainer">
 						<Row>
-							<Col sm={10} className="d-flex justify-content-center">
-								<HomeNavInfo />
-							</Col>
-							<Col sm={2} className="pt-3">
+							<Col className="pt-3 text-right">
 								{store.role.token != null ? (
 									<Dropdown>
 										<Dropdown.Toggle id="loggedButton">Hola {store.role.firstName}</Dropdown.Toggle>
