@@ -10,6 +10,8 @@ const Vaccines = props => {
 			.split("-")
 			.reverse()
 			.join("-");
+
+		console.log(formattedDate);
 	}
 	return (
 		<Table bordered hover>
