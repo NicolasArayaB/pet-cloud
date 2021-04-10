@@ -76,9 +76,23 @@ h1   {
   font-size: large;
 }
 
-.newPetToast {
+.toast {
   position: absolute;
-  bottom: 2rem;
-  left: 30rem;
   width: fit-content;
+}
+
+.newPetToast {
+  bottom: 8rem;
+  left: 26rem;
+}
+
+.registerToast {
+  top: 3rem;
+  left: 23rem;
+}
+
+.newCheckupToast {
+  top: 6rem;
+  left: 26rem;
+  z-index: 1;
 }

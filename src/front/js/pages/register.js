@@ -60,12 +60,14 @@ export const RegisterView = () => {
 	return (
 		<Container className="registerForms mt-5">
 			{redirect ? <Redirect to="/" /> : ""}
-			<Toast show={showToast} onClose={closeTost} delay={5000} autohide className="mt-5 mx-auto">
-				<Toast.Header>
-					<strong className="mr-auto">Mensaje</strong>
-				</Toast.Header>
-				<Toast.Body>{toastMsg}</Toast.Body>
-			</Toast>
+			<div className="position-relative">
+				<Toast show={showToast} onClose={closeTost} delay={5000} autohide className="mt-5 registerToast">
+					<Toast.Header>
+						<strong className="mr-auto">Mensaje</strong>
+					</Toast.Header>
+					<Toast.Body>{toastMsg}</Toast.Body>
+				</Toast>
+			</div>
 			<Form autoComplete="off" className="p-5 text-center">
 				<h1 className="my-4">Regístrate</h1>
 				<Form.Control
