@@ -325,22 +325,22 @@ const NewPetForm = () => {
 					</Col>
 				</Form.Row>
 				<br />
-				<span className="position-relative">
-					<Row>
-						<Col className="text-center">
-							<Button className="petBtn" type="submit" size="lg" onClick={handleSubmit}>
-								Registrar una nueva mascota
-							</Button>
-						</Col>
-					</Row>
+				<Row>
+					<Col className="text-center">
+						<Button className="petBtn my-5" type="submit" size="lg" onClick={handleSubmit}>
+							Registrar una nueva mascota
+						</Button>
+					</Col>
+				</Row>
+				<div className="position-relative">
 					<Toast show={showToast} onClose={closeTost} delay={5000} autohide className="my-4 newPetToast">
-						<Toast.Header>
+						<Toast.Header className="text-align-left">
 							<i className="far fa-hand-point-right" />
-							<strong className="mr-2">Mensaje</strong>
+							<strong className="mr-auto">Mensaje</strong>
 						</Toast.Header>
 						<Toast.Body>{toastMsg}</Toast.Body>
 					</Toast>
-				</span>
+				</div>
 			</Form.Group>
 		</div>
 	);

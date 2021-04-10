@@ -54,22 +54,19 @@ const NewCheckup = props => {
 
 	return (
 		<Container className="registerForms">
-			<Toast
-				show={showToast}
-				onClose={closeToast}
-				delay={5000}
-				autohide
-				className="mt-2 mx-auto newPetControlToast">
-				<Toast.Header>
-					<strong className="mr-auto">Mensaje</strong>
-				</Toast.Header>
-				<Toast.Body>Control fue ingresado con éxito</Toast.Body>
-			</Toast>
+			<div className="position-relative">
+				<Toast show={showToast} onClose={closeToast} delay={5000} autohide className="mt-4 newCheckupToast">
+					<Toast.Header>
+						<strong className="mr-auto">Mensaje</strong>
+					</Toast.Header>
+					<Toast.Body>Control fue ingresado con éxito</Toast.Body>
+				</Toast>
+			</div>
 			<Row>
 				{redirect ? <Redirect to="/vet" /> : ""}
 				<Col>
 					<Form onSubmit={handleSubmit} autoComplete="off" className="p-5 text-center mt-5">
-						<h2>Nuevo Control</h2>
+						<h1>Nuevo Control</h1>
 						<Form.Control
 							type="text"
 							placeholder="Peso"
