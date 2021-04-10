@@ -27,7 +27,7 @@ export const RegisterView = () => {
 	const handleSubmit = e => {
 		e.preventDefault();
 		if (password.length < 6 || password.length > 8) {
-			setToastMsg("El password debe tener entre 6 y 8 carácteres");
+			setToastMsg("El password debe tener entre 6 y 8 números");
 			toggleShowToast();
 		} else if (email != email) {
 			setToastMsg("Digitar formato correcto del mail");
@@ -111,7 +111,7 @@ export const RegisterView = () => {
 						onChange={e => setPassword(e.target.value)}
 						className="pass"
 					/>
-					<Form.Text className="passText">La contraseña debe tener entre 6 a 8 carácteres</Form.Text>
+					<Form.Text className="passText">La contraseña debe tener entre 6 a 8 números</Form.Text>
 				</Form.Group>
 				<Form.Text className="info mt-5">
 					Al hacer clic en Registrate, aceptas nuestras Condiciones, la Política de datos y la Política de

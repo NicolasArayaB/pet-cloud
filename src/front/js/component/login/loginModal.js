@@ -43,7 +43,7 @@ const LoginModal = params => {
 							type="password"
 							placeholder="Ingresa tu contraseña"
 						/>
-						<Form.Text>La contraseña debe tener entre 6 a 8 caracteres</Form.Text>
+						<Form.Text>La contraseña debe tener entre 6 a 8 números</Form.Text>
 					</Form.Group>
 					<Link to="/pass" onClick={params.close}>
 						¿Olvidaste tu contraseña?
