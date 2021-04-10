@@ -67,7 +67,7 @@ export const RegisterView = () => {
 				<Toast.Body>{toastMsg}</Toast.Body>
 			</Toast>
 			<Form autoComplete="off" className="p-5 text-center">
-				<h1>Regístrate</h1>
+				<h1 className="my-4">Regístrate</h1>
 				<Form.Control
 					type="text"
 					placeholder="Nombre"

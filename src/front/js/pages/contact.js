@@ -41,7 +41,7 @@ const Contact = () => {
 				{redirect ? <Redirect to="/" /> : ""}
 				<Row className="justify-content-center">
 					<Col xs={12} md={6}>
-						<Toast show={showToast} onClose={closeTost} className="mt-4 mx-auto">
+						<Toast show={showToast} onClose={closeTost} className="mt-4 mx-auto" autohide>
 							<Toast.Header>
 								<strong className="mr-auto">Muchas gracias</strong>
 							</Toast.Header>
