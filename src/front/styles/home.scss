@@ -1,0 +1,66 @@
+body, html {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.carrusel-images {
+   background-size: cover;
+   border: 2px solid #e37222;
+   border-radius: 5px;
+   height: 160px;
+   overflow: scroll;  
+   resize: both; 
+   width: 1000px; 
+}
+
+.brand-title   {
+    color: #66B9BF;  
+}
+
+.welcome {
+  background-color: #66B9BF;
+  color: #EEEEEE;
+}
+
+.welcomeHeader, .welcomeHeader2 {
+  position: absolute;
+  font-size: 3rem;
+  font-family: 'Londrina Solid', cursive;
+  color: #EEEEEE;
+}
+
+.welcomeHeader {
+  top: 3rem;
+  left: 3rem;
+}
+
+.welcomeHeader2 {
+  top: 10rem;
+  right: 3rem;
+}
+
+.col {
+  margin-right: 0%;
+  margin-left: 0%;
+  padding-left: 0%;
+  padding-right: 0%;
+}
+.cards {
+  background-color: #EEEEEE;
+}
+
+.card-li-item {
+  background-color: transparent;
+}
+
+.contact {
+  background-color: #66B9BF;
+}
+
+.contactLabel {
+  font-size: large;
+}
+
+.contactContainer {
+  border-radius: 15px;
+  background-color: #EEEEEE;
+}

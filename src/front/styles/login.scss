@@ -1,0 +1,75 @@
+.forgottenPass {
+    width: fit-content;
+}
+
+.info {
+    font-size: 10px;
+}
+
+.registerForm {
+    margin-top: 2rem;
+    border: 1px solid #cac8c8;
+    border-radius: 5px;
+}
+
+.modal-header {
+    // background-color: #e37222;
+    background-color: #EEAA7B;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.modal-body a {
+    color: #07889b;
+    border-radius: 10px;
+}
+
+.modal-content {
+    border-radius: 21px;
+}
+
+
+.pass {
+    margin: 1rem 1rem 0 1rem;
+}
+
+.passText {
+    float: left;
+    margin-left: center;
+}
+
+.log-off {
+    color: #66B9BF;
+    box-shadow: 2px 2px 2px #999;
+}
+
+
+// register radio button
+
+ input[type='radio']:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -3px;
+        left: -1px;
+        position: relative;
+        background-color: #d1d3d1;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+    }
+
+    input[type='radio']:checked:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -3px;
+        left: -1px;
+        position: relative;
+        background-color: #66B9BF;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+    }

@@ -1,3 +1,98 @@
-/* 
-    General Styles
-*/
+
+
+.altHeader {
+  color: #EEEEEE;
+  font-weight: bolder;
+}
+
+.container-fluid {
+  padding: 0;
+  text-align: center;
+}
+
+.footer a {
+    color: black;
+    padding: 15px;
+    font-size: small;
+}
+
+h1   {
+    color: #66B9BF;
+    font-weight: bolder;
+}
+
+#loggedButton, #loggedButton:focus, #loggedButton::after {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    color: #EEEEEE
+}
+#loggedButton:hover, .nav-link:hover {
+    color: rgb(214, 213, 213) !important;
+}
+
+.logo {
+    width: 130px;
+};
+
+.navbar-brand {
+    padding: 0;
+}
+
+.navContainer {
+    display: inline !important;
+    justify-content: center;
+}
+
+.navDropDn {
+  left: 87%;
+  border-color: transparent;
+}
+
+.navbar-toggler {
+    border: 3px black;
+}
+
+.petBtn, .petBtn:focus {
+    background-color: #66b9bf !important;
+    border-color: #EEEEEE;
+    border-radius: 15px;
+    color: #EEEEEE;
+    box-shadow: none;
+}
+
+.petBtn:hover {
+  border-color: rgb(214, 213, 213);
+  color: #1D1F23;
+  opacity: 0.9;
+}
+
+.petCloudBar {
+    background-color: #66b9bf !important;
+}
+
+.nav-link {
+  color: #EEEEEE !important;
+  font-size: large;
+}
+
+.toast {
+  position: absolute;
+  width: fit-content;
+}
+
+.newPetToast {
+  bottom: 8rem;
+  left: 26rem;
+}
+
+.registerToast {
+  top: 3rem;
+  left: 23rem;
+}
+
+.newCheckupToast {
+  top: 6rem;
+  left: 26rem;
+  z-index: 1;
+}

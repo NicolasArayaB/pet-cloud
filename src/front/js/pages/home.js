@@ -1,24 +1,37 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
+import React from "react";
+import { Container, Row, Col, Button } from "react-bootstrap";
+
+import CardVet from "../component/home/cardVet";
+import CardUser from "../component/home/cardUser";
 import "../../styles/home.scss";
 
-export const Home = () => {
-	const { store, actions } = useContext(Context);
+import Welcome from "../component/home/welcome";
+import ServicesMain from "../pages/services";
+import Contact from "../pages/contact";
 
+export const Home = () => {
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">{store.message || "Loading message from the backend..."}</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://github.com/4GeeksAcademy/react-flask-hello/tree/95e0540bd1422249c3004f149825285118594325/docs">
-					Read documentation
-				</a>
-			</p>
-		</div>
+		<Container fluid>
+			<Welcome />
+			<section className="cards">
+				<Container fluid>
+					<Row className="mx-5">
+						<Col xs={12} md={6} className="mx-auto pt-5">
+							<CardVet />
+						</Col>
+						<Col xs={12} md={6} className="mx-auto pt-5">
+							<CardUser />
+						</Col>
+						<Col className="mx-auto py-5">
+							<Button className="petBtn btn-lg my-4" href="/register">
+								Regístrate!
+							</Button>
+						</Col>
+					</Row>
+				</Container>
+			</section>
+			<ServicesMain />
+			<Contact />
+		</Container>
 	);
 };

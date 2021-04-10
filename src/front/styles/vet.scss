@@ -1,0 +1,34 @@
+.search-form {
+    margin-top: 10rem;
+}
+
+.search-btn, .search-btn:hover, .search-btn:focus {
+    padding: 0;
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+#search-addon1 {
+    border-top-left-radius: 0%;
+    border-bottom-left-radius: 0%;
+}
+
+.new-pet {
+    margin-top: -10rem;
+}
+
+.petBtn-float-right {
+    margin-top: 70px;
+}
+
+.mt-5-mx-auto {
+    margin-top: 10px;
+}
+
+.newPetControlToast {
+  position: absolute;
+  bottom: 10rem;
+  right: 2rem;
+  width: fit-content;
+}
