@@ -54,7 +54,12 @@ const NewCheckup = props => {
 
 	return (
 		<Container className="registerForms">
-			<Toast show={showToast} onClose={closeToast} delay={5000} autohide className="mt-4 mx-auto">
+			<Toast
+				show={showToast}
+				onClose={closeToast}
+				delay={5000}
+				autohide
+				className="mt-2 mx-auto newPetControlToast">
 				<Toast.Header>
 					<strong className="mr-auto">Mensaje</strong>
 				</Toast.Header>
