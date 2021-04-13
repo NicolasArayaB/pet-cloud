@@ -6,11 +6,12 @@ const Vaccines = props => {
 	let formattedDate = "";
 
 	if (props.date != undefined) {
-		formattedDate = props.date[0]
-			.split("-")
-			.reverse()
-			.join("-");
-
+		if (props.date[0] != undefined) {
+			formattedDate = props.date[0]
+				.split("-")
+				.reverse()
+				.join("-");
+		}
 		console.log(formattedDate);
 	}
 	return (
