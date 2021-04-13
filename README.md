@@ -1,90 +1,60 @@
 # PetCloud
 
-Sistema de veterinarios y dueños de mascota que permita digitalizar la ficha veterinaria de manera simple y en tiempo real
+Sistema de veterinarios y dueños de mascota que permite digitalizar la ficha veterinaria de manera simple y en tiempo real
 
-## Getting Started
+### Tecnologías Utilizadas
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+| Front-End |
+| ------ |
+| HTML |
+| CSS |
+| SASS |
+| JavaScript |
+| React.Js |
+| React-Bootstrap |
 
-### Prerequisites
 
-What things you need to install the software and how to install them
+| Back-End |
+| ------ |
+| Python |
+| Flask |
+| SQLAlchemy |
+| HL7 FHIR |
+| AWS |
 
-```
-Give examples
-```
 
-### Installing
+### Prerequisitos
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Que se debe instalar
 
 ```
-Give an example
+Formato de codigo
 ```
 
-### And coding style tests
+### Instalación
 
-Explain what these tests test and why
+Paso a paso como correr el entorno de desarrollo
 
 ```
-Give an example
+Formato de codigo
 ```
 
-## Deployment
+### Correr el test
 
-Add additional notes about how to deploy this on a live system
+Paso a paso como correr el entorno de desarrollo
 
-## Built With
+```
+Formato de codigo
+```
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Nombre** - *Initial work* - Github
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
-## License
+## Licencia
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
 
 
 
