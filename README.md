@@ -2,7 +2,7 @@
 
 Sistema de veterinarios y dueños de mascota que permite digitalizar la ficha veterinaria de manera simple y en tiempo real
 
-### Tecnologías Utilizadas
+### Tecnologías Utilizadas  🚀
 
 | Front-End |
 | ------ |
@@ -23,7 +23,7 @@ Sistema de veterinarios y dueños de mascota que permite digitalizar la ficha ve
 | AWS |
 
 
-### Prerequisitos
+### Prerequisitos 📋
 
 Que se debe instalar
 
@@ -31,7 +31,7 @@ Que se debe instalar
 Formato de codigo
 ```
 
-### Instalación
+### Instalación 🔧
 
 Paso a paso como correr el entorno de desarrollo
 
@@ -39,7 +39,7 @@ Paso a paso como correr el entorno de desarrollo
 Formato de codigo
 ```
 
-### Correr el test
+### Ejecutar Pruebas ⚙️
 
 Paso a paso como correr el entorno de desarrollo
 
@@ -48,7 +48,7 @@ Formato de codigo
 ```
 
 
-## Authors
+## Autores ✒️
 
 * **Nombre** - *Initial work* - Github
 
