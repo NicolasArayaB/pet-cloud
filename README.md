@@ -1,6 +1,6 @@
-# Project Title
+# PetCloud
 
-One Paragraph of project description goes here
+Sistema de veterinarios y dueños de mascota que permita digitalizar la ficha veterinaria de manera simple y en tiempo real
 
 ## Getting Started
 
