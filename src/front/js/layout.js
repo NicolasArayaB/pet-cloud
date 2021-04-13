@@ -58,7 +58,7 @@ const Layout = () => {
 									<Col xs={12} md={4}>
 										<Card border="0" className="image-dog">
 											<Card.Img
-												src="https://browser-apricot-puffin-v8aea7x1.ws-us03.gitpod.io/workspace/pet-cloud/src/front/img/pet-error-page.png"
+												src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/19.-more-information-user-view/src/front/img/pet-error-page.png"
 												style={{ width: "400px" }}
 												href="/"
 											/>

@@ -30,7 +30,7 @@ const User = () => {
 						<Card border="0">
 							<Card.Img
 								variant="top"
-								src="https://browser-apricot-puffin-v8aea7x1.ws-us03.gitpod.io/workspace/pet-cloud/src/front/img/not-pet-registration.png"
+								src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/19.-more-information-user-view/src/front/img/not-pet-registration.png"
 								style={{ width: "500px", height: "500px", borderRadius: "10px" }}
 							/>
 						</Card>
