@@ -9,6 +9,30 @@ import Vaccines from "../component/vet/vaccinesTable";
 const VetInfo = props => {
 	const { store, actions } = useContext(Context);
 	const chip = props.location.state.chip;
+	let birthDate = "";
+	let gender = "";
+	let species = "";
+
+	if (store.pets.birthDate) {
+		birthDate = store.pets.birthDate
+			.split("-")
+			.reverse()
+			.join("-");
+	}
+
+	if (store.pets.gender == "male") {
+		gender = "Macho";
+	} else if (store.pets.gender == "female") {
+		gender = "Hembra";
+	}
+
+	if (store.pets.species == "Dog") {
+		species = "Perro";
+	} else if (store.pets.species == "Cat") {
+		species = "Gato";
+	} else if (store.pets.species == "Other") {
+		species = "Exótico";
+	}
 
 	useEffect(() => {
 		actions.getPetById(chip);
@@ -16,7 +40,7 @@ const VetInfo = props => {
 
 	return (
 		<Container>
-			<Row className="m-3 mt-5">
+			<Row className="mt-5">
 				<Col />
 				<Col className="text-center mt-5">
 					<h2>{store.pets.name}</h2>
@@ -30,8 +54,13 @@ const VetInfo = props => {
 			<Row className="m-3">
 				<Col className="text-center mt-2">
 					<p>
-						{store.pets.species} | {store.pets.breed} | {store.pets.gender} | {store.pets.birthDate}
+						Especie: {species} | Raza: {store.pets.breed} | Genero: {gender}
 					</p>
+				</Col>
+			</Row>
+			<Row className="m-3">
+				<Col className="text-center mt-2">
+					<p>Fecha de nacimiento: {birthDate}</p>
 				</Col>
 			</Row>
 			<Row className="m-3">
