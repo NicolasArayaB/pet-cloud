@@ -8,7 +8,8 @@ import Vaccines from "../component/vet/vaccinesTable";
 
 const VetInfo = props => {
 	const { store, actions } = useContext(Context);
-	const chip = props.location.state.chip;
+	// const chip = props.location.state.chip;
+	const chip = props.chip;
 	let birthDate = "";
 	let gender = "";
 	let species = "";
@@ -40,14 +41,14 @@ const VetInfo = props => {
 
 	return (
 		<Container>
-			<Row className="mt-5">
+			<Row>
 				<Col />
-				<Col className="text-center mt-5">
+				<Col className="text-center">
 					<h2>{store.pets.name}</h2>
 				</Col>
 				<Col>
 					<Link to={{ pathname: "/checkup", state: { chip: chip } }}>
-						<Button className="petBtn float-right my-5">Nuevo Control</Button>
+						<Button className="petBtn float-right">Nuevo Control</Button>
 					</Link>
 				</Col>
 			</Row>
@@ -80,10 +81,11 @@ const VetInfo = props => {
 	);
 
 	VetInfo.propTypes = {
-		location: PropTypes.shape({
-			pathname: PropTypes.string.isRequired,
-			state: PropTypes.object.isRequired
-		}).isRequired
+		// location: PropTypes.shape({
+		// 	pathname: PropTypes.string.isRequired,
+		// 	state: PropTypes.object.isRequired
+		// }).isRequired
+		chip: PropTypes.integer
 	};
 };
 

@@ -13,13 +13,14 @@ const NewCheckup = props => {
 	};
 
 	const formReducer = (state, action) => {
-		if (action.type == "HANDLE INPUT TEXT") {
+		if (action.type == "TEXT") {
 			return {
 				...state,
 				[action.field]: action.payload
 			};
 		} else state;
 	};
+
 	const { store, actions } = useContext(Context);
 	const [formState, dispatch] = useReducer(formReducer, initialFormState);
 	const [showToast, setShowToast] = useState(false);
@@ -28,7 +29,7 @@ const NewCheckup = props => {
 
 	const handleTextChange = e => {
 		dispatch({
-			type: "HANDLE INPUT TEXT",
+			type: "TEXT",
 			field: e.target.name,
 			payload: e.target.value
 		});
@@ -63,7 +64,7 @@ const NewCheckup = props => {
 				</Toast>
 			</div>
 			<Row>
-				{redirect ? <Redirect to="/vet" /> : ""}
+				{redirect ? <Redirect to={{ pathname: "/vet", state: { chip: chip } }} /> : ""}
 				<Col>
 					<Form onSubmit={handleSubmit} autoComplete="off" className="p-5 text-center mt-5">
 						<h1>Nuevo Control</h1>
