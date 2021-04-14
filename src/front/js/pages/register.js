@@ -13,7 +13,6 @@ export const RegisterView = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isVet, setIsVet] = useState("0");
-	const [validated, setValidated] = useState(false);
 	const [redirect, setRedirect] = useState(null);
 
 	const expresions = {
@@ -43,7 +42,7 @@ export const RegisterView = () => {
 				icon: "info",
 				title: "El password debe tener entre 6 y 8 carácteres"
 			});
-		} else if (email != email) {
+		} else if (email != email.match(expresions.email)) {
 			ShowAlert.fire({
 				icon: "info",
 				title: "Digitar formato correcto del mail ejemplo@gmail.com"
@@ -61,7 +60,7 @@ export const RegisterView = () => {
 				icon: "success",
 				title: "Usuario registrado en forma exitosa"
 			});
-			setValidated(true);
+			setRedirect(true);
 		} else {
 			e.preventDefault();
 			ShowAlert.fire({
