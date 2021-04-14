@@ -1,3 +1,74 @@
+# PetCloud
+
+Sistema de veterinarios y dueños de mascota que permite digitalizar la ficha veterinaria de manera simple y en tiempo real
+
+## Funcionalidades
+
+### Dueños de Mascota
+El dueño de mascota puede registrarse como usuario, puede indentificarse para poder ver la información de las mascotas asociadas a su usuario
+
+### Veterinario
+El veterinario puede crear nuevas mascotas asociadas al codigo de identificación de la mascota segun el registro nacional de mascotas, ademas puede modificar los datos de cada mascota.
+
+
+## Tecnologías Utilizadas  🚀
+
+| Front-End |
+| ------ |
+| HTML |
+| CSS |
+| SASS |
+| JavaScript |
+| React.Js |
+| React-Bootstrap |
+
+
+| Back-End |
+| ------ |
+| Python |
+| Flask |
+| SQLAlchemy |
+| HL7 FHIR |
+| AWS |
+
+
+## Prerequisitos 📋
+
+Que se debe instalar
+
+```
+Formato de codigo
+```
+
+## Instalación 🔧
+
+Paso a paso como correr el entorno de desarrollo
+
+```
+Formato de codigo
+```
+
+## Ejecutar Pruebas ⚙️
+
+Paso a paso como correr el entorno de desarrollo
+
+```
+Formato de codigo
+```
+
+
+## Autores ✒️
+
+* **Nombre** - *Initial work* - Github
+
+
+## Licencia
+
+
+
+
+
+
 # WebApp boilerplate with React JS
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/4GeeksAcademy/react-flask-hello.git)
 
