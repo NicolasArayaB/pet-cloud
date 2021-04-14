@@ -2,7 +2,16 @@
 
 Sistema de veterinarios y dueños de mascota que permite digitalizar la ficha veterinaria de manera simple y en tiempo real
 
-### Tecnologías Utilizadas  🚀
+## Funcionalidades
+
+### Dueños de Mascota
+El dueño de mascota puede registrarse como usuario, puede indentificarse para poder ver la información de las mascotas asociadas a su usuario
+
+### Veterinario
+El veterinario puede crear nuevas mascotas asociadas al codigo de identificación de la mascota segun el registro nacional de mascotas, ademas puede modificar los datos de cada mascota.
+
+
+## Tecnologías Utilizadas  🚀
 
 | Front-End |
 | ------ |
@@ -23,7 +32,7 @@ Sistema de veterinarios y dueños de mascota que permite digitalizar la ficha ve
 | AWS |
 
 
-### Prerequisitos 📋
+## Prerequisitos 📋
 
 Que se debe instalar
 
@@ -31,7 +40,7 @@ Que se debe instalar
 Formato de codigo
 ```
 
-### Instalación 🔧
+## Instalación 🔧
 
 Paso a paso como correr el entorno de desarrollo
 
@@ -39,7 +48,7 @@ Paso a paso como correr el entorno de desarrollo
 Formato de codigo
 ```
 
-### Ejecutar Pruebas ⚙️
+## Ejecutar Pruebas ⚙️
 
 Paso a paso como correr el entorno de desarrollo
 
