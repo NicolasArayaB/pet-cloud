@@ -55,10 +55,26 @@ const Contact = () => {
 							<Form noValidate validated={validated} onSubmit={handleSubmit}>
 								<Form.Group controlId="roleFormControl">
 									<Form.Label className="contactLabel">Selecciona tu perfil</Form.Label>
-									<Form.Control className="contactInput" as="select" name="role">
-										<option>Soy Médico Veterinario</option>
-										<option>Soy Dueño de mascota</option>
-									</Form.Control>
+									<Container>
+										<Row>
+											<Col>
+												<Form.Check
+													type="radio"
+													label="Soy Médico Veterinario"
+													name="inlineRadioOptions"
+													value="Soy Médico Veterinario"
+												/>
+											</Col>
+											<Col>
+												<Form.Check
+													type="radio"
+													label="Soy Dueño de mascota"
+													name="inlineRadioOptions"
+													value="Soy Dueño de mascota"
+												/>
+											</Col>
+										</Row>
+									</Container>
 								</Form.Group>
 								<Form.Group controlId="nameFormControl">
 									<Form.Control
@@ -67,7 +83,6 @@ const Contact = () => {
 										type="text"
 										placeholder="Ingresa tu Nombre y Apellido"
 									/>
-									<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
 								</Form.Group>
 								<Form.Group controlId="emailFormControl">
 									<Form.Control
@@ -76,7 +91,6 @@ const Contact = () => {
 										placeholder="Ingresa tu mail: nombre@ejemplo.com"
 										required
 									/>
-									<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
 								</Form.Group>
 								<Form.Group controlId="messageFormControl">
 									<Form.Label className="contactLabel">Cuéntanos de tu problema</Form.Label>
