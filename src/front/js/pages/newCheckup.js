@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 import "../../styles/login.scss";
+import Swal from "sweetalert2";
 
 const NewCheckup = props => {
 	const initialFormState = {
@@ -23,7 +24,6 @@ const NewCheckup = props => {
 
 	const { store, actions } = useContext(Context);
 	const [formState, dispatch] = useReducer(formReducer, initialFormState);
-	const [showToast, setShowToast] = useState(false);
 	const [redirect, setRedirect] = useState(null);
 	const chip = props.location.state.chip;
 
@@ -35,18 +35,31 @@ const NewCheckup = props => {
 		});
 	};
 
+	const ShowAlert = Swal.mixin({
+		toast: true,
+		position: "bottom",
+		showConfirmButton: true,
+		confirmButtonColor: "#EEAA7B",
+		cancelButtonText: "Ok",
+		timer: 4000,
+		timerProgressBar: true,
+		didOpen: toast => {
+			toast.addEventListener("mouseenter", Swal.stopTimer);
+			toast.addEventListener("mouseleave", Swal.resumeTimer);
+		}
+	});
+
 	const handleSubmit = e => {
 		e.preventDefault();
 		const petId = store.petById.id;
 		actions.newPetObservation(petId, formState.weight, "Kg");
 		actions.newPetVaccine(petId, formState.vaccines, "2");
 		actions.newPetCondition(petId, formState.condition);
-		setShowToast(true);
-	};
-
-	const closeToast = () => {
+		ShowAlert.fire({
+			icon: "success",
+			title: "Control fue ingresado con éxito"
+		});
 		setRedirect(true);
-		setShowToast(!showToast);
 	};
 
 	useEffect(() => {
@@ -55,14 +68,6 @@ const NewCheckup = props => {
 
 	return (
 		<Container className="registerForms">
-			<div className="position-relative">
-				<Toast show={showToast} onClose={closeToast} delay={5000} autohide className="mt-4 newCheckupToast">
-					<Toast.Header>
-						<strong className="mr-auto">Mensaje</strong>
-					</Toast.Header>
-					<Toast.Body>Control fue ingresado con éxito</Toast.Body>
-				</Toast>
-			</div>
 			<Row>
 				{redirect ? <Redirect to={{ pathname: "/vet", state: { chip: chip } }} /> : ""}
 				<Col>

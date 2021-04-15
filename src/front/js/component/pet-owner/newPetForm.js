@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
-import { Form, Col, Button, Row, Toast, InputGroup } from "react-bootstrap";
+import { Form, Col, Button, Row, InputGroup } from "react-bootstrap";
 import { Context } from "../../store/appContext";
 import { Redirect } from "react-router-dom";
 import { string } from "prop-types";
+import Swal from "sweetalert2";
 
 const NewPetForm = () => {
 	const { actions } = useContext(Context);
@@ -19,10 +20,7 @@ const NewPetForm = () => {
 	const [address, setAddress] = useState("");
 	const [phone, setPhone] = useState("");
 	const [email, setEmail] = useState("");
-	const [validated, setValidated] = useState("");
-	const [toastMsg, setToastMsg] = useState("");
 	const [redirect, setRedirect] = useState("");
-	const [showToast, setShowToast] = useState(false);
 
 	const expresions = {
 		identifier: /^\d{15}$/, // 15 numbers
@@ -30,20 +28,54 @@ const NewPetForm = () => {
 		phone: /^\d{9}$/ // 9 numbers
 	};
 
-	const toggleShowToast = () => setShowToast(!showToast);
-
 	const handleSubmit = e => {
 		e.preventDefault();
+
+		const ShowAlert = Swal.mixin({
+			toast: true,
+			position: "bottom",
+			showConfirmButton: true,
+			confirmButtonColor: "#EEAA7B",
+			cancelButtonText: "Ok",
+			timer: 4000,
+			timerProgressBar: true,
+			didOpen: toast => {
+				toast.addEventListener("mouseenter", Swal.stopTimer);
+				toast.addEventListener("mouseleave", Swal.resumeTimer);
+			}
+		});
+
 		console.log("Submitted");
-		if (identifier.length != 15) {
-			setToastMsg("El CHIP debe tener sólo 15 digitos.");
-			toggleShowToast();
-		} else if (email != email) {
-			setToastMsg("Digitar formato correcto del mail");
-			toggleShowToast();
-		} else if (phone != phone) {
-			setToastMsg("Digitar formato correcto del teléfono");
-			toggleShowToast();
+		if (
+			gender == "" ||
+			birthDate == "" ||
+			species == "" ||
+			breed == "" ||
+			genderStatus == "" ||
+			petOwner_name == "" ||
+			petOwner_mother == "" ||
+			petOwner_father == "" ||
+			address == ""
+		) {
+			ShowAlert.fire({
+				icon: "info",
+				title: "Todos los campos son requeridos."
+			});
+		} else if (identifier.length != 15) {
+			ShowAlert.fire({
+				icon: "info",
+				title: "El CHIP debe tener sólo 15 digitos."
+			});
+		} else if (email != email.match(expresions.email)) {
+			ShowAlert.fire({
+				icon: "info",
+				title: "Digitar formato correcto del mail ejemplo@gmail.com"
+			});
+		} else if (phone != phone.match(expresions.phone)) {
+			ShowAlert.fire({
+				icon: "info",
+				title: "Digitar formato correcto del teléfono"
+			});
 		} else if (
 			identifier == identifier.match(expresions.identifier) &&
 			email == email.match(expresions.email) &&
@@ -65,20 +97,13 @@ const NewPetForm = () => {
 				email
 			);
 			actions.petCloudNewPet(name, identifier, email);
-			setToastMsg("Mascota ingresada en forma exitosa.");
-			setValidated(true);
-			toggleShowToast();
-		} else {
-			e.preventDefault();
-			setToastMsg("Todos los campos son requeridos");
-			toggleShowToast();
+			ShowAlert.fire({
+				icon: "success",
+				title: "Mascota ingresada en forma exitosa."
+			});
+			setRedirect(true);
 			console.log("You have an error");
 		}
-	};
-
-	const closeTost = () => {
-		toggleShowToast();
-		validated ? setRedirect(true) : "";
 	};
 
 	return (
@@ -115,7 +140,7 @@ const NewPetForm = () => {
 				<br />
 				<Form.Row>
 					<Form.Label column lg={2}>
-						Chip ID
+						Chip Id
 					</Form.Label>
 					<Col>
 						<Form.Control
@@ -123,7 +148,7 @@ const NewPetForm = () => {
 							name="identifier"
 							value={identifier}
 							onChange={e => setIdentifier(e.target.value)}
-							placeholder="Ingresa el Chip ID"
+							placeholder="Ingresa el Chip Id"
 						/>
 					</Col>
 				</Form.Row>
@@ -332,15 +357,6 @@ const NewPetForm = () => {
 						</Button>
 					</Col>
 				</Row>
-				<div className="position-relative">
-					<Toast show={showToast} onClose={closeTost} delay={5000} autohide className="my-4 newPetToast">
-						<Toast.Header className="text-align-left">
-							<i className="far fa-hand-point-right" />
-							<strong className="mr-auto">Mensaje</strong>
-						</Toast.Header>
-						<Toast.Body>{toastMsg}</Toast.Body>
-					</Toast>
-				</div>
 			</Form.Group>
 		</div>
 	);
