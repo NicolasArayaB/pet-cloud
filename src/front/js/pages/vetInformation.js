@@ -8,7 +8,6 @@ import Vaccines from "../component/vet/vaccinesTable";
 
 const VetInfo = props => {
 	const { store, actions } = useContext(Context);
-	// const chip = props.location.state.chip;
 	const chip = props.chip;
 	let birthDate = "";
 	let gender = "";
@@ -74,7 +73,7 @@ const VetInfo = props => {
 					/>
 				</Col>
 				<Col md={6}>
-					<Vaccines date={store.vaccines.date} vaccine={store.vaccines.vaccine} />
+					<Vaccines date={store.vaccines.date} vaccine={store.vaccines.vaccine} dose={store.vaccines.dose} />
 				</Col>
 			</Row>
 		</Container>
