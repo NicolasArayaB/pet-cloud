@@ -44,7 +44,11 @@ const VetInfo = props => {
 			<Row>
 				<Col />
 				<Col className="text-center">
-					<h2>{store.pets.name}</h2>
+					<h2 className="pet-name-control">
+						<i className="fas fa-paw" />
+						{store.pets.name}
+						<i className="fas fa-paw" />
+					</h2>
 				</Col>
 				<Col>
 					<Link to={{ pathname: "/checkup", state: { chip: chip } }}>
@@ -55,7 +59,8 @@ const VetInfo = props => {
 			<Row className="m-3">
 				<Col className="text-center mt-2">
 					<p>
-						Especie: {species} | Raza: {store.pets.breed} | Genero: {gender}
+						<strong>Especie: </strong>
+						{species} | <strong>Raza: </strong> {store.pets.breed} | <strong>Género </strong> {gender}
 					</p>
 				</Col>
 			</Row>
