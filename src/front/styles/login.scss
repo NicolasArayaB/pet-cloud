@@ -38,12 +38,19 @@
     margin-left: center;
 }
 
-.log-off {
+.log-off-menu {
     color: #66B9BF;
-    box-shadow: 2px 2px 2px #999;
+    box-shadow: 3px 3px 3px #999;
+    margin-top: 3.5rem;
 }
 
+.log-off-menu:active {
+    background-color: #EEAA7B;
+}
 
+.log-off:hover {
+    background-color: transparent;
+}
 // register radio button
 
  input[type='radio']:after {

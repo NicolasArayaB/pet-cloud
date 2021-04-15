@@ -27,7 +27,7 @@ const Vaccines = props => {
 				<tr>
 					<th>{props.vaccine}</th>
 					<th>{formattedDate}</th>
-					<th>2/3</th>
+					<th>{props.dose}</th>
 				</tr>
 			</tbody>
 		</Table>
@@ -36,7 +36,8 @@ const Vaccines = props => {
 
 Vaccines.propTypes = {
 	vaccine: PropTypes.string,
-	date: PropTypes.string
+	date: PropTypes.string,
+	dose: PropTypes.string
 };
 
 export default Vaccines;

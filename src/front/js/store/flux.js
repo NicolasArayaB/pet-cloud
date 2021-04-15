@@ -267,14 +267,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (data.entry != undefined) {
 							const vaccine = {
 								vaccine: data.entry[0].resource.vaccineCode.text,
-								date: data.meta.lastUpdated.split("T")
+								date: data.meta.lastUpdated.split("T"),
+								dose:
+									data.entry[0].resource.doseQuantity.value +
+									" " +
+									data.entry[0].resource.doseQuantity.code
 							};
 							setStore({ vaccines: vaccine });
 						} else setStore({ vaccines: { vaccine: "", date: "" } });
 					});
 			},
 
-			newPetVaccine: (petId, vaccine, value) => {
+			newPetVaccine: (petId, vaccine, quantity, code) => {
 				const vacData = {
 					resourceType: "Immunization",
 					id: petId,
@@ -293,9 +297,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					occurrenceDateTime: "2020-01-10",
 					doseQuantity: {
-						value: value,
+						value: quantity,
 						system: "http://unitsofmeasure.org",
-						code: "UI"
+						code: code
 					}
 				};
 				fetch(`https://fhir.cens.cl/baseR4/Immunization?patient=${petId}`, {
