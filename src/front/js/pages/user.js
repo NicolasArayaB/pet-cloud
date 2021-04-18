@@ -24,16 +24,14 @@ const User = () => {
 		return (
 			<div>
 				<h1 className="titlePet">No tienes mascotas inscritas :(</h1>
-				<h1> dirígete a tu veterinaria más cercana para que obtengas tu CHIP</h1>
-				<Row className="justify-content-center">
-					<Col xs={12} md={4}>
-						<Card border="0">
-							<Card.Img
-								variant="top"
-								src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/19.-more-information-user-view/src/front/img/not-pet-registration.png"
-								style={{ width: "500px", height: "500px", borderRadius: "10px" }}
-							/>
-						</Card>
+				<h2 className="titlePet_not_found"> Dirígete a tu veterinaria más cercana para que obtengas tu CHIP</h2>
+				<Row>
+					<Col sm className="titlePet_not_found">
+						<img
+							className="rounded"
+							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/19.-more-information-user-view/src/front/img/not-pet-registration.png"
+							style={{ width: "25rem" }}
+						/>
 					</Col>
 				</Row>
 			</div>
