@@ -7,30 +7,30 @@ const CardInfoVet = () => {
 	return (
 		<Container>
 			<Row>
-				<Col>
+				<Col sm>
 					<img
 						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/15-create-services-view/src/front/img/Services4.png"
 						style={{ width: "5rem" }}
 					/>
-					<p className="mt-4" style={{ color: "grey" }}>
+					<p className="mt-2 p-4" style={{ color: "grey" }}>
 						Enrola fácilmente a los veterinarios en nuestra aplicación
 					</p>
 				</Col>
-				<Col>
+				<Col sm>
 					<img
 						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/15-create-services-view/src/front/img/Services5.png"
 						style={{ width: "5rem" }}
 					/>
-					<p className="mt-4" style={{ color: "grey" }}>
+					<p className="mt-2 p-4" style={{ color: "grey" }}>
 						Agrega mascotas en forma estándar en tu registro clínico
 					</p>
 				</Col>
-				<Col>
+				<Col sm>
 					<img
 						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/15-create-services-view/src/front/img/Services6.png"
 						style={{ width: "5rem" }}
 					/>
-					<p className="mt-4" style={{ color: "grey" }}>
+					<p className="mt-2 p-4" style={{ color: "grey" }}>
 						Crea nuevos controles para las mascotas
 					</p>
 				</Col>
