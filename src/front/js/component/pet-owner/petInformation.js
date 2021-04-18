@@ -6,6 +6,21 @@ import PropTypes from "prop-types";
 export const PetInformation = props => {
 	const { store, actions } = useContext(Context);
 	const chip = props.location.state.chip_identifier;
+	const cloudName = "pet-cloud-img";
+	const uploadPreset = "fffnsmp9";
+
+	const myWidget = cloudinary.createUploadWidget(
+		{
+			cloudName,
+			uploadPreset
+			// sources: ['local', 'url']
+		},
+		(error, result) => {
+			if (!error && result && result.event === "success") {
+				console.log(`Done! Here is the image info: ${JSON.stringify(result.info)}`);
+			}
+		}
+	);
 
 	useEffect(async () => {
 		await actions.getPetById(chip);
@@ -21,6 +36,9 @@ export const PetInformation = props => {
 						style={{ height: "200px" }}
 						roundedCircle
 					/>
+				</Col>
+				<Col>
+					<button id="upload_widget" className="cloudinary-button ImgBtn" onClick={() => myWidget.open()}>+</button>
 				</Col>
 			</Row>
 			<Row className="text-center">
