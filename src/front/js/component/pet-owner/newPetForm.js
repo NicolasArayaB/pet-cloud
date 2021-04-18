@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
-import { Form, Col, Button, Row, InputGroup } from "react-bootstrap";
+import { Form, Col, Button, Row, InputGroup, FormControl } from "react-bootstrap";
 import { Context } from "../../store/appContext";
 import { Redirect } from "react-router-dom";
 import { string } from "prop-types";
 import Swal from "sweetalert2";
+import GoogleAddress from "../googleAddress";
 
 const NewPetForm = () => {
 	const { actions } = useContext(Context);
@@ -101,6 +102,7 @@ const NewPetForm = () => {
 				icon: "success",
 				title: "Mascota ingresada en forma exitosa."
 			});
+
 			setRedirect(true);
 			console.log("You have an error");
 		}
@@ -305,13 +307,7 @@ const NewPetForm = () => {
 						Dirección
 					</Form.Label>
 					<Col>
-						<Form.Control
-							type="text"
-							name="address"
-							value={address}
-							onChange={e => setAddress(e.target.value)}
-							placeholder="Ingresa Dirección, Comuna y Ciudad"
-						/>
+						<GoogleAddress />
 					</Col>
 				</Form.Row>
 				<br />

@@ -10,7 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			vaccines: {},
 			role: {},
 			userPets: [],
-			id: []
+			id: [],
+			address: []
 		},
 
 		actions: {
@@ -483,6 +484,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("Unexpected error");
 					});
 			}
+
+			// getOwnerAddress: () => {
+			// 	fetch(`https://maps.googleapis.com/maps/api/js?language=es&libraries=places&key=` + API_KEY, {
+			// 		method: "GET",
+			// 		headers: { "Content-type": "application/json" }
+			// 	})
+			// 		.then(response => response.json())
+			// 		.then(data => {
+			// 			if (data.predictions != []) {
+			// 				const address = data.predictions[0].description;
+			// 				setStore({ address: address });
+			// 			} else {
+			// 				setStore({ address: "" });
+			// 			}
+			// 		});
+			// }
 		}
 	};
 };
