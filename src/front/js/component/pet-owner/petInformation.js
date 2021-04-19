@@ -28,17 +28,24 @@ export const PetInformation = props => {
 
 	return (
 		<Container>
-			<Row className="text-center">
+			<Row className="text-center mt-5">
 				<Col xs={12} md={12}>
 					<h2 className="pet-name">Hola {store.petById.name} </h2>
-					<Image
-						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
-						style={{ height: "200px" }}
-						roundedCircle
-					/>
-				</Col>
-				<Col>
-					<button id="upload_widget" className="cloudinary-button ImgBtn" onClick={() => myWidget.open()}>+</button>
+					<figure className="position-relative">
+						<Image
+							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
+							style={{ height: "200px" }}
+							roundedCircle
+							className="my-3"
+						/>
+						<div
+							role="button"
+							id="upload_widget"
+							className="cloudinary-button ImgBtn"
+							onClick={() => myWidget.open()}>
+							<i className="fas fa-camera" />
+						</div>
+					</figure>
 				</Col>
 			</Row>
 			<Row className="text-center">
