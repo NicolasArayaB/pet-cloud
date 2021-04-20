@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from "react";
-import { Container, Row, Col, ListGroup, ListGroupItem, Form, Image } from "react-bootstrap";
+import { Container, Row, Col, ListGroup, ListGroupItem, Form, Image, Button } from "react-bootstrap";
 import { Context } from "../../store/appContext";
 import PropTypes from "prop-types";
 
 export const PetInformation = props => {
 	const { store, actions } = useContext(Context);
 	const chip = props.location.state.chip_identifier;
+	const id = props.location.state.id;
+
 	const cloudName = "pet-cloud-img";
 	const uploadPreset = "fffnsmp9";
 
@@ -18,12 +20,18 @@ export const PetInformation = props => {
 		(error, result) => {
 			if (!error && result && result.event === "success") {
 				console.log(`Done! Here is the image info: ${JSON.stringify(result.info)}`);
+				actions.imgUpload(result.info.url, id);
 			}
 		}
 	);
 
+	const handleClick = () => {
+		myWidget.open();
+	};
+
 	useEffect(async () => {
 		await actions.getPetById(chip);
+		await actions.getPetCloudById(id);
 	}, []);
 
 	return (
@@ -33,7 +41,11 @@ export const PetInformation = props => {
 					<h2 className="pet-name">Hola {store.petById.name} </h2>
 					<figure className="position-relative">
 						<Image
-							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
+							src={
+								store.petCloudPet
+									? store.petCloudPet.url
+									: "https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
+							}
 							style={{ height: "200px" }}
 							roundedCircle
 							className="my-3"
@@ -42,7 +54,7 @@ export const PetInformation = props => {
 							role="button"
 							id="upload_widget"
 							className="cloudinary-button ImgBtn"
-							onClick={() => myWidget.open()}>
+							onClick={() => handleClick()}>
 							<i className="fas fa-camera" />
 						</div>
 					</figure>
@@ -162,6 +174,13 @@ export const PetInformation = props => {
 							</Form>
 						</ListGroupItem>
 					</ListGroup>
+				</Col>
+			</Row>
+			<Row>
+				<Col className="text-center my-5">
+					<Button className="petBtn" type="button" href="/user">
+						Volver a mis mascotas
+					</Button>
 				</Col>
 			</Row>
 		</Container>

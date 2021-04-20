@@ -13,7 +13,10 @@ const PetPhoto = props => {
 			<CardGroup className="marginGroup">
 				{redirect ? (
 					<Redirect
-						to={{ pathname: "/user/information", state: { chip_identifier: props.chip_identifier } }}
+						to={{
+							pathname: "/user/information",
+							state: { chip_identifier: props.chip_identifier, id: props.id }
+						}}
 					/>
 				) : (
 					""
@@ -23,7 +26,11 @@ const PetPhoto = props => {
 						<Card.Img
 							className="rounded-circle mx-5"
 							variant="top"
-							src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
+							src={
+								props.img_url
+									? props.img_url
+									: "https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
+							}
 							style={{ width: "12rem" }}
 						/>
 						<ListGroup className="pets-list" variant="list-group-flush">
@@ -38,7 +45,9 @@ const PetPhoto = props => {
 
 PetPhoto.propTypes = {
 	name: PropTypes.string,
-	chip_identifier: PropTypes.string
+	chip_identifier: PropTypes.string,
+	img_url: PropTypes.string,
+	id: PropTypes.integer
 };
 
 export default PetPhoto;
