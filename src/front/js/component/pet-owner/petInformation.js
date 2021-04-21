@@ -1,10 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { Container, Row, Col, ListGroup, ListGroupItem, Form, Image, Button } from "react-bootstrap";
-import { Context } from "../../store/appContext";
+import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Context } from "../../store/appContext";
 
 export const PetInformation = props => {
 	const { store, actions } = useContext(Context);
+	const history = useHistory();
+
 	const chip = props.location.state.chip_identifier;
 	const id = props.location.state.id;
 
@@ -21,6 +24,7 @@ export const PetInformation = props => {
 			if (!error && result && result.event === "success") {
 				console.log(`Done! Here is the image info: ${JSON.stringify(result.info)}`);
 				actions.imgUpload(result.info.url, id);
+				history.go();
 			}
 		}
 	);
@@ -42,11 +46,11 @@ export const PetInformation = props => {
 					<figure className="position-relative">
 						<Image
 							src={
-								store.petCloudPet
+								store.petCloudPet.url
 									? store.petCloudPet.url
 									: "https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
 							}
-							style={{ height: "200px" }}
+							style={{ width: "200px", height: "200px" }}
 							roundedCircle
 							className="my-3"
 						/>
