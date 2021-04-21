@@ -97,3 +97,18 @@ h1   {
   z-index: 1;
 }
 
+.ImgBtn {
+    position: absolute;
+    bottom: 1rem;
+    left: 57%;
+    width: fit-content;
+    height: fit-content;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 2em;
+    border-radius: 50%;
+    background-color: transparent;
+    color: black;
+}

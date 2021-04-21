@@ -142,11 +142,13 @@ def register():
 def new_pet():
     name = request.json.get("name", None)
     chip_identifier = request.json.get("chip", None)
+    img_url = request.json.get("url", None)
     userEmail = request.json.get("email", None)
 
     pet = Pet()
     pet.name = name
     pet.chip_identifier = chip_identifier
+    pet.img_url = img_url
     pet.user_email = userEmail
 
     db.session.add(pet)
@@ -155,5 +157,23 @@ def new_pet():
     response_token = {
         "msg": "Pet added successfully"   
     }
+
+    return jsonify(response_token), 201
+
+@api.route('/pet/<int:id>', methods=['GET', 'PUT'])
+def img_upload(id):
+    pet = Pet.query.get(id)
+
+    if request.method == 'PUT':    
+        pet.img_url = request.json.get("url", None)
+        db.session.commit()
+
+        response_token = {
+            "msg": "Image uploaded succesfully"
+        }
+    else:
+        response_token = {
+            "pet": pet.serialize()
+        }
 
     return jsonify(response_token), 200
