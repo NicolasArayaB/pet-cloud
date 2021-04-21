@@ -11,7 +11,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			role: {},
 			userPets: [],
 			id: [],
-			address: []
+			imgUrl: {},
+			petCloudPet: {}
 		},
 
 		actions: {
@@ -111,21 +112,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: { "Content-type": "application/json" }
 				});
 				const data = await request.json();
-				const dataPets = {
-					id: data.entry[0].resource.id,
-					name: data.entry[0].resource.name[0].given[0],
-					chip: data.entry[0].resource.identifier[0].value,
-					species: data.entry[0].resource.extension[0].extension[0].valueCodeableConcept.coding[0].display,
-					breed: data.entry[0].resource.extension[0].extension[1].valueCodeableConcept.coding[0].display,
-					gender: data.entry[0].resource.gender,
-					birthDate: data.entry[0].resource.birthDate,
-					petOwner_name: data.entry[0].resource.contact[0].name.given[0],
-					petOwner_father: data.entry[0].resource.contact[0].name.extension[0].valueString,
-					petOwner_mother: data.entry[0].resource.contact[0].name.extension[1].valueString,
-					address: data.entry[0].resource.contact[0].address.line[0],
-					phone: data.entry[0].resource.contact[0].telecom[0].value,
-					email: data.entry[0].resource.contact[0].telecom[1].value
-				};
+				console.log(data, "getpetbyid");
+				const dataPets = data.entry
+					? {
+							id: data.entry[0].resource.id,
+							name: data.entry[0].resource.name[0].given[0],
+							chip: data.entry[0].resource.identifier[0].value,
+							species:
+								data.entry[0].resource.extension[0].extension[0].valueCodeableConcept.coding[0].display,
+							breed:
+								data.entry[0].resource.extension[0].extension[1].valueCodeableConcept.coding[0].display,
+							gender: data.entry[0].resource.gender,
+							birthDate: data.entry[0].resource.birthDate,
+							petOwner_name: data.entry[0].resource.contact[0].name.given[0],
+							petOwner_father: data.entry[0].resource.contact[0].name.extension[0].valueString,
+							petOwner_mother: data.entry[0].resource.contact[0].name.extension[1].valueString,
+							address: data.entry[0].resource.contact[0].address.line[0],
+							phone: data.entry[0].resource.contact[0].telecom[0].value,
+							email: data.entry[0].resource.contact[0].telecom[1].value
+					  }
+					: "";
 
 				setStore({ petById: dataPets });
 
@@ -355,8 +361,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(data => {
 						let userPets = data.pets.filter(selectPets);
-
 						setStore({ userPets: userPets });
+						console.log(userPets, "userPets");
 					})
 					.catch(error => console.log(error));
 			},
@@ -470,7 +476,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const petCloudNewPet = {
 					name: name,
 					chip: identifier,
-					email: email
+					email: email,
+					url: ""
 				};
 
 				fetch(process.env.BACKEND_URL + "/api/pet", {
@@ -480,26 +487,46 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => console.log("Pet has been registered"))
-					.catch(error => {
-						console.log("Unexpected error");
-					});
-			}
+					.catch(error => console.log("Unexpected error"));
+			},
 
-			// getOwnerAddress: () => {
-			// 	fetch(`https://maps.googleapis.com/maps/api/js?language=es&libraries=places&key=` + API_KEY, {
-			// 		method: "GET",
-			// 		headers: { "Content-type": "application/json" }
-			// 	})
-			// 		.then(response => response.json())
-			// 		.then(data => {
-			// 			if (data.predictions != []) {
-			// 				const address = data.predictions[0].description;
-			// 				setStore({ address: address });
-			// 			} else {
-			// 				setStore({ address: "" });
-			// 			}
-			// 		});
-			// }
+			getPetCloudById: id => {
+				fetch(process.env.BACKEND_URL + `/api/pet/${id}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						console.log(data);
+						const petData = {
+							name: data.pet.name,
+							email: data.pet.user_email,
+							url: data.pet.img_url,
+							chip: data.pet.chip_identifier
+						};
+						setStore({ petCloudPet: petData });
+						console.log(petData, "petData");
+					});
+			},
+
+			imgUpload: (url, id) => {
+				const dataWithImg = {
+					url: url
+				};
+				console.log(dataWithImg, "dataWithImg");
+
+				fetch(process.env.BACKEND_URL + `/api/pet/${id}`, {
+					method: "PUT",
+					body: JSON.stringify(dataWithImg),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						console.log("Pet image has been uploaded");
+						setStore({ imgUrl: data });
+					})
+					.catch(error => console.log("Unexpected error"));
+			}
 		}
 	};
 };

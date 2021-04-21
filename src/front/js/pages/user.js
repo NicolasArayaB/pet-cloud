@@ -7,6 +7,8 @@ import "../../styles/user.scss";
 const User = () => {
 	const { store, actions } = useContext(Context);
 
+	console.log(store.userPets, "Store.userPets");
+
 	useEffect(async () => {
 		await actions.getPets();
 	}, []);

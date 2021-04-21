@@ -1,26 +1,67 @@
 import React, { useContext, useEffect } from "react";
-import { Container, Row, Col, ListGroup, ListGroupItem, Form, Image } from "react-bootstrap";
-import { Context } from "../../store/appContext";
+import { Container, Row, Col, ListGroup, ListGroupItem, Form, Image, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Context } from "../../store/appContext";
 
 export const PetInformation = props => {
 	const { store, actions } = useContext(Context);
+	const history = useHistory();
+
 	const chip = props.location.state.chip_identifier;
+	const id = props.location.state.id;
+
+	const cloudName = "pet-cloud-img";
+	const uploadPreset = "fffnsmp9";
+
+	const myWidget = cloudinary.createUploadWidget(
+		{
+			cloudName,
+			uploadPreset
+			// sources: ['local', 'url']
+		},
+		(error, result) => {
+			if (!error && result && result.event === "success") {
+				console.log(`Done! Here is the image info: ${JSON.stringify(result.info)}`);
+				actions.imgUpload(result.info.url, id);
+				history.go();
+			}
+		}
+	);
+
+	const handleClick = () => {
+		myWidget.open();
+	};
 
 	useEffect(async () => {
 		await actions.getPetById(chip);
+		await actions.getPetCloudById(id);
 	}, []);
 
 	return (
 		<Container>
-			<Row className="text-center">
+			<Row className="text-center mt-5">
 				<Col xs={12} md={12}>
 					<h2 className="pet-name">Hola {store.petById.name} </h2>
-					<Image
-						src="https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
-						style={{ height: "200px" }}
-						roundedCircle
-					/>
+					<figure className="position-relative">
+						<Image
+							src={
+								store.petCloudPet.url
+									? store.petCloudPet.url
+									: "https://raw.githubusercontent.com/NicolasArayaB/pet-cloud/3.4_User_View/src/front/img/DogPhoto01.png"
+							}
+							style={{ width: "200px", height: "200px" }}
+							roundedCircle
+							className="my-3"
+						/>
+						<div
+							role="button"
+							id="upload_widget"
+							className="cloudinary-button ImgBtn"
+							onClick={() => handleClick()}>
+							<i className="fas fa-camera" />
+						</div>
+					</figure>
 				</Col>
 			</Row>
 			<Row className="text-center">
@@ -137,6 +178,13 @@ export const PetInformation = props => {
 							</Form>
 						</ListGroupItem>
 					</ListGroup>
+				</Col>
+			</Row>
+			<Row>
+				<Col className="text-center my-5">
+					<Button className="petBtn" type="button" href="/user">
+						Volver a mis mascotas
+					</Button>
 				</Col>
 			</Row>
 		</Container>
