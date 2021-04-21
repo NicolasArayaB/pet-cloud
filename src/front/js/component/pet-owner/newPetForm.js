@@ -23,6 +23,11 @@ const NewPetForm = () => {
 	const [email, setEmail] = useState("");
 	const [redirect, setRedirect] = useState("");
 
+	// const addressFunction = () => {
+	// 	return setAddress;
+	// };
+	console.log(setAddress, "<--address");
+
 	const expresions = {
 		identifier: /^\d{15}$/, // 15 numbers
 		email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -307,7 +312,7 @@ const NewPetForm = () => {
 						Dirección
 					</Form.Label>
 					<Col>
-						<GoogleAddress />
+						<GoogleAddress address={address} setAddress={setAddress} />
 					</Col>
 				</Form.Row>
 				<br />
