@@ -12,7 +12,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userPets: [],
 			id: [],
 			imgUrl: {},
-			petCloudPet: {}
+			petCloudPet: {},
+			dataMail: {}
 		},
 
 		actions: {
@@ -526,6 +527,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ imgUrl: data });
 					})
 					.catch(error => console.log("Unexpected error"));
+			},
+
+			emailForgotPassword: () => {
+				const dataMail = {
+					service_id: pet_cloud_service,
+					template_id: template_mail,
+					user_id: user_ipNgY6FvK2EvoDrPH27Bw,
+					template_params: {
+						from_name: "PetCloud",
+						email: email,
+						to_name: user_name,
+						message: "Esta es tu clave para recuperar la contraseña",
+						password: Math.floor(Math.random() * 100000)
+					}
+				};
+				fetch("https://api.emailjs.com/api/v1.0/email/send", {
+					method: "POST",
+					body: JSON.stringify(dataMail),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						console.log("email has been sent to recover password");
+						setStore({ dataMail: data });
+					})
+					.catch(error => console.log("Ooops unexpected error"));
 			}
 		}
 	};

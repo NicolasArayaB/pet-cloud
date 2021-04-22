@@ -10,7 +10,6 @@ const GoogleAddress = props => {
 			<PlacesAutocomplete type="text" name="address" value={props.address} onChange={props.setAddress}>
 				{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
 					<div>
-						<span>{JSON.stringify(props.address)}</span>
 						<input
 							className="google-address-input rounded"
 							{...getInputProps({ placeholder: "Escribe la dirección del dueño ... " })}
