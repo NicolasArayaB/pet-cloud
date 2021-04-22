@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Modal, Form, Container, Row, Col, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "../../store/appContext";
 
@@ -8,6 +9,20 @@ const LoginModal = params => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const history = useHistory();
+
+	const ShowAlert = Swal.mixin({
+		toast: true,
+		position: "bottom",
+		showConfirmButton: true,
+		confirmButtonColor: "#EEAA7B",
+		cancelButtonText: "Ok",
+		timer: 4000,
+		timerProgressBar: true,
+		didOpen: toast => {
+			toast.addEventListener("mouseenter", Swal.stopTimer);
+			toast.addEventListener("mouseleave", Swal.resumeTimer);
+		}
+	});
 
 	const submitHandler = async e => {
 		e.preventDefault();
@@ -18,7 +33,8 @@ const LoginModal = params => {
 				email: email,
 				password: password
 			},
-			history
+			history,
+			ShowAlert
 		);
 	};
 
