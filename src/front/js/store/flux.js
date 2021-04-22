@@ -16,7 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
-			setLogin: (user, history) => {
+			setLogin: (user, history, ShowAlert) => {
 				fetch(process.env.BACKEND_URL + "/api/login", {
 					method: "POST",
 					body: JSON.stringify(user),
@@ -24,24 +24,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						const loginData = {
-							token: data.token,
-							email: data.user.email,
-							id: data.user.id,
-							firstName: data.first_name,
-							is_vet: data.is_vet
-						};
-						setStore({ login: loginData });
-						if (typeof Storage !== "undefined") {
-							localStorage.setItem("token", loginData.token);
-							localStorage.setItem("email", loginData.email);
-							localStorage.setItem("firstName", loginData.firstName);
-							localStorage.setItem("is_vet", JSON.stringify(loginData.is_vet));
-							history.push(data.is_vet === "1" ? "/vet" : "/user");
-							history.go();
+						if (data.status == 200) {
+							const loginData = {
+								token: data.token,
+								email: data.user.email,
+								id: data.user.id,
+								firstName: data.first_name,
+								is_vet: data.is_vet
+							};
+
+							setStore({ login: loginData });
+							if (typeof Storage !== "undefined") {
+								localStorage.setItem("token", loginData.token);
+								localStorage.setItem("email", loginData.email);
+								localStorage.setItem("firstName", loginData.firstName);
+								localStorage.setItem("is_vet", JSON.stringify(loginData.is_vet));
+								history.push(data.is_vet === "1" ? "/vet" : "/user");
+								history.go();
+							} else {
+								// LocalStorage no soportado en este navegador
+								alert("Lo sentimos, tu navegador no es compatible.");
+							}
 						} else {
-							// LocalStorage no soportado en este navegador
-							alert("Lo sentimos, tu navegador no es compatible.");
+							ShowAlert.fire({
+								icon: "info",
+								title: data.msg
+							});
 						}
 					})
 					.catch(error => console.log("Error loading message from backend", error));
