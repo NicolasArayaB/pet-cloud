@@ -50,20 +50,20 @@ def login():
     password = request.json.get("password", None)
 
     if not email:
-        return jsonify({"msg":"Email is required"}), 400
+        return jsonify({"msg":"Debes ingresar tu email"}), 400
 
     if not password:
-        return jsonify({"msg":"Password is required"}), 400
+        return jsonify({"msg":"Debes ingresar tu contraseña"}), 400
     
     user = User.query.filter_by(email=email).first()
     
     if not user:
-        return jsonify({"msg": "The email is not correct",
+        return jsonify({"msg": "Email no registrado",
         "status": 401
         }), 401
     
     elif not check_password_hash(user.password, password):
-        return jsonify({"msg": "Invalid password",
+        return jsonify({"msg": "Contraseña no es valida",
         "status": 401
         }), 401
 
