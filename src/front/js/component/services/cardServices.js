@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Image from "react-bootstrap/Image";
 import "../../../styles/services.scss";
 
 const CardInfo = () => {
@@ -13,7 +12,7 @@ const CardInfo = () => {
 						style={{ width: "5rem" }}
 					/>
 					<p className="mt-2 p-4" style={{ color: "grey" }}>
-						Identifica a tus mascotas rápidamente en tu cuenta
+						Identifica y personaliza a tus mascotas rápidamente en tu cuenta
 					</p>
 				</Col>
 				<Col sm>

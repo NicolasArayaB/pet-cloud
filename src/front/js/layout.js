@@ -19,6 +19,7 @@ import { PetInformation } from "./component/pet-owner/petInformation";
 import VetInfo from "./pages/vetInformation";
 import NewPet from "./pages/newPet";
 import { ForgottenPass } from "./pages/forgottenPassword";
+import { RecoverPassword } from "./pages/recoverPassword";
 import { useToken } from "./useToken";
 import ServicesMain from "./pages/services";
 import A from "./pages/newCheckup";
@@ -39,6 +40,7 @@ const Layout = () => {
 						<Route exact path="/" component={Home} />
 						<Route exact path="/register" component={RegisterView} />
 						<Route exact path="/pass" component={ForgottenPass} />
+						<Route exact path="/recover-password" component={RecoverPassword} />
 						<Route exact path="/contact-us" component={Contact} />
 						<Route exact path="/services" component={ServicesMain} />
 						<Route exact path="/vet" component={Vet} />

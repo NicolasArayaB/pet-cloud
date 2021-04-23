@@ -63,7 +63,7 @@ def login():
         }), 401
     
     elif not check_password_hash(user.password, password):
-        return jsonify({"msg": "Contraseña no es valida",
+        return jsonify({"msg": "Contraseña no es válida",
         "status": 401
         }), 401
 
@@ -182,3 +182,57 @@ def img_upload(id):
         }
 
     return jsonify(response_token), 200
+
+@api.route("/validate", methods=["POST"])
+def validate_mail():
+
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+
+    if not email:
+        return jsonify({"msg": "Mail no válido"}), 400
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({"msg": "Usuario no registrado",
+        "status": 401
+        }), 401
+    
+    user = User()
+    user.password = password
+    user.email = email
+    db.session.commit()
+
+    response_token = {
+        "msg": "Mail ingresado con éxito para recuperar contraseña"   
+    }
+
+    return jsonify(response_token), 200
+
+@api.route("/recover_password", methods=["PUT"])    
+def recover_password(email):
+
+    user = User.query.get(email)
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+   
+    if not password:
+        return "Error por favor intentatelo nuevamente"
+
+    if request.method == 'PUT':    
+        user.password = request.json.get("password", None)
+        db.session.commit()
+
+        response_token = {
+            "msg": "Contraseña recuperada exitosamente"
+        }
+
+    return jsonify(response), 200
+    
+    
+
+    
+ 
+    
+    

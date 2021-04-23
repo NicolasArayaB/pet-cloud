@@ -85,10 +85,6 @@ const VetInfo = props => {
 	);
 
 	VetInfo.propTypes = {
-		// location: PropTypes.shape({
-		// 	pathname: PropTypes.string.isRequired,
-		// 	state: PropTypes.object.isRequired
-		// }).isRequired
 		chip: PropTypes.integer
 	};
 };
