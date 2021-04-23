@@ -7,6 +7,8 @@ import { Context } from "../store/appContext";
 export const RecoverPassword = () => {
 	const { actions } = useContext(Context);
 	const [redirect, setRedirect] = useState("");
+	const [password, setPassword] = useState("");
+	const [againPassword, setAgainPassword] = useState("");
 
 	const handleSubmit = e => {
 		actions.recoverPassword(); // llamar a la fetch para ingresar nueva contraseña
@@ -26,13 +28,20 @@ export const RecoverPassword = () => {
 			}
 		});
 
-		ShowAlert.fire({
-			icon: "success",
-			title: "Muchas gracias puedes loguearte nuevamente."
-		});
+		if (password != againPassword) {
+			ShowAlert.fire({
+				icon: "info",
+				title: "Tus contraseñas no coinciden, inténtalo nuevamente."
+			});
+		} else {
+			ShowAlert.fire({
+				icon: "success",
+				title: "Muchas gracias puedes loguearte nuevamente."
+			});
 
-		setRedirect(true);
-		console.log("Redirect to home page");
+			setRedirect(true);
+			console.log("Redirect to home page");
+		}
 	};
 
 	return (
@@ -42,11 +51,23 @@ export const RecoverPassword = () => {
 				<Row className="text-center">
 					<Col xs={12} md={12}>
 						<Form.Text className="mt-5">Ingresa tu nueva contraseña</Form.Text>
-						<Form.Control type="password" name="password" className="m-3 text-center" />
+						<Form.Control
+							type="password"
+							name="password"
+							value={password}
+							onChange={e => setPassword(e.target.value)}
+							className="m-3 text-center"
+						/>
 					</Col>
 					<Col xs={12} md={12}>
 						<Form.Text className="mt-5">Reingresa tu contraseña nuevamente</Form.Text>
-						<Form.Control type="password" name="password" className="m-3 text-center" />
+						<Form.Control
+							type="password"
+							name="password"
+							value={againPassword}
+							onChange={e => setAgainPassword(e.target.value)}
+							className="m-3 text-center"
+						/>
 					</Col>
 				</Row>
 				<Button className="petBtn my-1" onClick={handleSubmit}>

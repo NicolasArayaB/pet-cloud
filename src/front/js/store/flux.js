@@ -557,7 +557,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				fetch(process.env.BACKEND_URL + `/api/recover_password/${email}`, {
 					method: "PUT",
-					body: JSON.stringify(recoverPassword),
+					body: JSON.stringify(dataRecoverPassword),
 					headers: { "Content-type": "application/json" }
 				})
 					.then(resp => resp.json())
