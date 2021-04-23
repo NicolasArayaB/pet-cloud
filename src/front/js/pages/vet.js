@@ -30,7 +30,7 @@ export const Vet = props => {
 					<Col xs={12} className="mb-3">
 						<h3>Buscar por chip de la mascota</h3>
 					</Col>
-					<Col xs={6} className="mx-auto">
+					<Col xs={7} sm={5} className="mx-auto">
 						<InputGroup className="mb-3">
 							<FormControl
 								onChange={e => setChip(e.target.value)}
