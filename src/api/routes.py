@@ -183,15 +183,8 @@ def img_upload(id):
 
     return jsonify(response_token), 200
 
-@api.route("/validate", methods=["POST"])
-def validate_mail():
-
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-
-    if not email:
-        return jsonify({"msg": "Mail no válido"}), 400
-
+@api.route("/validate/<string:email>", methods=["GET"])
+def validate_mail(email):
     user = User.query.filter_by(email=email).first()
 
     if not user:
@@ -199,36 +192,36 @@ def validate_mail():
         "status": 401
         }), 401
     
-    user = User()
-    user.password = password
-    user.email = email
-    db.session.commit()
-
-    response_token = {
-        "msg": "Mail ingresado con éxito para recuperar contraseña"   
-    }
-
-    return jsonify(response_token), 200
-
-@api.route("/recover_password", methods=["PUT"])    
-def recover_password(email):
-
-    user = User.query.get(email)
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-   
-    if not password:
-        return "Error por favor intentatelo nuevamente"
-
-    if request.method == 'PUT':    
-        user.password = request.json.get("password", None)
-        db.session.commit()
-
-        response_token = {
-            "msg": "Contraseña recuperada exitosamente"
+    else:
+        response_body = {
+            "msg": "Solicitúd para recuperar contraseña ingresado con éxito",
+            "user": user.serialize(),
+            "status": 200  
         }
 
-    return jsonify(response), 200
+    return jsonify(response_body), 200
+
+@api.route("/recover_password/<int:id>", methods=["PUT"])    
+def recover_password(id):
+
+    user = User.query.get(id)
+    password = request.json.get("password", None)
+    
+    if not user:
+        return "Este usuario no esta registrado"
+
+    elif not password:
+        return "Error por favor intentatelo nuevamente"
+   
+    hashed_password = generate_password_hash(password)
+    user.password = hashed_password
+    db.session.commit()
+
+    response_body = {
+        "msg": "Contraseña recuperada exitosamente"
+    }
+
+    return jsonify(response_body), 200
     
     
 
