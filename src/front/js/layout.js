@@ -40,7 +40,7 @@ const Layout = () => {
 						<Route exact path="/" component={Home} />
 						<Route exact path="/register" component={RegisterView} />
 						<Route exact path="/pass" component={ForgottenPass} />
-						<Route exact path="/recover-password" component={RecoverPassword} />
+						<Route path="/recover-password/:id" component={RecoverPassword} />
 						<Route exact path="/contact-us" component={Contact} />
 						<Route exact path="/services" component={ServicesMain} />
 						<Route exact path="/vet" component={Vet} />

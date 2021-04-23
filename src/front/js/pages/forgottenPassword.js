@@ -28,31 +28,12 @@ export const ForgottenPass = () => {
 		e.preventDefault();
 		await actions.validateMail(userEmail, emailjs); // llamar a la fetch para validar mail ya registrado
 
-		// await emailjs
-		// 	.send(
-		// 		"pet_cloud_service",
-		// 		"template_mail",
-		// 		{
-		// 			from_name: "PetCloud",
-		// 			email: userEmail,
-		// 			to_name: store.account.user.first_name,
-		// 			message: "Haz click en este link para recuperar contraseña",
-		// 			url: "https://3001-cyan-cod-ypw331wt.ws-us03.gitpod.io/recover-password" + userEmail, // opcion 2 link
-		// 			password: Math.floor(Math.random() * 1000000) // opción 1 contraseña
-		// 		},
-		// 		"user_ipNgY6FvK2EvoDrPH27Bw"
-		// 	)
-		// 	.then(
-		// 		resp => console.log("email has been sent to recover password"),
-		// 		error => console.log("unexpected error")
-		// 	);
-
 		ShowAlert.fire({
 			icon: "success",
 			title: "Revisa tu mail para recuperar tu nueva contraseña."
 		});
 
-		// setRedirect(true);
+		setRedirect(true);
 		console.log("Redirect to home page");
 	};
 

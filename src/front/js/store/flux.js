@@ -545,7 +545,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						console.log(data, "Email es válido");
 						data.status == 200
 							? emailjs.send(
 									"pet_cloud_service",
@@ -555,9 +554,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 										email: userEmail,
 										to_name: data.user.first_name,
 										message: "Haz click en este link para recuperar contraseña",
-										url:
-											"https://3001-cyan-cod-ypw331wt.ws-us03.gitpod.io/recover-password/" +
-											userEmail // opcion 2 link
+										url: process.env.BACKEND_URL + "/recover-password/" + data.user.id
 									},
 									"user_ipNgY6FvK2EvoDrPH27Bw"
 							  )
@@ -566,23 +563,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 									error => console.log("unexpected error")
 							  );
 					})
-					.catch(error => console.log("Unexpected error"));
+					.catch(error => console.log("Unexpected error", error));
 			},
 
-			recoverPassword: (password, email) => {
+			recoverPassword: (password, id) => {
 				const dataRecoverPassword = {
-					password: password,
-					email: email
+					id: id,
+					password: password
 				};
-				fetch(process.env.BACKEND_URL + `/api/recover_password/${email}`, {
+				fetch(process.env.BACKEND_URL + `/api/recover_password/${id}`, {
 					method: "PUT",
 					body: JSON.stringify(dataRecoverPassword),
 					headers: { "Content-type": "application/json" }
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						console.log("Contraseña correcta");
-						setStore({ dataRecoverPassword: data });
+						console.log("Contraseña correcta", data);
+						// setStore({ dataRecoverPassword: data });
 					})
 					.catch(error => console.log("Unexpected error"));
 			}

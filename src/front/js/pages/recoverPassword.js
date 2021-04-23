@@ -1,32 +1,32 @@
 import React, { useState, useContext } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
+import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import { Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const RecoverPassword = () => {
+export const RecoverPassword = props => {
 	const { actions } = useContext(Context);
 	const [redirect, setRedirect] = useState("");
 	const [password, setPassword] = useState("");
 	const [againPassword, setAgainPassword] = useState("");
 
-	const handleSubmit = e => {
-		actions.recoverPassword(); // llamar a la fetch para ingresar nueva contraseña
-		e.preventDefault();
+	const ShowAlert = Swal.mixin({
+		toast: true,
+		position: "bottom",
+		showConfirmButton: true,
+		confirmButtonColor: "#EEAA7B",
+		cancelButtonText: "Ok",
+		timer: 4000,
+		timerProgressBar: true,
+		didOpen: toast => {
+			toast.addEventListener("mouseenter", Swal.stopTimer);
+			toast.addEventListener("mouseleave", Swal.resumeTimer);
+		}
+	});
 
-		const ShowAlert = Swal.mixin({
-			toast: true,
-			position: "bottom",
-			showConfirmButton: true,
-			confirmButtonColor: "#EEAA7B",
-			cancelButtonText: "Ok",
-			timer: 4000,
-			timerProgressBar: true,
-			didOpen: toast => {
-				toast.addEventListener("mouseenter", Swal.stopTimer);
-				toast.addEventListener("mouseleave", Swal.resumeTimer);
-			}
-		});
+	const handleSubmit = e => {
+		e.preventDefault();
 
 		if (password != againPassword) {
 			ShowAlert.fire({
@@ -34,13 +34,15 @@ export const RecoverPassword = () => {
 				title: "Tus contraseñas no coinciden, inténtalo nuevamente."
 			});
 		} else {
+			console.log(props.match.params.id, "id");
+			actions.recoverPassword(password, props.match.params.id);
+
 			ShowAlert.fire({
 				icon: "success",
-				title: "Muchas gracias puedes loguearte nuevamente."
+				title: "Muchas gracias, puedes loguearte nuevamente."
 			});
 
-			setRedirect(true);
-			console.log("Redirect to home page");
+			// setRedirect(true);
 		}
 	};
 
@@ -76,4 +78,12 @@ export const RecoverPassword = () => {
 			</Form>
 		</div>
 	);
+};
+
+RecoverPassword.propTypes = {
+	match: PropTypes.shape({
+		params: {
+			id: PropTypes.number
+		}
+	})
 };

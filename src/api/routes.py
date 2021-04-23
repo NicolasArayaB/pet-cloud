@@ -201,25 +201,27 @@ def validate_mail(email):
 
     return jsonify(response_body), 200
 
-@api.route("/recover_password", methods=["PUT"])    
-def recover_password(email):
+@api.route("/recover_password/<int:id>", methods=["PUT"])    
+def recover_password(id):
 
-    user = User.query.get(email)
-    email = request.json.get("email", None)
+    user = User.query.get(id)
     password = request.json.get("password", None)
-   
-    if not password:
+    
+    if not user:
+        return "Este usuario no esta registrado"
+
+    elif not password:
         return "Error por favor intentatelo nuevamente"
+   
+    hashed_password = generate_password_hash(password)
+    user.password = hashed_password
+    db.session.commit()
 
-    if request.method == 'PUT':    
-        user.password = request.json.get("password", None)
-        db.session.commit()
+    response_body = {
+        "msg": "Contraseña recuperada exitosamente"
+    }
 
-        response_token = {
-            "msg": "Contraseña recuperada exitosamente"
-        }
-
-    return jsonify(response), 200
+    return jsonify(response_body), 200
     
     
 
