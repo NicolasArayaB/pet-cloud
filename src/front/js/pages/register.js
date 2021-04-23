@@ -16,26 +16,26 @@ export const RegisterView = () => {
 	const [redirect, setRedirect] = useState(null);
 
 	const expresions = {
-		password: /^\d\w{6,8}$/, // between 6 and 8 characters
+		password: /^\w{6,8}$/, // between 6 and 8 characters
 		email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
 	};
 
+	const ShowAlert = Swal.mixin({
+		toast: true,
+		position: "bottom",
+		showConfirmButton: true,
+		confirmButtonColor: "#EEAA7B",
+		cancelButtonText: "Ok",
+		timer: 4000,
+		timerProgressBar: true,
+		didOpen: toast => {
+			toast.addEventListener("mouseenter", Swal.stopTimer);
+			toast.addEventListener("mouseleave", Swal.resumeTimer);
+		}
+	});
+
 	const handleSubmit = e => {
 		e.preventDefault();
-
-		const ShowAlert = Swal.mixin({
-			toast: true,
-			position: "bottom",
-			showConfirmButton: true,
-			confirmButtonColor: "#EEAA7B",
-			cancelButtonText: "Ok",
-			timer: 4000,
-			timerProgressBar: true,
-			didOpen: toast => {
-				toast.addEventListener("mouseenter", Swal.stopTimer);
-				toast.addEventListener("mouseleave", Swal.resumeTimer);
-			}
-		});
 
 		if (password.length < 6 || password.length > 8) {
 			ShowAlert.fire({
@@ -46,6 +46,11 @@ export const RegisterView = () => {
 			ShowAlert.fire({
 				icon: "info",
 				title: "Digitar formato correcto del mail ejemplo@gmail.com"
+			});
+		} else if (password != password.match(expresions.password)) {
+			ShowAlert.fire({
+				icon: "info",
+				title: "La contraseña sólo debe tener caracteres de números o letras"
 			});
 		} else if (password == password.match(expresions.password) && email == email.match(expresions.email)) {
 			actions.registerUser({
@@ -61,12 +66,6 @@ export const RegisterView = () => {
 				title: "Usuario registrado en forma exitosa"
 			});
 			setRedirect(true);
-		} else {
-			e.preventDefault();
-			ShowAlert.fire({
-				icon: "success",
-				title: "Usuario registrado en forma exitosa"
-			});
 		}
 	};
 

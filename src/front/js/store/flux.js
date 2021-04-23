@@ -12,7 +12,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userPets: [],
 			id: [],
 			imgUrl: {},
-			petCloudPet: {}
+			petCloudPet: {},
+			account: {}
 		},
 
 		actions: {
@@ -98,6 +99,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => response.json())
 					.then(data => {
+						console.log("submitted");
 						setStore({ user: data });
 					})
 					.catch(error => {
@@ -536,34 +538,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("Unexpected error"));
 			},
 
-			validateMail: email => {
-				fetch(process.env.BACKEND_URL + `/api/validate/`, {
-					method: "POST",
-					body: JSON.stringify({ email: email }),
+			validateMail: (userEmail, emailjs) => {
+				fetch(process.env.BACKEND_URL + `/api/validate/${userEmail}`, {
+					method: "GET",
 					headers: { "Content-type": "application/json" }
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						console.log("Email es válido");
-						setStore({ email: data });
+						data.status == 200
+							? emailjs.send(
+									"pet_cloud_service",
+									"template_mail",
+									{
+										from_name: "PetCloud",
+										email: userEmail,
+										to_name: data.user.first_name,
+										message: "Haz click en este link para recuperar contraseña",
+										url: process.env.BACKEND_URL + "/recover-password/" + data.user.id
+									},
+									"user_ipNgY6FvK2EvoDrPH27Bw"
+							  )
+							: "".then(
+									resp => console.log("email has been sent to recover password"),
+									error => console.log("unexpected error")
+							  );
 					})
-					.catch(error => console.log("Unexpected error"));
+					.catch(error => console.log("Unexpected error", error));
 			},
 
-			recoverPassword: (password, email) => {
+			recoverPassword: (password, id) => {
 				const dataRecoverPassword = {
-					password: password,
-					email: email
+					id: id,
+					password: password
 				};
-				fetch(process.env.BACKEND_URL + `/api/recover_password/${email}`, {
+				fetch(process.env.BACKEND_URL + `/api/recover_password/${id}`, {
 					method: "PUT",
 					body: JSON.stringify(dataRecoverPassword),
 					headers: { "Content-type": "application/json" }
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						console.log("Contraseña correcta");
-						setStore({ dataRecoverPassword: data });
+						console.log("Contraseña correcta", data);
+						// setStore({ dataRecoverPassword: data });
 					})
 					.catch(error => console.log("Unexpected error"));
 			}
