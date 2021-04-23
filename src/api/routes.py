@@ -183,15 +183,8 @@ def img_upload(id):
 
     return jsonify(response_token), 200
 
-@api.route("/validate", methods=["POST"])
-def validate_mail():
-
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-
-    if not email:
-        return jsonify({"msg": "Mail no válido"}), 400
-
+@api.route("/validate/<string:email>", methods=["GET"])
+def validate_mail(email):
     user = User.query.filter_by(email=email).first()
 
     if not user:
@@ -199,16 +192,14 @@ def validate_mail():
         "status": 401
         }), 401
     
-    user = User()
-    user.password = password
-    user.email = email
-    db.session.commit()
+    else:
+        response_body = {
+            "msg": "Solicitúd para recuperar contraseña ingresado con éxito",
+            "user": user.serialize(),
+            "status": 200  
+        }
 
-    response_token = {
-        "msg": "Mail ingresado con éxito para recuperar contraseña"   
-    }
-
-    return jsonify(response_token), 200
+    return jsonify(response_body), 200
 
 @api.route("/recover_password", methods=["PUT"])    
 def recover_password(email):

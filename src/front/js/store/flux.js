@@ -12,7 +12,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userPets: [],
 			id: [],
 			imgUrl: {},
-			petCloudPet: {}
+			petCloudPet: {},
+			account: {}
 		},
 
 		actions: {
@@ -98,6 +99,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => response.json())
 					.then(data => {
+						console.log("submitted");
 						setStore({ user: data });
 					})
 					.catch(error => {
@@ -536,16 +538,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("Unexpected error"));
 			},
 
-			validateMail: email => {
-				fetch(process.env.BACKEND_URL + `/api/validate/`, {
-					method: "POST",
-					body: JSON.stringify({ email: email }),
+			validateMail: (userEmail, emailjs) => {
+				fetch(process.env.BACKEND_URL + `/api/validate/${userEmail}`, {
+					method: "GET",
 					headers: { "Content-type": "application/json" }
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						console.log("Email es válido");
-						setStore({ email: data });
+						console.log(data, "Email es válido");
+						data.status == 200
+							? emailjs.send(
+									"pet_cloud_service",
+									"template_mail",
+									{
+										from_name: "PetCloud",
+										email: userEmail,
+										to_name: data.user.first_name,
+										message: "Haz click en este link para recuperar contraseña",
+										url:
+											"https://3001-cyan-cod-ypw331wt.ws-us03.gitpod.io/recover-password/" +
+											userEmail // opcion 2 link
+									},
+									"user_ipNgY6FvK2EvoDrPH27Bw"
+							  )
+							: "".then(
+									resp => console.log("email has been sent to recover password"),
+									error => console.log("unexpected error")
+							  );
 					})
 					.catch(error => console.log("Unexpected error"));
 			},
