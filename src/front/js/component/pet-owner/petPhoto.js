@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, CardGroup, ListGroup } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -19,7 +19,6 @@ const PetPhoto = props => {
 		<div>
 			<CardGroup className="marginGroup">
 				<Card border="white">
-					{/* <Card.Link className="img-pet" onClick={() => setRedirect(true)}> */}
 					<Card.Link className="img-pet" onClick={handleClick}>
 						<Card.Img
 							className="rounded-circle mx-5"

@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Container, Card, Row, Col } from "react-bootstrap";
+import React, { useContext, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import { Context } from "../store/appContext";
 import PetPhoto from "../component/pet-owner/petPhoto";
 import "../../styles/user.scss";

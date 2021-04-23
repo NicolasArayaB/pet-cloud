@@ -534,6 +534,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ imgUrl: data });
 					})
 					.catch(error => console.log("Unexpected error"));
+			},
+
+			validateMail: email => {
+				fetch(process.env.BACKEND_URL + `/api/validate/`, {
+					method: "POST",
+					body: JSON.stringify({ email: email }),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						console.log("Email es válido");
+						setStore({ email: data });
+					})
+					.catch(error => console.log("Unexpected error"));
+			},
+
+			recoverPassword: (password, email) => {
+				const dataRecoverPassword = {
+					password: password,
+					email: email
+				};
+				fetch(process.env.BACKEND_URL + `/api/recover_password/${email}`, {
+					method: "PUT",
+					body: JSON.stringify(recoverPassword),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						console.log("Contraseña correcta");
+						setStore({ dataRecoverPassword: data });
+					})
+					.catch(error => console.log("Unexpected error"));
 			}
 		}
 	};

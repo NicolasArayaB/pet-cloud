@@ -16,7 +16,7 @@ export const RegisterView = () => {
 	const [redirect, setRedirect] = useState(null);
 
 	const expresions = {
-		password: /^\d{6,8}$/, // between 6 and 8 characters
+		password: /^\d\w{6,8}$/, // between 6 and 8 characters
 		email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
 	};
 
@@ -40,7 +40,7 @@ export const RegisterView = () => {
 		if (password.length < 6 || password.length > 8) {
 			ShowAlert.fire({
 				icon: "info",
-				title: "El password debe tener entre 6 y 8 carácteres"
+				title: "La contraseña debe tener entre 6 y 8 carácteres"
 			});
 		} else if (email != email.match(expresions.email)) {
 			ShowAlert.fire({
