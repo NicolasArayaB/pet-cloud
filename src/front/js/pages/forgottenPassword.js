@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import emailjs from "emailjs-com";
 import Swal from "sweetalert2";
 import { Redirect } from "react-router-dom";
@@ -38,22 +38,34 @@ export const ForgottenPass = () => {
 	};
 
 	return (
-		<div>
-			<Form autoComplete="off" onSubmit={handleSubmit} className="p-5 text-center">
+		<Container>
+			<Form autoComplete="off" onSubmit={handleSubmit} className="my-5">
 				{redirect ? <Redirect to="/" /> : ""}
-				<Form.Text className="mt-5">Ingresa tu email para recuperar tu contraseña</Form.Text>
-				<Form.Control
-					type="email"
-					name="email"
-					value={userEmail}
-					onChange={e => setUserEmail(e.target.value)}
-					placeholder="tuemail@petcloud.com"
-					className="m-3 recover_password text-center"
-				/>
-				<Button className="petBtn my-1" type="submit">
-					Recuperar
-				</Button>
+				<Row className="my-5 py-5 justify-content-center">
+					<Col className="recover">
+						<h2 className="mt-5">Ingresa tu email para recuperar contraseña</h2>
+					</Col>
+				</Row>
+				<Row className="justify-content-center">
+					<Col className="recover">
+						<Form.Control
+							type="email"
+							name="email"
+							value={userEmail}
+							onChange={e => setUserEmail(e.target.value)}
+							placeholder="tuemail@petcloud.com"
+							className="recover_password text-center"
+						/>
+					</Col>
+				</Row>
+				<Row className="justify-content-center">
+					<Col className="recover">
+						<Button className="petBtn my-5" type="submit">
+							Recuperar
+						</Button>
+					</Col>
+				</Row>
 			</Form>
-		</div>
+		</Container>
 	);
 };

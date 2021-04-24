@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Form, Row, Col, Button } from "react-bootstrap";
+import { Container, Form, Row, Col, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import { Redirect } from "react-router-dom";
@@ -42,41 +42,48 @@ export const RecoverPassword = props => {
 				title: "Muchas gracias, puedes loguearte nuevamente."
 			});
 
-			// setRedirect(true);
+			setRedirect(true);
 		}
 	};
 
 	return (
-		<div>
-			<Form autocomplete="off" className="p-5 text-center">
+		<Container className="mt-5">
+			<Form autocomplete="off" className="my-5 text-center">
 				{redirect ? <Redirect to="/" /> : ""}
-				<Row className="text-center">
-					<Col xs={12} md={12}>
-						<Form.Text className="mt-5">Ingresa tu nueva contraseña</Form.Text>
+				<Row className="mt-5 justify-content-center">
+					<Col className="recover">
+						<h2 className="mt-5">Ingresa tu nueva contraseña</h2>
 						<Form.Control
 							type="password"
 							name="password"
 							value={password}
 							onChange={e => setPassword(e.target.value)}
-							className="m-3 text-center"
+							className="my-3 text-center"
 						/>
+						<Form.Text className="mt-1">La contraseña debe tener entre 6 a 8 carácteres</Form.Text>
 					</Col>
-					<Col xs={12} md={12}>
-						<Form.Text className="mt-5">Reingresa tu contraseña nuevamente</Form.Text>
+				</Row>
+				<Row className="justify-content-center">
+					<Col className="recover">
+						<h2 className="mt-5">Reingresa tu contraseña nuevamente</h2>
 						<Form.Control
 							type="password"
 							name="password"
 							value={againPassword}
 							onChange={e => setAgainPassword(e.target.value)}
-							className="m-3 text-center"
+							className="mt-3 text-center"
 						/>
 					</Col>
 				</Row>
-				<Button className="petBtn my-1" onClick={handleSubmit}>
-					Recuperar contraseña
-				</Button>
+				<Row>
+					<Col className="mt-5">
+						<Button className="petBtn my-1" onClick={handleSubmit}>
+							Recuperar contraseña
+						</Button>
+					</Col>
+				</Row>
 			</Form>
-		</div>
+		</Container>
 	);
 };
 
