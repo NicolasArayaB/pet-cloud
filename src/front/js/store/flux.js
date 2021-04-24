@@ -10,11 +10,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			vaccines: {},
 			role: {},
 			userPets: [],
-			id: []
+			id: [],
+			imgUrl: {},
+			petCloudPet: {},
+			account: {}
 		},
 
 		actions: {
-			setLogin: (user, history) => {
+			setLogin: (user, history, ShowAlert) => {
 				fetch(process.env.BACKEND_URL + "/api/login", {
 					method: "POST",
 					body: JSON.stringify(user),
@@ -22,24 +25,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						const loginData = {
-							token: data.token,
-							email: data.user.email,
-							id: data.user.id,
-							firstName: data.first_name,
-							is_vet: data.is_vet
-						};
-						setStore({ login: loginData });
-						if (typeof Storage !== "undefined") {
-							localStorage.setItem("token", loginData.token);
-							localStorage.setItem("email", loginData.email);
-							localStorage.setItem("firstName", loginData.firstName);
-							localStorage.setItem("is_vet", JSON.stringify(loginData.is_vet));
-							history.push(data.is_vet === "1" ? "/vet" : "/user");
-							history.go();
+						if (data.status == 200) {
+							const loginData = {
+								token: data.token,
+								email: data.user.email,
+								id: data.user.id,
+								firstName: data.first_name,
+								is_vet: data.is_vet
+							};
+
+							setStore({ login: loginData });
+							if (typeof Storage !== "undefined") {
+								localStorage.setItem("token", loginData.token);
+								localStorage.setItem("email", loginData.email);
+								localStorage.setItem("firstName", loginData.firstName);
+								localStorage.setItem("is_vet", JSON.stringify(loginData.is_vet));
+								history.push(data.is_vet === "1" ? "/vet" : "/user");
+								history.go();
+							} else {
+								// LocalStorage no soportado en este navegador
+								alert("Lo sentimos, tu navegador no es compatible.");
+							}
 						} else {
-							// LocalStorage no soportado en este navegador
-							alert("Lo sentimos, tu navegador no es compatible.");
+							ShowAlert.fire({
+								icon: "info",
+								title: data.msg
+							});
 						}
 					})
 					.catch(error => console.log("Error loading message from backend", error));
@@ -88,6 +99,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => response.json())
 					.then(data => {
+						console.log("submitted");
 						setStore({ user: data });
 					})
 					.catch(error => {
@@ -110,21 +122,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: { "Content-type": "application/json" }
 				});
 				const data = await request.json();
-				const dataPets = {
-					id: data.entry[0].resource.id,
-					name: data.entry[0].resource.name[0].given[0],
-					chip: data.entry[0].resource.identifier[0].value,
-					species: data.entry[0].resource.extension[0].extension[0].valueCodeableConcept.coding[0].display,
-					breed: data.entry[0].resource.extension[0].extension[1].valueCodeableConcept.coding[0].display,
-					gender: data.entry[0].resource.gender,
-					birthDate: data.entry[0].resource.birthDate,
-					petOwner_name: data.entry[0].resource.contact[0].name.given[0],
-					petOwner_father: data.entry[0].resource.contact[0].name.extension[0].valueString,
-					petOwner_mother: data.entry[0].resource.contact[0].name.extension[1].valueString,
-					address: data.entry[0].resource.contact[0].address.line[0],
-					phone: data.entry[0].resource.contact[0].telecom[0].value,
-					email: data.entry[0].resource.contact[0].telecom[1].value
-				};
+				console.log(data, "getpetbyid");
+				const dataPets = data.entry
+					? {
+							id: data.entry[0].resource.id,
+							name: data.entry[0].resource.name[0].given[0],
+							chip: data.entry[0].resource.identifier[0].value,
+							species:
+								data.entry[0].resource.extension[0].extension[0].valueCodeableConcept.coding[0].display,
+							breed:
+								data.entry[0].resource.extension[0].extension[1].valueCodeableConcept.coding[0].display,
+							gender: data.entry[0].resource.gender,
+							birthDate: data.entry[0].resource.birthDate,
+							petOwner_name: data.entry[0].resource.contact[0].name.given[0],
+							petOwner_father: data.entry[0].resource.contact[0].name.extension[0].valueString,
+							petOwner_mother: data.entry[0].resource.contact[0].name.extension[1].valueString,
+							address: data.entry[0].resource.contact[0].address.line[0],
+							phone: data.entry[0].resource.contact[0].telecom[0].value,
+							email: data.entry[0].resource.contact[0].telecom[1].value
+					  }
+					: "";
 
 				setStore({ petById: dataPets });
 
@@ -267,14 +284,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (data.entry != undefined) {
 							const vaccine = {
 								vaccine: data.entry[0].resource.vaccineCode.text,
-								date: data.meta.lastUpdated.split("T")
+								date: data.meta.lastUpdated.split("T"),
+								dose:
+									data.entry[0].resource.doseQuantity.value +
+									" " +
+									data.entry[0].resource.doseQuantity.code
 							};
 							setStore({ vaccines: vaccine });
 						} else setStore({ vaccines: { vaccine: "", date: "" } });
 					});
 			},
 
-			newPetVaccine: (petId, vaccine, value) => {
+			newPetVaccine: (petId, vaccine, quantity, code) => {
 				const vacData = {
 					resourceType: "Immunization",
 					id: petId,
@@ -293,9 +314,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					occurrenceDateTime: "2020-01-10",
 					doseQuantity: {
-						value: value,
+						value: quantity,
 						system: "http://unitsofmeasure.org",
-						code: "UI"
+						code: code
 					}
 				};
 				fetch(`https://fhir.cens.cl/baseR4/Immunization?patient=${petId}`, {
@@ -350,8 +371,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(data => {
 						let userPets = data.pets.filter(selectPets);
-
 						setStore({ userPets: userPets });
+						console.log(userPets, "userPets");
 					})
 					.catch(error => console.log(error));
 			},
@@ -465,7 +486,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const petCloudNewPet = {
 					name: name,
 					chip: identifier,
-					email: email
+					email: email,
+					url: ""
 				};
 
 				fetch(process.env.BACKEND_URL + "/api/pet", {
@@ -475,9 +497,91 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => console.log("Pet has been registered"))
-					.catch(error => {
-						console.log("Unexpected error");
+					.catch(error => console.log("Unexpected error"));
+			},
+
+			getPetCloudById: id => {
+				fetch(process.env.BACKEND_URL + `/api/pet/${id}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						console.log(data);
+						const petData = {
+							name: data.pet.name,
+							email: data.pet.user_email,
+							url: data.pet.img_url,
+							chip: data.pet.chip_identifier
+						};
+						setStore({ petCloudPet: petData });
+						console.log(petData, "petData");
 					});
+			},
+
+			imgUpload: (url, id) => {
+				const dataWithImg = {
+					url: url
+				};
+				console.log(dataWithImg, "dataWithImg");
+
+				fetch(process.env.BACKEND_URL + `/api/pet/${id}`, {
+					method: "PUT",
+					body: JSON.stringify(dataWithImg),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						console.log("Pet image has been uploaded");
+						setStore({ imgUrl: data });
+					})
+					.catch(error => console.log("Unexpected error"));
+			},
+
+			validateMail: (userEmail, emailjs) => {
+				fetch(process.env.BACKEND_URL + `/api/validate/${userEmail}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						data.status == 200
+							? emailjs.send(
+									"pet_cloud_service",
+									"template_mail",
+									{
+										from_name: "PetCloud",
+										email: userEmail,
+										to_name: data.user.first_name,
+										message: "Haz click en este link para recuperar contraseña",
+										url: process.env.FRONTEND_URL + "/recover-password/" + data.user.id
+									},
+									"user_ipNgY6FvK2EvoDrPH27Bw"
+							  )
+							: "".then(
+									resp => console.log("email has been sent to recover password"),
+									error => console.log("unexpected error")
+							  );
+					})
+					.catch(error => console.log("Unexpected error", error));
+			},
+
+			recoverPassword: (password, id) => {
+				const dataRecoverPassword = {
+					id: id,
+					password: password
+				};
+				fetch(process.env.BACKEND_URL + `/api/recover_password/${id}`, {
+					method: "PUT",
+					body: JSON.stringify(dataRecoverPassword),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						console.log("Contraseña correcta", data);
+						// setStore({ dataRecoverPassword: data });
+					})
+					.catch(error => console.log("Unexpected error"));
 			}
 		}
 	};

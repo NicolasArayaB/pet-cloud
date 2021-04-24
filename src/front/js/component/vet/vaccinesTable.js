@@ -6,11 +6,12 @@ const Vaccines = props => {
 	let formattedDate = "";
 
 	if (props.date != undefined) {
-		formattedDate = props.date[0]
-			.split("-")
-			.reverse()
-			.join("-");
-
+		if (props.date[0] != undefined) {
+			formattedDate = props.date[0]
+				.split("-")
+				.reverse()
+				.join("-");
+		}
 		console.log(formattedDate);
 	}
 	return (
@@ -26,7 +27,7 @@ const Vaccines = props => {
 				<tr>
 					<th>{props.vaccine}</th>
 					<th>{formattedDate}</th>
-					<th>2/3</th>
+					<th>{props.dose}</th>
 				</tr>
 			</tbody>
 		</Table>
@@ -35,7 +36,8 @@ const Vaccines = props => {
 
 Vaccines.propTypes = {
 	vaccine: PropTypes.string,
-	date: PropTypes.string
+	date: PropTypes.string,
+	dose: PropTypes.string
 };
 
 export default Vaccines;

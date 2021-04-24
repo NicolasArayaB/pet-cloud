@@ -1,38 +1,47 @@
 import React, { useState, useContext } from "react";
-import { Container, Row, Col, Form, Button, Toast } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
+import Swal from "sweetalert2";
 
 const Contact = () => {
 	const { actions } = useContext(Context);
 
 	const [validated, setValidated] = useState(false);
-	const [showToast, setShowToast] = useState(false);
-	const [redirect, setRedirect] = useState(false);
-
-	const toggleShowToast = () => setShowToast(!showToast);
+	const [redirect] = useState(false);
 
 	const handleSubmit = event => {
 		event.preventDefault();
-
 		const form = event.target;
 		const role = form.roleFormControl.value;
 		const name = form.nameFormControl.value;
 		const email = form.emailFormControl.value;
 		const message = form.messageFormControl.value;
 
+		const ShowAlert = Swal.mixin({
+			toast: true,
+			position: "bottom",
+			showConfirmButton: true,
+			confirmButtonColor: "#EEAA7B",
+			cancelButtonText: "Ok",
+			timer: 4000,
+			timerProgressBar: true,
+			didOpen: toast => {
+				toast.addEventListener("mouseenter", Swal.stopTimer);
+				toast.addEventListener("mouseleave", Swal.resumeTimer);
+			}
+		});
+
 		if (form.checkValidity() === false) {
 			event.stopPropagation();
 		} else {
 			setValidated(true);
 			actions.sendContactMsg(name, email, message, role);
-			toggleShowToast();
+			ShowAlert.fire({
+				icon: "success",
+				title: "Muchas gracias, responderemos tu consulta a la brevedad"
+			});
 		}
-	};
-
-	const closeTost = () => {
-		toggleShowToast();
-		setRedirect(true);
 	};
 
 	return (
@@ -41,21 +50,31 @@ const Contact = () => {
 				{redirect ? <Redirect to="/" /> : ""}
 				<Row className="justify-content-center">
 					<Col xs={12} md={6}>
-						<Toast show={showToast} onClose={closeTost} className="mt-4 mx-auto" autohide>
-							<Toast.Header>
-								<strong className="mr-auto">Muchas gracias</strong>
-							</Toast.Header>
-							<Toast.Body>Responderemos a tu consulta a la brevedad</Toast.Body>
-						</Toast>
 						<h2 className="altHeader">Contáctanos</h2>
 						<div className="p-3 mt-5 contactContainer">
 							<Form noValidate validated={validated} onSubmit={handleSubmit}>
 								<Form.Group controlId="roleFormControl">
 									<Form.Label className="contactLabel">Selecciona tu perfil</Form.Label>
-									<Form.Control className="contactInput" as="select" name="role">
-										<option>Soy Médico Veterinario</option>
-										<option>Soy Dueño de mascota</option>
-									</Form.Control>
+									<Container>
+										<Row>
+											<Col>
+												<Form.Check
+													type="radio"
+													label="Soy Médico Veterinario"
+													name="inlineRadioOptions"
+													value="Soy Médico Veterinario"
+												/>
+											</Col>
+											<Col>
+												<Form.Check
+													type="radio"
+													label="Soy Dueño de mascota"
+													name="inlineRadioOptions"
+													value="Soy Dueño de mascota"
+												/>
+											</Col>
+										</Row>
+									</Container>
 								</Form.Group>
 								<Form.Group controlId="nameFormControl">
 									<Form.Control
@@ -64,7 +83,6 @@ const Contact = () => {
 										type="text"
 										placeholder="Ingresa tu Nombre y Apellido"
 									/>
-									<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
 								</Form.Group>
 								<Form.Group controlId="emailFormControl">
 									<Form.Control
@@ -73,7 +91,6 @@ const Contact = () => {
 										placeholder="Ingresa tu mail: nombre@ejemplo.com"
 										required
 									/>
-									<Form.Control.Feedback>Se ve bien eso!</Form.Control.Feedback>
 								</Form.Group>
 								<Form.Group controlId="messageFormControl">
 									<Form.Label className="contactLabel">Cuéntanos de tu problema</Form.Label>

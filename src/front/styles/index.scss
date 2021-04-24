@@ -21,6 +21,22 @@ h1   {
     font-weight: bolder;
 }
 
+.ImgBtn {
+    position: absolute;
+    bottom: 1rem;
+    left: 57%;
+    width: fit-content;
+    height: fit-content;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 2em;
+    border-radius: 50%;
+    background-color: transparent;
+    color: black;
+}
+
 #loggedButton, #loggedButton:focus, #loggedButton::after {
     background-color: transparent;
     border-color: transparent;
@@ -53,6 +69,22 @@ h1   {
     border: 3px black;
 }
 
+.nav-link {
+  color: #EEEEEE !important;
+  font-size: large;
+}
+
+.newCheckupToast {
+  top: 6rem;
+  left: 26rem;
+  z-index: 1;
+}
+
+.newPetToast {
+  bottom: 8rem;
+  left: 26rem;
+}
+
 .petBtn, .petBtn:focus {
     background-color: #66b9bf !important;
     border-color: #EEEEEE;
@@ -71,19 +103,9 @@ h1   {
     background-color: #66b9bf !important;
 }
 
-.nav-link {
-  color: #EEEEEE !important;
-  font-size: large;
-}
-
-.toast {
-  position: absolute;
-  width: fit-content;
-}
-
-.newPetToast {
-  bottom: 8rem;
-  left: 26rem;
+.recover {
+    max-width: 40rem;
+    text-align: center;
 }
 
 .registerToast {
@@ -91,8 +113,7 @@ h1   {
   left: 23rem;
 }
 
-.newCheckupToast {
-  top: 6rem;
-  left: 26rem;
-  z-index: 1;
+.toast {
+  position: absolute;
+  width: fit-content;
 }

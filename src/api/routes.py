@@ -50,17 +50,21 @@ def login():
     password = request.json.get("password", None)
 
     if not email:
-        return jsonify({"msg":"Email is required"}), 400
+        return jsonify({"msg":"Debes ingresar tu email"}), 400
 
     if not password:
-        return jsonify({"msg":"Password is required"}), 400
+        return jsonify({"msg":"Debes ingresar tu contraseña"}), 400
     
     user = User.query.filter_by(email=email).first()
-
+    
     if not user:
-        return jsonify({"msg": "The email is not correct",
+        return jsonify({"msg": "Email no registrado",
         "status": 401
-        
+        }), 401
+    
+    elif not check_password_hash(user.password, password):
+        return jsonify({"msg": "Contraseña no es válida",
+        "status": 401
         }), 401
 
     expiration = datetime.timedelta(days=2)
@@ -71,7 +75,8 @@ def login():
         "user": user.serialize(),
         "expires": expiration.total_seconds()*1000,
         "first_name": user.first_name,
-        "is_vet": user.is_vet
+        "is_vet": user.is_vet,
+        "status": 200
     }
 
     return jsonify(data), 200
@@ -142,11 +147,13 @@ def register():
 def new_pet():
     name = request.json.get("name", None)
     chip_identifier = request.json.get("chip", None)
+    img_url = request.json.get("url", None)
     userEmail = request.json.get("email", None)
 
     pet = Pet()
     pet.name = name
     pet.chip_identifier = chip_identifier
+    pet.img_url = img_url
     pet.user_email = userEmail
 
     db.session.add(pet)
@@ -156,4 +163,69 @@ def new_pet():
         "msg": "Pet added successfully"   
     }
 
+    return jsonify(response_token), 201
+
+@api.route('/pet/<int:id>', methods=['GET', 'PUT'])
+def img_upload(id):
+    pet = Pet.query.get(id)
+
+    if request.method == 'PUT':    
+        pet.img_url = request.json.get("url", None)
+        db.session.commit()
+
+        response_token = {
+            "msg": "Image uploaded succesfully"
+        }
+    else:
+        response_token = {
+            "pet": pet.serialize()
+        }
+
     return jsonify(response_token), 200
+
+@api.route("/validate/<string:email>", methods=["GET"])
+def validate_mail(email):
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({"msg": "Usuario no registrado",
+        "status": 401
+        }), 401
+    
+    else:
+        response_body = {
+            "msg": "Solicitúd para recuperar contraseña ingresado con éxito",
+            "user": user.serialize(),
+            "status": 200  
+        }
+
+    return jsonify(response_body), 200
+
+@api.route("/recover_password/<int:id>", methods=["PUT"])    
+def recover_password(id):
+
+    user = User.query.get(id)
+    password = request.json.get("password", None)
+    
+    if not user:
+        return "Este usuario no esta registrado"
+
+    elif not password:
+        return "Error por favor intentatelo nuevamente"
+   
+    hashed_password = generate_password_hash(password)
+    user.password = hashed_password
+    db.session.commit()
+
+    response_body = {
+        "msg": "Contraseña recuperada exitosamente"
+    }
+
+    return jsonify(response_body), 200
+    
+    
+
+    
+ 
+    
+    

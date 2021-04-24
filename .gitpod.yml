@@ -12,6 +12,7 @@ tasks:
     - init: >
         (cp -n .env.example .env || true) && 
         echo "" >> .env && echo "BACKEND_URL=https://3001-${GITPOD_WORKSPACE_URL:8}" >> .env && 
+        echo "" >> .env && echo "FRONTEND_URL=https://3000-${GITPOD_WORKSPACE_URL:8}" >> .env && 
         pipenv install &&
         psql -U gitpod -c 'CREATE DATABASE example;' &&
         psql -U gitpod -c 'CREATE EXTENSION unaccent;' -d example &&

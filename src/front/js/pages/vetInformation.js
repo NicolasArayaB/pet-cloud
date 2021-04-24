@@ -8,7 +8,31 @@ import Vaccines from "../component/vet/vaccinesTable";
 
 const VetInfo = props => {
 	const { store, actions } = useContext(Context);
-	const chip = props.location.state.chip;
+	const chip = props.chip;
+	let birthDate = "";
+	let gender = "";
+	let species = "";
+
+	if (store.pets.birthDate) {
+		birthDate = store.pets.birthDate
+			.split("-")
+			.reverse()
+			.join("-");
+	}
+
+	if (store.pets.gender == "male") {
+		gender = "Macho";
+	} else if (store.pets.gender == "female") {
+		gender = "Hembra";
+	}
+
+	if (store.pets.species == "Dog") {
+		species = "Perro";
+	} else if (store.pets.species == "Cat") {
+		species = "Gato";
+	} else if (store.pets.species == "Other") {
+		species = "Exótico";
+	}
 
 	useEffect(() => {
 		actions.getPetById(chip);
@@ -16,22 +40,32 @@ const VetInfo = props => {
 
 	return (
 		<Container>
-			<Row className="m-3 mt-5">
+			<Row>
 				<Col />
-				<Col className="text-center mt-5">
-					<h2>{store.pets.name}</h2>
+				<Col className="text-center">
+					<h2 className="pet-name-control">
+						<i className="fas fa-paw" />
+						{store.pets.name}
+						<i className="fas fa-paw" />
+					</h2>
 				</Col>
 				<Col>
 					<Link to={{ pathname: "/checkup", state: { chip: chip } }}>
-						<Button className="petBtn float-right my-5">Nuevo Control</Button>
+						<Button className="petBtn float-right">Nuevo Control</Button>
 					</Link>
 				</Col>
 			</Row>
 			<Row className="m-3">
 				<Col className="text-center mt-2">
 					<p>
-						{store.pets.species} | {store.pets.breed} | {store.pets.gender} | {store.pets.birthDate}
+						<strong>Especie: </strong>
+						{species} | <strong>Raza: </strong> {store.pets.breed} | <strong>Género </strong> {gender}
 					</p>
+				</Col>
+			</Row>
+			<Row className="m-3">
+				<Col className="text-center mt-2">
+					<p>Fecha de nacimiento: {birthDate}</p>
 				</Col>
 			</Row>
 			<Row className="m-3">
@@ -44,17 +78,14 @@ const VetInfo = props => {
 					/>
 				</Col>
 				<Col md={6}>
-					<Vaccines date={store.vaccines.date} vaccine={store.vaccines.vaccine} />
+					<Vaccines date={store.vaccines.date} vaccine={store.vaccines.vaccine} dose={store.vaccines.dose} />
 				</Col>
 			</Row>
 		</Container>
 	);
 
 	VetInfo.propTypes = {
-		location: PropTypes.shape({
-			pathname: PropTypes.string.isRequired,
-			state: PropTypes.object.isRequired
-		}).isRequired
+		chip: PropTypes.integer
 	};
 };
 

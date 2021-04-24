@@ -22,6 +22,7 @@ class User(db.Model):
 
     def serialize(self):
         return {
+            "first_name": self.first_name,
             "id": self.id,
             "email": self.email,
             "is_vet": self.is_vet
@@ -97,6 +98,7 @@ class Pet(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(100))
     chip_identifier = Column(String(50))
+    img_url = Column(String(255))
     user_email = Column(String, ForeignKey('user.email'))
     users_email = relationship("User", foreign_keys=[user_email])
 
@@ -108,6 +110,7 @@ class Pet(db.Model):
             "id": self.id,
             "name": self.name,
             "user_email": self.user_email,
+            "img_url": self.img_url,
             "chip_identifier": self.chip_identifier
         }
 
