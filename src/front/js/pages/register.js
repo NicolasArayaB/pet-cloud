@@ -16,7 +16,7 @@ export const RegisterView = () => {
 	const [redirect, setRedirect] = useState(null);
 
 	const expresions = {
-		password: /^\w{6,8}$/, // between 6 and 8 characters
+		password: /^[\d\w]{6,8}$/, // between 6 and 8 characters
 		email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
 	};
 

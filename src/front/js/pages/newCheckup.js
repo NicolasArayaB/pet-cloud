@@ -115,6 +115,7 @@ const NewCheckup = props => {
 								<Form.Control
 									type="text"
 									name="quantity"
+									placeholder="Unidad de medida"
 									value={formState.quantity}
 									onChange={e => handleTextChange(e)}
 								/>
