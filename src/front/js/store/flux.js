@@ -554,7 +554,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 										email: userEmail,
 										to_name: data.user.first_name,
 										message: "Haz click en este link para recuperar contraseña",
-										url: process.env.BACKEND_URL + "/recover-password/" + data.user.id
+										url: process.env.FRONT_URL + "/recover-password/" + data.user.id
 									},
 									"user_ipNgY6FvK2EvoDrPH27Bw"
 							  )
