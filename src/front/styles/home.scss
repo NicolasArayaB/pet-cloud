@@ -2,6 +2,18 @@ body, html {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.brand-title   {
+    color: #66B9BF;  
+}
+
+.cards {
+  background-color: #EEEEEE;
+}
+
+.card-li-item {
+  background-color: transparent;
+}
+
 .carrusel-images {
    background-size: cover;
    border: 2px solid #e37222;
@@ -12,8 +24,24 @@ body, html {
    width: 1000px; 
 }
 
-.brand-title   {
-    color: #66B9BF;  
+.contact {
+  background-color: #66B9BF;
+}
+
+.contactLabel {
+  font-size: large;
+}
+
+.contactContainer {
+  border-radius: 15px;
+  background-color: #EEEEEE;
+}
+
+.col {
+  margin-right: 0%;
+  margin-left: 0%;
+  padding-left: 0%;
+  padding-right: 0%;
 }
 
 .welcome {
@@ -38,29 +66,8 @@ body, html {
   right: 3rem;
 }
 
-.col {
-  margin-right: 0%;
-  margin-left: 0%;
-  padding-left: 0%;
-  padding-right: 0%;
-}
-.cards {
-  background-color: #EEEEEE;
-}
-
-.card-li-item {
-  background-color: transparent;
-}
-
-.contact {
-  background-color: #66B9BF;
-}
-
-.contactLabel {
-  font-size: large;
-}
-
-.contactContainer {
-  border-radius: 15px;
-  background-color: #EEEEEE;
+@media (max-width:480px) {
+  .welcomeHeader, .welcomeHeader2 {
+    font-size: 2rem;
+  }
 }

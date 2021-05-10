@@ -12,7 +12,7 @@ export const MyNavbar = props => {
 	return (
 		<>
 			<LoginModal show={show} close={handleShow} />
-			<Navbar collapseOnSelect className="petCloudBar fixed-top">
+			<Navbar className="petCloudBar fixed-top">
 				<Navbar.Brand href="#home">
 					<Link to="/">
 						<img
@@ -25,7 +25,7 @@ export const MyNavbar = props => {
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Container className="navContainer">
 						<Row>
-							<Col className="pt-3 text-right">
+							<Col className="text-right">
 								{store.role.token != null ? (
 									<Dropdown>
 										<Dropdown.Toggle id="loggedButton">Hola {store.role.firstName}</Dropdown.Toggle>
@@ -39,7 +39,7 @@ export const MyNavbar = props => {
 										</Dropdown.Menu>
 									</Dropdown>
 								) : (
-									<Button onClick={handleShow} className="mx-4 btn petBtn">
+									<Button onClick={handleShow} className="btn petBtn">
 										Login
 									</Button>
 								)}
